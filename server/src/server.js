@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import statusCode from 'http-status-codes';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import connectDB from './lib/db.js';
 
 dotenv.config();
 
@@ -18,11 +19,15 @@ app.use(
 );
 app.use(cookieParser());
 
+connectDB()
+
 app.get('/', (req, res) => {
   res
     .status(statusCode.OK)
     .json({ success: true, message: `Server is running on port: ${port}` });
 });
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
