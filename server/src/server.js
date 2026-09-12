@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './lib/db.js';
 import helmet from 'helmet'
 import { ErrorHandlerMiddleware } from './middlewares/index.js';
+import {authRouter} from './routes/index.js';
 
 dotenv.config();
 
@@ -30,6 +31,8 @@ app.get('/', (req, res) => {
     .status(statusCode.OK)
     .json({ success: true, message: `Server is running on port: ${port}` });
 });
+
+app.use('/api/auth',authRouter)
 
 app.use(ErrorHandlerMiddleware)
 
