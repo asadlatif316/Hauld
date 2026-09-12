@@ -4,22 +4,26 @@ import statusCode from 'http-status-codes';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectDB from './lib/db.js';
+import helmet from 'helmet'
+import { ErrorHandlerMiddleware } from './middlewares/index.js';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
-app.use(express.json());
+
+app.use(helmet())
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
   }),
 );
+app.use(express.json());
 app.use(cookieParser());
 
-connectDB()
+
 
 app.get('/', (req, res) => {
   res
@@ -27,8 +31,9 @@ app.get('/', (req, res) => {
     .json({ success: true, message: `Server is running on port: ${port}` });
 });
 
+app.use(ErrorHandlerMiddleware)
 
 
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
+connectDB().then(() => {
+  app.listen(port, () => console.log(`Server is running on port: ${port}`));
 });
