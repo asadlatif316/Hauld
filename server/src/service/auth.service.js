@@ -1,5 +1,9 @@
 import UserModel from '../models/user.model.js';
-import { comparePassword, UnauthenticatedError } from '../utils/index.js';
+import {
+  comparePassword,
+  NotFoundError,
+  UnauthenticatedError,
+} from '../utils/index.js';
 import { UnauthorizedError, createToken } from '../utils/index.js';
 import jwt from 'jsonwebtoken';
 
@@ -21,10 +25,18 @@ const loginUser = async (email, password) => {
     role: user.role,
   };
 
-  const token = createToken(userTokenData)
+  const token = createToken(userTokenData);
 
   await user.save();
   return { user, token };
 };
 
-export { loginUser };
+const getUser = async (id) => {
+  const user = await UserModel.findOne({ id });
+  if (!user) {
+    throw new NotFoundError('User not found');
+  }
+  return user;
+};
+
+export { loginUser, getUser };
