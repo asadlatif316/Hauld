@@ -1,24 +1,19 @@
-import { login } from '../controller/auth.controller.js';
-import User from '../models/user.model.js';
 import UserModel from '../models/user.model.js';
-import {
-  comparePassword,
-  UnauthenticatedError,
-} from '../utils/index.js';
+import { comparePassword, UnauthenticatedError } from '../utils/index.js';
 import { UnauthorizedError } from '../utils/index.js';
 import jwt from 'jsonwebtoken';
 
-const loginUser = async (userData) => {
-  const user = await UserModel.findOne({ email });
+const loginUser = async (email, password) => {
+  const user = await UserModel.findOne({ email }).select('+password');
 
   if (!user) {
-    new UnauthorizedError('Invalid Credentials');
+    throw new UnauthorizedError('Invalid Credentials');
   }
 
-  const verifyPassword = comparePassword(userData.password, user.password);
+  const verifyPassword = comparePassword(password, user.password);
 
   if (!verifyPassword) {
-    new UnauthenticatedError('password do no match');
+    throw new UnauthenticatedError('password do no match');
   }
 
   const userTokenData = {
@@ -34,4 +29,4 @@ const loginUser = async (userData) => {
   return { user, token };
 };
 
-export {loginUser}
+export { loginUser };
