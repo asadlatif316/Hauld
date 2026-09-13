@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 import { loginUser } from '../service/index.js';
-import { UnauthenticatedError } from '../utils/index.js';
+import { setCookie, UnauthenticatedError } from '../utils/index.js';
 
 const login = async (req, res, next) => {
   try {
@@ -10,12 +10,7 @@ const login = async (req, res, next) => {
     }
 
     const { user, token } = await loginUser(email, password);
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    setCookie(res, token);
     res.status(StatusCodes.OK).json({
       success: true,
       message: 'loggedIn successfully',
