@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import { loginUser } from '../service/index.js';
+import { loginUser,getUserData } from '../service/index.js';
 import { setCookie, UnauthenticatedError } from '../utils/index.js';
 
 const login = async (req, res, next) => {
@@ -23,8 +23,18 @@ const login = async (req, res, next) => {
 const logout = async (req, res) => {
   res.json('logout');
 };
-const getUser = async (req, res) => {
-  res.json('getUser');
+const getUser = async (req, res, next) => {
+  try {
+    const { id } = req.user;
+    const user = await getUserData(id);
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: 'User found',
+      user,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export { login, logout, getUser };

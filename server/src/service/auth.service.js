@@ -31,12 +31,12 @@ const loginUser = async (email, password) => {
   return { user, token };
 };
 
-const getUser = async (id) => {
-  const user = await UserModel.findOne({ id });
+const getUserData = async (id) => {
+  const user = await UserModel.findOne({_id:id});
   if (!user) {
     throw new NotFoundError('User not found');
   }
   return user;
 };
 
-export { loginUser, getUser };
+export { loginUser, getUserData };
