@@ -1,8 +1,10 @@
-import { Login } from "../pages";
+import { Login } from '../pages';
 
-const routes = [{
-    path: '/',
-    element: <Login/>
-}]
+const routes = [
+  {
+    path: '/login',
+    element: <Login />,
+  },
+];
 
-export default routes
+export default routes;
