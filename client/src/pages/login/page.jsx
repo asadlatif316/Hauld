@@ -1,4 +1,5 @@
 import logo from '@/assets/logo.png';
+import { FormInput } from '@/components';
 
 const Login = () => {
   return (
@@ -14,29 +15,9 @@ const Login = () => {
           </p>
         </div>
         <form className='flex flex-col items-center space-y-2'>
-          <div className='flex flex-col w-full gap-1.5'>
-            <label className='font-medium' htmlFor='name'>
-              Email
-            </label>
-            <input
-              type='text'
-              id='name'
-              name='name'
-              className='h-8 min-w-0 block rounded-md border-2 bg-input/10 px-3 py-4 text-foreground transition-all outline-none ease-in duration-200 focus-visible:ring-2 focus-visible:ring-ring/30 disabled:opacity-30 disabled:cursor-not-allowed border-input'
-            />
-          </div>
+          <FormInput label='Email' name='email' />
 
-          <div className='flex flex-col w-full gap-1.5'>
-            <label className='font-medium' htmlFor='name'>
-              Password
-            </label>
-            <input
-              type='password'
-              id='name'
-              name='name'
-              className='h-8 min-w-0 block rounded-md border-2 bg-input/20 px-3 py-4 text-foreground transition-all outline-none ease-in duration-200 focus-visible:ring-2 focus-visible:ring-ring/30 disabled:opacity-30 disabled:cursor-not-allowed border-input'
-            />
-          </div>
+          <FormInput type='password' name='password' label='Password' />
           <div className='w-full sm:w-auto mt-2'>
             <button className='cursor-pointer active:scale-[0.98] bg-foreground text-white font-bold px-3 py-2 rounded-xl w-full sm:w-40'>
               Sign In
