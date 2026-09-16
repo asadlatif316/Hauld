@@ -43,6 +43,10 @@ const Login = () => {
             </button>
           </div>
         </form>
+        <div className='mt-4 w-full rounded-md border bg-muted/50 px-3 py-2 text-xs text-muted-foreground'>
+          <p className='font-medium text-foreground'>Demo account</p>
+          <p>admin@hauld.dev · Admin@12345</p>
+        </div>
       </div>
     </div>
   );
