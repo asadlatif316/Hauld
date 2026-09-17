@@ -4,6 +4,7 @@ import { useAuthStore } from '@/store';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { Loader2 } from 'lucide-react';
 
 const Login = () => {
   const { login, isLoggingIn } = useAuthStore();
@@ -33,7 +34,7 @@ const Login = () => {
       toast.success('Logged In');
       navigate('/dashboard');
     } catch (error) {
-       console.error(error);
+      console.error(error);
       toast.error(error.response?.data?.message || 'Login failed');
     }
   };
@@ -68,8 +69,18 @@ const Login = () => {
             onChange={handleChange}
           />
           <div className='w-full sm:w-auto mt-2'>
-            <button className='cursor-pointer active:scale-[0.98] bg-foreground text-white font-bold px-3 py-2 rounded-xl w-full sm:w-40'>
-              Sign In
+            <button
+              className='cursor-pointer active:scale-[0.98] bg-foreground text-white font-bold px-3 py-2 rounded-xl w-full sm:w-40'
+              disabled={isLoggingIn}
+            >
+              {isLoggingIn ? (
+                <>
+                  <Loader2 className='size-4 animate-spin' />
+                  Signing in
+                </>
+              ) : (
+                'Sign In'
+              )}
             </button>
           </div>
         </form>
