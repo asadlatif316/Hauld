@@ -3,6 +3,7 @@ import { FormInput } from '@/components';
 import { useAuthStore } from '@/store';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { login, isLoggingIn } = useAuthStore();
@@ -10,6 +11,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,16 +24,17 @@ const Login = () => {
     const { password } = formData;
 
     if (!email || !password) {
-      toast.error('Fill in all fields')
+      toast.error('Fill in all fields');
       return;
     }
 
     try {
       await login({ email, password });
-      toast.success('Welcome to your dashboard')
-      
+      toast.success('Logged In');
+      navigate('/dashboard');
     } catch (error) {
-      console.log('Login failed');
+       console.error(error);
+      toast.error(error.response?.data?.message || 'Login failed');
     }
   };
   return (
