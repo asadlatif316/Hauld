@@ -1,9 +1,11 @@
+import { AdminHeader, AdminSidebar } from '@/components';
 const DashboardLayout = () => {
   return (
     <div>
-Admin Dashboard
+      <AdminSidebar />
+      <AdminHeader />
     </div>
-  )
-}
+  );
+};
 
-export default DashboardLayout
+export default DashboardLayout;
