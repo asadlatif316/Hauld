@@ -1,9 +1,15 @@
 import { AdminHeader, AdminSidebar } from '@/components';
+import { Outlet } from 'react-router-dom';
 const DashboardLayout = () => {
   return (
-    <div>
+    <div className='relative h-screen'>
       <AdminSidebar />
-      <AdminHeader />
+      <div className='ml-72'>
+        <AdminHeader />
+        <main>
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };
