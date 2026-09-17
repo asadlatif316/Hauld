@@ -1,4 +1,5 @@
 import { Login } from '../pages';
+import { DashboardLayout } from '@/Layout';
 
 const routes = [
   {
@@ -9,7 +10,7 @@ const routes = [
     path: '/dashboard',
     element: (
       <ProtectedRoute>
-        <p>dashboard</p>
+        <DashboardLayout />
       </ProtectedRoute>
     ),
   },
