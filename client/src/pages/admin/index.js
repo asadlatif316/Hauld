@@ -1,0 +1,5 @@
+export { default as Dashboard} from './Dashboard' 
+export { default as ProductList} from './product/page' 
+export { default as OrderList} from './orders/page' 
+export { default as Messages} from './messages/page' 
+export { default as Settings} from './settings/page' 
