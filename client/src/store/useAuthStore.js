@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { api } from '@/utils';
+import toast from 'react-hot-toast';
 
 const useAuthStore = create((set) => ({
   user: null,
@@ -27,6 +28,17 @@ const useAuthStore = create((set) => ({
       console.log(error);
     } finally {
       set({ isLoggingIn: false });
+    }
+  },
+
+  logout: async () => {
+    try {
+      await api.post('/auth/logout');
+      set({ user: null });
+      toast.success('Logged out');
+    } catch (error) {
+      console.log(error);
+      toast.error('Error in logging out');
     }
   },
 }));
