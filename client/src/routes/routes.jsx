@@ -7,8 +7,12 @@ const routes = [
   },
   {
     path: '/dashboard',
-    element: <p>dashboard</p>
-  }
+    element: (
+      <ProtectedRoute>
+        <p>dashboard</p>
+      </ProtectedRoute>
+    ),
+  },
 ];
 
 export default routes;
