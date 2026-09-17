@@ -2,6 +2,7 @@ import logo from '@/assets/logo.png';
 import { FormInput } from '@/components';
 import { useAuthStore } from '@/store';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const { login, isLoggingIn } = useAuthStore();
@@ -21,13 +22,13 @@ const Login = () => {
     const { password } = formData;
 
     if (!email || !password) {
-      console.log('fill the field');
+      toast.error('Fill in all fields')
       return;
     }
 
     try {
       await login({ email, password });
-      console.log('login');
+      toast.success('Welcome to your dashboard')
       
     } catch (error) {
       console.log('Login failed');
