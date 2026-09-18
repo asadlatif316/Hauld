@@ -5,10 +5,9 @@ import toast from 'react-hot-toast';
 const useAuthStore = create((set) => ({
   user: null,
   isLoggingIn: false,
-  isCheckingAuth: false,
+  isCheckingAuth: true,
 
   checkAuth: async () => {
-    set({ isCheckingAuth: true });
     try {
       const res = await api.get('/auth/user/me');
       set({ user: res.data });
