@@ -1,11 +1,13 @@
-import {  HiMenuAlt1, HiMenuAlt2 } from 'react-icons/hi';
+import { useUIStore } from '@/store/useUIStore';
+import { HiMenuAlt1, HiMenuAlt2 } from 'react-icons/hi';
 
-const AdminHeader = ({setIsOpen}) => {
+const AdminHeader = () => {
+  const { openSidebar } = useUIStore();
   return (
     <div>
       <button
         aria-label='Open menu'
-        onClick={() => setIsOpen(true)}
+        onClick={openSidebar}
         className='group relative size-13 md:hidden cursor-pointer'
       >
         <HiMenuAlt1
@@ -19,6 +21,6 @@ const AdminHeader = ({setIsOpen}) => {
       </button>
     </div>
   );
-}
+};
 
-export default AdminHeader
+export default AdminHeader;

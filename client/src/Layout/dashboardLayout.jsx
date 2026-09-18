@@ -1,14 +1,16 @@
 import { AdminHeader, AdminSidebar } from '@/components';
-import { useState } from 'react';
+import { useUIStore } from '@/store/useUIStore';
 import { Outlet } from 'react-router-dom';
 const DashboardLayout = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const { isSidebarOpen } = useUIStore();
   return (
     <div className='relative h-screen'>
-      <AdminSidebar setIsOpen={setIsOpen} isOpen={isOpen} />
-      {isOpen && <div className='fixed inset-0 bg-primary/50 md:hidden'></div>}
+      <AdminSidebar />
+      {isSidebarOpen && (
+        <div className='fixed inset-0 bg-primary/50 md:hidden'></div>
+      )}
       <div className='md:ml-72'>
-        <AdminHeader setIsOpen={setIsOpen} />
+        <AdminHeader />
         <main>
           <Outlet />
         </main>
