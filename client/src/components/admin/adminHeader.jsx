@@ -4,7 +4,7 @@ import { UserMenu } from '..';
 const AdminHeader = () => {
   const { openSidebar } = useUIStore();
   return (
-      <header className='flex items-center  justify-between p-4'>
+      <header className='flex items-center  justify-between p-4 md:px-12 md:py-6'>
         <div>
           <button
             aria-label='Open menu'
