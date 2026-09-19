@@ -7,7 +7,7 @@ const DashboardLayout = () => {
     <div className='relative h-screen'>
       <AdminSidebar />
       {isSidebarOpen && (
-        <div className='fixed inset-0 bg-primary/50 md:hidden'></div>
+        <div className='fixed z-40 inset-0 bg-primary/50 md:hidden'></div>
       )}
       <div className='md:ml-72'>
         <AdminHeader />
