@@ -3,16 +3,16 @@ import mongoose from 'mongoose';
 const ProductSchema = mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
-    slug: { type: String, required: true },
     description: { type: String },
     price: { type: Number, required: true },
     category: {
+      type: String,
       enum: ['backpack', 'tote', 'duffel', 'crossBody', 'wallet', 'laptop-bag'],
       required: true,
     },
     image: {
-      url: { type: String, required: true },
-      publicId: { type: String, required: true },
+      url: { type: String },
+      publicId: { type: String },
     },
     isFeatured: { type: Boolean, required: true },
     isActive: { type: Boolean, required: true },
