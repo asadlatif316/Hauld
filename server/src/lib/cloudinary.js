@@ -17,4 +17,4 @@ const deleteImage = async (publicId) => {
   cloudinary.uploader.destroy(publicId);
 };
 
-export default { uploadImage, deleteImage };
+export { uploadImage, deleteImage };
