@@ -17,7 +17,7 @@ const createProduct = async (productData) => {
 };
 
 const fetchProducts = async (query) => {
-  const { search, category, isActive, isFeatured, inStock } = query;
+  const { search, category, isActive, isFeatured, inStock, sort } = query;
   const filter = {};
 
   if (search) {
@@ -35,7 +35,17 @@ const fetchProducts = async (query) => {
   if(inStock === 'true') filter.stock = {$gt:0}
   if(inStock === 'false') filter.stock = 0
 
-  const products = await ProductModel.find(filter);
+  const sortOptions = {
+    newest: '-createdAt',
+    oldest: 'createdAt',
+    'a-z': 'name',
+    'z-a': '-name',
+    'high-price': '-price',
+    'low-price': 'price',
+    'low-stock': 'stock',
+  };
+  const sortKey= sortOptions[sort] || sortOptions.newest
+  const products = await ProductModel.find(filter).sort(sortKey);
   return products;
 };
 
