@@ -5,6 +5,8 @@ const getProducts = async (req, res, next) => {
   const query = req.query;
   try {
     const product = await fetchProducts(query);
+    console.log(product);
+    
     res.json(product);
   } catch (error) {
     next(error);

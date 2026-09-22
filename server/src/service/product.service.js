@@ -17,12 +17,16 @@ const createProduct = async (productData) => {
 };
 
 const fetchProducts = async (query) => {
-  const { search } = query;
+  const { search, category } = query;
   const filter = {};
 
   if (search) {
     filter.$or = [{ name: { $regex: search, $options: 'i' } }];
     filter.$or = [{ description: { $regex: search, $options: 'i' } }];
+  }
+
+  if (category && category !== 'all') {
+    filter.category = category;
   }
 
   const products = await ProductModel.find(filter);
