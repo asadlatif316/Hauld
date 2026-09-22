@@ -3,19 +3,29 @@ import { uploadImage, deleteImage } from '../lib/index.js';
 
 const createProduct = async (productData) => {
   const { image: base64, ...rest } = productData;
+  if (!base64) {
+    return await ProductModel.create(rest);
+  }
   const image = await uploadImage(base64);
   try {
     const product = await ProductModel.create({ ...rest, image });
     return product;
   } catch (error) {
-    await deleteImage(image.publicId)
-    throw error
+    await deleteImage(image.publicId);
+    throw error;
   }
 };
 
-const fetchProducts = async () => {
-  const products = await ProductModel.find()
-  return products
-}
+const fetchProducts = async (query) => {
+  const { search } = query;
+  const filter = {};
+
+  if (search) {
+    filter.$or = [{ name: { $regex: search, $options: 'i' } }];
+  }
+
+  const products = await ProductModel.find(filter);
+  return products;
+};
 
 export { createProduct, fetchProducts };

@@ -1,22 +1,23 @@
 import { StatusCodes } from 'http-status-codes';
-import { createProduct,fetchProducts } from '../service/index.js';
+import { createProduct, fetchProducts } from '../service/index.js';
 
-const getProducts = async (req, res,next) => {
+const getProducts = async (req, res, next) => {
+  const query = req.query;
   try {
-    const product = await fetchProducts();
+    const product = await fetchProducts(query);
     res.json(product);
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 const addNewProduct = async (req, res, next) => {
   try {
     const productData = req.body;
-    
+
     const product = await createProduct(productData);
     res
       .status(StatusCodes.CREATED)
-      .json({ success: true, message: 'Product Created', product:product });
+      .json({ success: true, message: 'Product Created', product: product });
   } catch (error) {
     next(error);
   }
