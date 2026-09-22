@@ -22,6 +22,7 @@ const fetchProducts = async (query) => {
 
   if (search) {
     filter.$or = [{ name: { $regex: search, $options: 'i' } }];
+    filter.$or = [{ description: { $regex: search, $options: 'i' } }];
   }
 
   const products = await ProductModel.find(filter);
