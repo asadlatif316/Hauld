@@ -13,4 +13,9 @@ const createProduct = async (productData) => {
   }
 };
 
-export { createProduct };
+const fetchProducts = async () => {
+  const products = await ProductModel.find()
+  return products
+}
+
+export { createProduct, fetchProducts };
