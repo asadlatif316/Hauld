@@ -17,7 +17,7 @@ const createProduct = async (productData) => {
 };
 
 const fetchProducts = async (query) => {
-  const { search, category, isActive, isFeatured, inStock, sort } = query;
+  const { search, category, isActive, isFeatured, inStock, sort, page, limit } = query;
   const filter = {};
 
   if (search) {
@@ -29,11 +29,11 @@ const fetchProducts = async (query) => {
     filter.category = category;
   }
 
-  if(isActive !== undefined) filter.isActive = isActive === 'true'
-  if (isFeatured !== undefined) filter.isFeatured = isFeatured === 'true'  
-  
-  if(inStock === 'true') filter.stock = {$gt:0}
-  if(inStock === 'false') filter.stock = 0
+  if (isActive !== undefined) filter.isActive = isActive === 'true';
+  if (isFeatured !== undefined) filter.isFeatured = isFeatured === 'true';
+
+  if (inStock === 'true') filter.stock = { $gt: 0 };
+  if (inStock === 'false') filter.stock = 0;
 
   const sortOptions = {
     newest: '-createdAt',
@@ -44,9 +44,17 @@ const fetchProducts = async (query) => {
     'low-price': 'price',
     'low-stock': 'stock',
   };
-  const sortKey= sortOptions[sort] || sortOptions.newest
-  const products = await ProductModel.find(filter).sort(sortKey);
-  return products;
+
+  //setup pagination
+  const pageNumber = Number(page) || 1;
+  const pagelimit = limit || 10;
+  const skip = (pageNumber - 1) * pagelimit;
+
+  const sortKey = sortOptions[sort] || sortOptions.newest;
+  const products = await ProductModel.find(filter).sort(sortKey).limit(pagelimit).skip(skip);
+  const totalProducts = await ProductModel.countDocuments(filter);
+  const numberOfPages = Math.ceil(totalProducts / pagelimit);
+  return { products, totalProducts, pageNumber, numberOfPages };
 };
 
 export { createProduct, fetchProducts };

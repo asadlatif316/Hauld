@@ -4,10 +4,17 @@ import { createProduct, fetchProducts } from '../service/index.js';
 const getProducts = async (req, res, next) => {
   const query = req.query;
   try {
-    const product = await fetchProducts(query);
-    console.log(product);
+    const { products, totalProducts, numberOfPages, pageNumber } = await fetchProducts(query);
+    console.log(products);
     
-    res.json(product);
+    res
+      .status(StatusCodes.OK)
+      .json({
+        totalProducts,
+        numberOfPages,
+        currentPage: pageNumber,
+        products,
+      });
   } catch (error) {
     next(error);
   }
