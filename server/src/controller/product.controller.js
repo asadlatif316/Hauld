@@ -36,11 +36,18 @@ const addNewProduct = async (req, res, next) => {
 };
 const editProduct = async (req, res) => {
   const { id } = req.params;
-  const data = req.body;
-
-  const updatedProduct = await updateProduct(id, data);
-  res.status(StatusCodes.OK).json({success:true,message:'Product modified', product:updatedProduct});
+  try {
+    const updatedProduct = await updateProduct(id, req.body);
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: 'Product modified',
+      product: updatedProduct,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
+
 const deleteProduct = async (req, res) => {
   res.json('delete Products');
 };
