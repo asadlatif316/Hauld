@@ -1,20 +1,23 @@
 import { StatusCodes } from 'http-status-codes';
-import { createProduct, fetchProducts } from '../service/index.js';
+import {
+  createProduct,
+  fetchProducts,
+  updateProduct,
+} from '../service/index.js';
 
 const getProducts = async (req, res, next) => {
   const query = req.query;
   try {
-    const { products, totalProducts, numberOfPages, pageNumber } = await fetchProducts(query);
+    const { products, totalProducts, numberOfPages, pageNumber } =
+      await fetchProducts(query);
     console.log(products);
-    
-    res
-      .status(StatusCodes.OK)
-      .json({
-        totalProducts,
-        numberOfPages,
-        currentPage: pageNumber,
-        products,
-      });
+
+    res.status(StatusCodes.OK).json({
+      totalProducts,
+      numberOfPages,
+      currentPage: pageNumber,
+      products,
+    });
   } catch (error) {
     next(error);
   }
@@ -32,7 +35,11 @@ const addNewProduct = async (req, res, next) => {
   }
 };
 const editProduct = async (req, res) => {
-  res.json('edit Products');
+  const { id } = req.params;
+  const data = req.body;
+
+  const updatedProduct = await updateProduct(id, data);
+  res.status(StatusCodes.OK).json({success:true,message:'Product modified', product:updatedProduct});
 };
 const deleteProduct = async (req, res) => {
   res.json('delete Products');

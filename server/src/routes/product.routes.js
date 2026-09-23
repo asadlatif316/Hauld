@@ -8,7 +8,7 @@ router.use(authMiddleware)
 
 router.get('/', getProducts);
 router.post('/', addNewProduct);
-router.put('/:id', editProduct);
+router.post('/:id', editProduct);
 router.delete('/:id', deleteProduct);
 
 export default router

@@ -1,5 +1,6 @@
 import { ProductModel } from '../models/index.js';
 import { uploadImage, deleteImage } from '../lib/index.js';
+import { BadRequestError } from '../utils/errors.js';
 
 const createProduct = async (productData) => {
   const { image: base64, ...rest } = productData;
@@ -17,7 +18,8 @@ const createProduct = async (productData) => {
 };
 
 const fetchProducts = async (query) => {
-  const { search, category, isActive, isFeatured, inStock, sort, page, limit } = query;
+  const { search, category, isActive, isFeatured, inStock, sort, page, limit } =
+    query;
   const filter = {};
 
   if (search) {
@@ -51,10 +53,50 @@ const fetchProducts = async (query) => {
   const skip = (pageNumber - 1) * pagelimit;
 
   const sortKey = sortOptions[sort] || sortOptions.newest;
-  const products = await ProductModel.find(filter).sort(sortKey).limit(pagelimit).skip(skip);
+  const products = await ProductModel.find(filter)
+    .sort(sortKey)
+    .limit(pagelimit)
+    .skip(skip);
   const totalProducts = await ProductModel.countDocuments(filter);
   const numberOfPages = Math.ceil(totalProducts / pagelimit);
   return { products, totalProducts, pageNumber, numberOfPages };
 };
 
-export { createProduct, fetchProducts };
+const updateProduct = async (id, data) => {
+  const {
+    name,
+    description,
+    price,
+    category,
+    stock,
+    isFeatured,
+    isActive,
+    image,
+  } = data;
+  const allowed = [
+    'name',
+    'description',
+    'price',
+    'category',
+    'stock',
+    'isFeatured',
+    'isActive',
+  ];
+  const updates = {};
+  for (const key of allowed) {
+    if (data[key] !== undefined) updates[key] = data[key];
+  }
+
+  const updatedProduct = await ProductModel.findByIdAndUpdate(id, updates, {
+    returnDocument: 'after',
+    runValidators: true,
+  });
+  console.log(updatedProduct);
+  
+  if (!updatedProduct) {
+    throw new BadRequestError('Product not found');
+  }
+  return updatedProduct;
+};
+
+export { createProduct, fetchProducts, updateProduct };
