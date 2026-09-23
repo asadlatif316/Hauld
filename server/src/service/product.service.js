@@ -112,4 +112,13 @@ const updateProduct = async (id, data) => {
   }
 };
 
-export { createProduct, fetchProducts, updateProduct };
+const delProduct = async (id) => {
+  const product = await ProductModel.findByIdAndDelete(id);
+  if (!product) throw new NotFoundError('Product not found');
+  if (product.image?.publicId) {
+    await deleteImage(product.image.publicId);
+  }
+  return product;
+};
+
+export { createProduct, fetchProducts, updateProduct, delProduct };

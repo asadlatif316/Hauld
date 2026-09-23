@@ -1,6 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import {
   createProduct,
+  delProduct,
   fetchProducts,
   updateProduct,
 } from '../service/index.js';
@@ -48,8 +49,16 @@ const editProduct = async (req, res) => {
   }
 };
 
-const deleteProduct = async (req, res) => {
-  res.json('delete Products');
+const deleteProduct = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    await delProduct(id);
+    res
+      .status(StatusCodes.OK)
+      .json({ success: true, message: 'Product deleted' });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export { getProducts, addNewProduct, editProduct, deleteProduct };
