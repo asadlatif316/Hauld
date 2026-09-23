@@ -1,6 +1,6 @@
 import { ProductModel } from '../models/index.js';
 import { uploadImage, deleteImage } from '../lib/index.js';
-import { BadRequestError } from '../utils/errors.js';
+import { BadRequestError, NotFoundError } from '../utils/errors.js';
 
 const createProduct = async (productData) => {
   const { image: base64, ...rest } = productData;
@@ -63,16 +63,7 @@ const fetchProducts = async (query) => {
 };
 
 const updateProduct = async (id, data) => {
-  const {
-    name,
-    description,
-    price,
-    category,
-    stock,
-    isFeatured,
-    isActive,
-    image,
-  } = data;
+  const { image: base64 } = data;
   const allowed = [
     'name',
     'description',
@@ -87,16 +78,38 @@ const updateProduct = async (id, data) => {
     if (data[key] !== undefined) updates[key] = data[key];
   }
 
-  const updatedProduct = await ProductModel.findByIdAndUpdate(id, updates, {
-    returnDocument: 'after',
-    runValidators: true,
-  });
-  console.log(updatedProduct);
-  
-  if (!updatedProduct) {
-    throw new BadRequestError('Product not found');
+  const existing = await ProductModel.findById(id);
+  if (!existing) throw new NotFoundError('Product not found');
+
+  if (!base64) {
+    const updatedProduct = await ProductModel.findByIdAndUpdate(id, updates, {
+      returnDocument: 'after',
+      runValidators: true,
+    });
+    if (!updatedProduct) throw new NotFoundError('Product not found');
+    return updatedProduct;
   }
-  return updatedProduct;
+
+  const image = await uploadImage(base64);
+  try {
+    const updatedProduct = await ProductModel.findByIdAndUpdate(
+      id,
+      { ...updates, image },
+      {
+        returnDocument: 'after',
+        runValidators: true,
+      },
+    );
+    console.log(updatedProduct);
+
+    if (existing.image?.publicId) {
+      await deleteImage(existing.image.publicId);
+    }
+    return updatedProduct;
+  } catch (error) {
+    await deleteImage(image.publicId);
+    throw error;
+  }
 };
 
 export { createProduct, fetchProducts, updateProduct };
