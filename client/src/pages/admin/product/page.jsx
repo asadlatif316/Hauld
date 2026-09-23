@@ -1,9 +1,11 @@
-const ProductList = () => {
+import ProductToolbar from "./productToolbar"
+
+const ProductPage = () => {
   return (
     <div>
-      Product
+      <ProductToolbar/>
     </div>
   )
 }
 
-export default ProductList
+export default ProductPage
