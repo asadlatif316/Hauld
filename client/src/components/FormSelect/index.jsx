@@ -10,7 +10,6 @@ const FormSelect = ({ value, className, onChange, placeholder, options }) => {
   return (
     <div className='relative w-full' ref={ref}>
       <button
-        onChange={onChange}
         type='button'
         data-state={open ? 'open' : 'close'}
         onClick={() => setOpen((prev) => !prev)}
@@ -25,15 +24,32 @@ const FormSelect = ({ value, className, onChange, placeholder, options }) => {
         </span>
       </button>
       {open && (
-        <ul className='absolute top-full left-0 h-auto z-30  overflow-hidden bg-background border rounded-lg py-1 shadow-md'>
-          {options.map((option) => (
-            <li
-              key={option.value}
-              className='text-sm cursor-pointer px-3 py-2 hover:bg-muted'
-            >
-              {option.label}
-            </li>
-          ))}
+        <ul
+          role='listbox'
+          className='absolute top-full left-0 z-50 mt-1 overflow-hidden rounded-md border bg-background py-1 shadow-md'
+        >
+          {options.map((option) => {
+            const isSelected = option.value === value;
+
+            return (
+              <li
+                key={option.value}
+                role='option'
+                aria-selected={isSelected}
+                onClick={() => {
+                  onChange(option.value);
+                  setOpen(false);
+                }}
+                className={cn(
+                  'flex cursor-pointer items-center justify-between px-3 py-2 text-sm hover:bg-muted',
+                  isSelected && 'font-medium text-primary',
+                )}
+              >
+                {option.label}
+                {isSelected && <Check className='size-4' />}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
