@@ -6,10 +6,11 @@ import {
   STOCK_OPTIONS,
   CATEGORY_OPTIONS,
 } from '@/config';
-import { TbLayoutList, TbLayoutGrid } from 'react-icons/tb';
+import ListToggleButtons from './ListToggleButtons';
 import { Funnel } from 'lucide-react';
 import { IoMdAdd } from 'react-icons/io';
 import { useState } from 'react';
+
 
 const Toolbar = () => {
   const [sortBy, setSortBy] = useState('-createdAt');
@@ -20,10 +21,7 @@ const Toolbar = () => {
 
   return (
     <div>
-      <div className='bg-white flex'>
-        <Button icon={<TbLayoutList />} />
-        <Button icon={<TbLayoutGrid />} />
-      </div>
+      <ListToggleButtons/>
       <form>
         <FormInput type='text' />
         <div className='hidden md:flex gap-2'>
