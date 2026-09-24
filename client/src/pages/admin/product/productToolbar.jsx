@@ -3,18 +3,15 @@ import ProductFilters from './productFilters';
 import { TbLayoutList, TbLayoutGrid } from 'react-icons/tb';
 import { IoMdAdd } from 'react-icons/io';
 import { Funnel } from 'lucide-react';
+import { Button } from '@/components';
 
 const ProductToolbar = () => {
   return (
     <div>
       <div>
         <div>
-          <button>
-            <TbLayoutList />
-          </button>
-          <button>
-            <TbLayoutGrid />
-          </button>
+          <Button icon={<TbLayoutList />} />
+          <Button icon={<TbLayoutGrid />} />
         </div>
         <form>
           <FormInput type='text' />
@@ -30,8 +27,12 @@ const ProductToolbar = () => {
             <option value=''>Active</option>
             <option value=''>Inactive</option>
           </select>
-          <button><Funnel/> Filter</button>
-          <button><IoMdAdd/> Add new Project</button>
+          <Button
+            label='Filter'
+            iconDirection='left'
+            icon={<Funnel size={17} />}
+          />
+          <Button label='Add new Product' iconDirection='left' icon={<IoMdAdd size={20}/>} />
         </form>
       </div>
       <ProductFilters />
