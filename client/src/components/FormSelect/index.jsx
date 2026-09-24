@@ -15,7 +15,7 @@ const FormSelect = ({ value, className, onChange, placeholder, options, label })
         data-state={open ? 'open' : 'close'}
         onClick={() => setOpen((prev) => !prev)}
         className={cn(
-          'flex h-10 w-full max-w-sm items-center justify-between gap-2 rounded-md border border-transparent bg-muted px-3 text-sm cursor-pointer transition-color',
+          'flex h-10 w-full items-center justify-between gap-2 rounded-md border border-transparent bg-muted px-3 text-sm cursor-pointer transition-color',
           'data-[state=open]:bg-primary/10 data-[state=open]:border-primary/20 data-[state=open]:border-2 data-[state=open]:text-primary',
           className,
         )}
