@@ -20,7 +20,7 @@ const Toolbar = () => {
 
   return (
     <div>
-      <div>
+      <div className='bg-white flex'>
         <Button icon={<TbLayoutList />} />
         <Button icon={<TbLayoutGrid />} />
       </div>
