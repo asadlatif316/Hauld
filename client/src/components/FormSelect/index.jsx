@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { ChevronDown, Check  } from 'lucide-react';
 
-const FormSelect = ({ value, className, onChange, placeholder, options }) => {
+const FormSelect = ({ value, className, onChange, placeholder, options, label }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -19,9 +20,18 @@ const FormSelect = ({ value, className, onChange, placeholder, options }) => {
           className,
         )}
       >
-        <span className={cn('truncate', !selected && 'text-muted-foreground')}>
-          {selected ? selected.label : placeholder}
+        <span className='truncate'>
+          {label && <span className='text-muted-foreground'>{label}: </span>}
+          <span className='font-medium'>
+            {selected ? selected.label : placeholder}
+          </span>
         </span>
+        <ChevronDown
+          className={cn(
+            'size-4 shrink-0 transition-transform',
+            open && 'rotate-180',
+          )}
+        />
       </button>
       {open && (
         <ul
