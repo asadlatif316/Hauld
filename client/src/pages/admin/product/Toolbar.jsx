@@ -23,7 +23,7 @@ const Toolbar = () => {
     <div>
       <ListToggleButtons />
       <div className='flex flex-col justify-center space-y-2'>
-        <FormInput type='text' />
+        <FormInput placeholder='search product' type='text' />
         <div className='hidden md:flex gap-2'>
           <FormSelect
             value={featured}
