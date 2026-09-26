@@ -6,7 +6,7 @@ import { useState } from 'react';
 const ListToggleButtons = () => {
   const [view, setView] = useState('list');
   return (
-    <div className='hidden sm:inline-flex bg-muted rounded-full shadow-lg'>
+    <div className='hidden md:inline-flex bg-muted rounded-full shadow-lg'>
       <Button
         aria-label='List View'
         aria-pressed={view === 'list'}
