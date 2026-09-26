@@ -21,8 +21,8 @@ const Toolbar = () => {
 
   return (
     <div>
-      <ListToggleButtons/>
-      <form>
+      <ListToggleButtons />
+      <div className='flex flex-col justify-center space-y-2'>
         <FormInput type='text' />
         <div className='hidden md:flex gap-2'>
           <FormSelect
@@ -38,16 +38,19 @@ const Toolbar = () => {
             label='Sort by'
           />
         </div>
-        <Button
-          label='Filter'
-          iconDirection='left'
-          icon={<Funnel size={17} />}
-        />
-        <Button
-          label='Add new Product'
-          iconDirection='left'
-          icon={<IoMdAdd size={20} />}
-        />
+        <div className='flex gap-2'>
+          <Button
+            label='Filter'
+            iconDirection='left'
+            icon={<Funnel size={17} />}
+          className='flex-1 sm:flex-none'/>
+          <Button
+            aria-label='Add new Product'
+            label={<span className='hidden sm:inline'>Add new product</span>}
+            iconDirection='left'
+            icon={<IoMdAdd size={20} />}
+          />
+        </div>
 
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 space-y-2'>
           <FormSelect
@@ -83,7 +86,7 @@ const Toolbar = () => {
             label='Status'
           />
         </div>
-      </form>
+      </div>
     </div>
   );
 };
