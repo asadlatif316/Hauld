@@ -8,7 +8,7 @@ const AdminSidebar = () => {
   return (
     <div
       className={cn(
-        'fixed left-0 top-0 h-screen z-50 w-72 flex flex-col p-2 transition-transform ease-in-out duration-300 md:translate-x-0',
+        'fixed left-0 top-0 h-screen z-50 w-72 flex flex-col p-2 transition-transform ease-in-out duration-300 lg:translate-x-0',
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full',
       )}
     >
@@ -18,7 +18,7 @@ const AdminSidebar = () => {
 
           <button
             aria-label='Close menu'
-            className='md:hidden cursor-pointer group relative size-11'
+            className='lg:hidden cursor-pointer group relative size-11'
             onClick={closeSidebar}
           >
             <PanelLeft className='absolute inset-0 m-auto group-hover:opacity-0 transition-opacity' />

@@ -15,7 +15,7 @@ const AdminHeader = () => {
           <button
             aria-label='Toggle menu'
             onClick={openSidebar}
-            className='cursor-pointer group grid size-11 place-items-center md:hidden'
+            className='cursor-pointer group grid size-11 place-items-center lg:hidden'
           >
             <svg
               width='24'
