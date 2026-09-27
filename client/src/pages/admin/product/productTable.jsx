@@ -9,7 +9,7 @@ const ProductTable = () => {
       <div className='hidden lg:flex'>
         {view === 'list' ? <ProductList /> : <ProductGrid />}
       </div>
-      <div className='lg:hidden'>
+      <div className='lg:hidden p-6'>
         <ProductCards />
       </div>
     </div>
