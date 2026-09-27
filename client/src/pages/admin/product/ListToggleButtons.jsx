@@ -2,9 +2,10 @@ import { cn } from '@/lib/utils';
 import { TbLayoutList, TbLayoutGrid } from 'react-icons/tb';
 import { Button } from '@/components';
 import { useState } from 'react';
+import { useUIStore } from '@/store/useUIStore';
 
 const ListToggleButtons = () => {
-  const [view, setView] = useState('list');
+  const { view, setView } = useUIStore();
   return (
     <div className='hidden md:inline-flex bg-muted rounded-full shadow-lg'>
       <Button
