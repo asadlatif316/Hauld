@@ -7,11 +7,11 @@ import { useEffect } from 'react';
 
 const ProductPage = () => {
   const { products, isProductLoading, fetchProducts } = useProductStore();
-  
-
+console.log(useProductStore.getState().products);  
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
+  console.log(products);
 
   return (
     <div>
