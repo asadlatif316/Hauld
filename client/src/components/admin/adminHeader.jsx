@@ -9,7 +9,7 @@ const AdminHeader = () => {
   const title = getPageTitle(pathname);
 
   return (
-    <header className='sticky top-0 z-30 flex items-center  justify-between p-4 md:p-6'>
+    <header className='sticky top-0 z-30 flex items-center justify-between p-4 md:p-6 overflow-hidden bg-background'>
       <div className='flex items-center'>
         <div>
           <button
