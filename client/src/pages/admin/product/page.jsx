@@ -1,14 +1,14 @@
 import ProductToolbar from './productToolbar';
 import ProductTable from './productTable';
 import { useProductStore } from '@/store';
+import { EmptyState } from '@/components';
 const ProductPage = () => {
-  const { product } = useProductStore()
-  console.log(product);
-  
+  const { products } = useProductStore();
+
   return (
     <div>
       <ProductToolbar />
-      <ProductTable />
+      <div className='flex flex-col items-center'>{products.length > 0 ? <ProductTable /> : <EmptyState />}</div>
     </div>
   );
 };

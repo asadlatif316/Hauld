@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 const useProductStore = create((set) => ({
-  product: 'working',
+  products: [],
 }));
 
 export default useProductStore;
