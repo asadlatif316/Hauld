@@ -5,11 +5,11 @@ import { useUIStore } from '@/store/useUIStore';
 const ProductTable = () => {
   const { view } = useUIStore();
   return (
-    <div>
+    <div className='w-full'>
       <div className='hidden lg:flex'>
         {view === 'list' ? <ProductList /> : <ProductGrid />}
       </div>
-      <div className='lg:hidden p-6'>
+      <div className='lg:hidden'>
         <ProductCards />
       </div>
     </div>

@@ -3,7 +3,7 @@ import productImage from '@/assets/product.jpeg';
 import { EllipsisVertical } from 'lucide-react';
 const ProductCards = () => {
   return (
-    <div className='flex gap-4 p-4 rounded-lg bg-card'>
+    <div className='w-full flex gap-4 p-4 rounded-lg bg-card'>
       <img
         src={productImage}
         alt='Product'

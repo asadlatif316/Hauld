@@ -3,9 +3,15 @@ import ProductTable from './productTable';
 import { useProductStore } from '@/store';
 import { Button, EmptyState, Skeleton } from '@/components';
 import { LuPackageX } from 'react-icons/lu';
+import { useEffect } from 'react';
 
 const ProductPage = () => {
-  const { products, isProductLoading } = useProductStore();
+  const { products, isProductLoading, fetchProducts } = useProductStore();
+  
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   return (
     <div>
@@ -13,7 +19,9 @@ const ProductPage = () => {
       <div className='flex p-6 flex-col items-center'>
         {products.length > 0 ? (
           <ProductTable />
-        ) : isProductLoading ? <Skeleton/> : (
+        ) : isProductLoading ? (
+          <Skeleton />
+        ) : (
           <EmptyState
             icon={<LuPackageX />}
             title='No Products yet'
