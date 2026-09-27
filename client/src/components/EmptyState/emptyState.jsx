@@ -1,4 +1,4 @@
-const EmptyState = ({ icon, title, description, action }) => {
+const CardSkeleton = ({ icon, title, description, action }) => {
   return (
     <div className='py-10 px-4  flex flex-col items-center gap-2 text-center'>
       {icon && (
@@ -15,4 +15,12 @@ const EmptyState = ({ icon, title, description, action }) => {
   );
 };
 
-export default EmptyState;
+const ListSkeleton = () => {
+  return <div>List Skeleton</div>;
+};
+
+const GridSkeleton = () => {
+  return <div>Grid Skeleton</div>;
+};
+
+export { CardSkeleton, ListSkeleton, GridSkeleton };
