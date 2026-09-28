@@ -1,4 +1,4 @@
-const Skeleton = () => {
+const CardSkeleton = () => {
   return (
     <div className='w-full space-y-4  animate-pulse'>
       {[...Array(3)].map((_, index) => (
@@ -15,4 +15,12 @@ const Skeleton = () => {
   );
 };
 
-export default Skeleton;
+const ListSkeleton = () => {
+  return <div>List Skeleton</div>;
+};
+
+const GridSkeleton = () => {
+  return <div>Grid Skeleton</div>;
+};
+
+export { CardSkeleton, GridSkeleton, ListSkeleton };

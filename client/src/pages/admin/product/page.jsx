@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 
 const ProductPage = () => {
   const { fetchProducts } = useProductStore();
-  console.log(useProductStore.getState().products);
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
