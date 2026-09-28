@@ -1,5 +1,5 @@
-import ProductToolbar from './productToolbar';
-import ProductTable from './productTable';
+import ProductToolbar from './ProductToolbar/productToolbar';
+import ProductTable from './Views/productTable';
 import { useProductStore } from '@/store';
 import { useEffect } from 'react';
 
