@@ -1,3 +1,5 @@
+import { ProductTableHead } from '@/pages/admin/product';
+
 const CardSkeleton = () => {
   return (
     <div className='w-full space-y-4  animate-pulse'>
@@ -16,7 +18,13 @@ const CardSkeleton = () => {
 };
 
 const ListSkeleton = () => {
-  return <div>List Skeleton</div>;
+  return (
+    <table>
+      <ProductTableHead/>
+      <tbody>
+      </tbody>
+    </table>
+  );
 };
 
 const GridSkeleton = () => {

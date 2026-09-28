@@ -16,11 +16,7 @@ import { useUIStore } from '@/store/useUIStore';
 const ProductTable = () => {
   const { products, isProductLoading } = useProductStore();
   const { view } = useUIStore()
-  console.log(isProductLoading);
-  
   const isInitialLoading = isProductLoading && products.length === 0;
-  console.log(isInitialLoading);
-  
   const isRefetching = isProductLoading && products.length > 0;
   if (true) {
     return (
