@@ -19,9 +19,43 @@ const CardSkeleton = () => {
 
 const ListSkeleton = () => {
   return (
-    <table>
-      <ProductTableHead/>
-      <tbody>
+    <table className='w-full table-fixed'>
+      <ProductTableHead />
+      <tbody className='animate-pulse'>
+        {[...Array(6)].map((_, index) => (
+          <tr key={index} className='border-b border-border'>
+            <td className='p-3'>
+              <div className='flex items-center gap-3'>
+                <div className='size-9 bg-muted rounded-lg'></div>
+                <div className='space-y-2'>
+                  <div className='w-36 h-3 rounded bg-muted'></div>
+                  <div className='h-3 w-20 rounded bg-muted'></div>
+                </div>
+              </div>
+            </td>
+            <td className='hidden lg:table-cell p-3'>
+              <div className='w-16 h-3 rounded bg-muted'></div>
+            </td>
+            <td className='p-3'>
+              <div className='w-16 h-3 rounded bg-muted'></div>
+            </td>
+            <td className='p-3'>
+              <div className='w-16 h-3 rounded bg-muted'></div>
+            </td>
+            <td className='p-3'>
+              <div className='w-16 h-3 rounded bg-muted'></div>
+            </td>
+            <td className='hidden lg:table-cell p-3'>
+              <div className='w-16 h-3 rounded bg-muted'></div>
+            </td>
+            <td className='p-3'>
+              <div className='flex justify-end gap-2'>
+                <div className='size-7 bg-muted rounded'></div>
+                <div className='size-7 bg-muted rounded'></div>
+              </div>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
