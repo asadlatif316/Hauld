@@ -24,7 +24,7 @@ const ProductList = () => {
           } = product;
           const stockStatus = getStockStatus(stock);
           return (
-            <tr key={_id} className='border-b border-border'>
+            <tr key={_id} className='border-b border-border text-sm'>
               <td className='p-4'>
                 <div className='flex items-center gap-3'>
                   {image?.url ? (
@@ -53,7 +53,7 @@ const ProductList = () => {
               <td className='p-4'>
                 <span
                   className={cn(
-                    'px-3 py-2 rounded-full font-semibold',
+                    'px-3 py-2 rounded-full font-medium',
                     isActive
                       ? 'bg-green-500/10 text-green-700'
                       : 'text-destructive bg-destructive/10',
