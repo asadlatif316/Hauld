@@ -62,7 +62,29 @@ const ListSkeleton = () => {
 };
 
 const GridSkeleton = () => {
-  return <div>Grid Skeleton</div>;
+  return (
+    <div className='grid grid-cols-2 gap-4 lg:grid-cols-3'>
+      {[...Array(6)].map((_, index) => (
+        <div
+          key={index}
+          className='overflow-hidden rounded-xl border border-border'
+        >
+          <div className='aspect-4/3 bg-muted'></div>
+          <div className='space-y-2 p-3'>
+            <div className='w-3/4 h-3 bg-muted'></div>
+            <div className='w-2/5 h-2.5 bg-muted'></div>
+            <div className='flex items-center justify-between'>
+              <div className='h-3 w-1/4 bg-muted'></div>
+              <div className='flex items-center gap-2'>
+                <div className='size-7 bg-muted rounded-lg'></div>
+                <div className='size-7 bg-muted rounded-lg'></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export { CardSkeleton, GridSkeleton, ListSkeleton };
