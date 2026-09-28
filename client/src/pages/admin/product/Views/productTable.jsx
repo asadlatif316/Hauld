@@ -18,7 +18,7 @@ const ProductTable = () => {
   const { view } = useUIStore()
   const isInitialLoading = isProductLoading && products.length === 0;
   const isRefetching = isProductLoading && products.length > 0;
-  if (true) {
+  if (isInitialLoading) {
     return (
       <div className='w-full'>
         <div className='hidden md:block'>

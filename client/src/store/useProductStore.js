@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 const useProductStore = create((set) => ({
   products: [],
-  isProductLoading: true,
+  isProductLoading: false,
   pagination: { currentPage: 1, numberOfPages: 1, totalProducts: 0 },
 
   fetchProducts: async () => {
