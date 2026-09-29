@@ -1,9 +1,11 @@
+import ProductForm from './Forms/ProductForm';
+
 const ProductCreatePage = () => {
   return (
     <div>
-      Product create Page
+      <ProductForm />
     </div>
-  )
-}
+  );
+};
 
-export default ProductCreatePage
+export default ProductCreatePage;
