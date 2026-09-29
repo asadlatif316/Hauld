@@ -4,12 +4,14 @@ import ListToggleButtons from './ListToggleButtons';
 import { Funnel } from 'lucide-react';
 import { IoMdAdd } from 'react-icons/io';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ProductFilters from './productFilters';
 
 const Toolbar = () => {
   const [sortBy, setSortBy] = useState('-createdAt');
   const [featured, setFeatured] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
+  const navigate = useNavigate()
 
   return (
     <div>
@@ -46,6 +48,7 @@ const Toolbar = () => {
               label={<span className='hidden lg:inline'>Add new product</span>}
               iconDirection='left'
               icon={<IoMdAdd size={20} />}
+              onClick={()=> navigate('/dashboard/products/new')}
             />
           </div>
         </div>

@@ -1,7 +1,13 @@
-import { Login } from '../pages';
+import { Login, ProductCreatePage } from '../pages';
 import { DashboardLayout } from '@/Layout';
 import { ProtectedRoute } from '@/components';
-import { Dashboard,Messages,ProductList,Settings,OrderList } from '../pages';
+import {
+  Dashboard,
+  Messages,
+  ProductList,
+  Settings,
+  OrderList,
+} from '../pages';
 
 const routes = [
   {
@@ -18,6 +24,7 @@ const routes = [
     children: [
       { index: true, element: <Dashboard /> },
       { path: 'products', element: <ProductList /> },
+      { path: 'products/new', element: <ProductCreatePage /> },
       { path: 'orders', element: <OrderList /> },
       { path: 'settings', element: <Settings /> },
       { path: 'messages', element: <Messages /> },
