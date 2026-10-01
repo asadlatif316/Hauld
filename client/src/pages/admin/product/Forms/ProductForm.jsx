@@ -4,6 +4,7 @@ import {
   CategorySection,
   ImageSection,
   PriceStockSection,
+  Visibility,
 } from './FormSections';
 const ProductForm = () => {
   return (
@@ -15,6 +16,7 @@ const ProductForm = () => {
           <ImageSection />
           <CategorySection />
           <PriceStockSection />
+          <Visibility/>
         </form>
       </div>
       <div className='bg-primary hidden lg:flex w-2/5'></div>
