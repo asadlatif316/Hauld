@@ -2,10 +2,14 @@ import { FormInput, FormSectionWrapper } from '@/components';
 
 const Section1 = () => {
   return (
-    <FormSectionWrapper>
-      <h2 className='text-xl font-medium'>Basics</h2>
-      <FormInput label='Product name' placeholder='Enter product name' />
-      <FormInput label='Description' />
+    <FormSectionWrapper
+      heading='Basics'
+      description='The name and description shopper see'
+    >
+      <div className='flex-1 flex flex-col gap-4'>
+        <FormInput label='Product name' placeholder='Enter product name' className='w-full'/>
+        <FormInput label='Description' />
+      </div>
     </FormSectionWrapper>
   );
 };
