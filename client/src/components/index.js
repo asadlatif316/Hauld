@@ -7,3 +7,4 @@ export { default as UserMenu } from './UserMenu/index';
 export { default as Button } from './button/index';
 export { default as FormSelect } from './FormSelect/index';
 export { default as EmptyState } from './EmptyState/emptyState';
+export { default as FormSectionWrapper } from './SectionWrappers/FormSectionsWrapper';

@@ -1,12 +1,12 @@
-import { FormInput } from '@/components';
+import { FormInput, FormSectionWrapper } from '@/components';
 
 const Section1 = () => {
   return (
-    <div className='flex flex-col gap-3 bg-primary-foreground px-4 py-6 border border-border rounded-xl'>
+    <FormSectionWrapper>
       <h2 className='text-xl font-medium'>Basics</h2>
       <FormInput label='Product name' placeholder='Enter product name' />
       <FormInput label='Description' />
-    </div>
+    </FormSectionWrapper>
   );
 };
 
