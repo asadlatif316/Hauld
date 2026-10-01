@@ -1,5 +1,10 @@
 import FormHeader from './FormHeader';
-import { Basics,CategorySection,ImageSection } from './FormSections';
+import {
+  Basics,
+  CategorySection,
+  ImageSection,
+  PriceStockSection,
+} from './FormSections';
 const ProductForm = () => {
   return (
     <div className='p-6 min-h-screen flex flex-col lg:flex-row gap-4'>
@@ -9,6 +14,7 @@ const ProductForm = () => {
           <Basics />
           <ImageSection />
           <CategorySection />
+          <PriceStockSection />
         </form>
       </div>
       <div className='bg-primary hidden lg:flex w-2/5'></div>
