@@ -13,10 +13,10 @@ const Section2 = () => {
     };
   };
   return (
-    <FormSectionWrapper>
-      <h2 className='text-xl font-medium'>Image</h2>
+    <FormSectionWrapper heading='Image' description='Add Photo for the product'>
+      
       {image ? (
-        <div className='relative rounded-xl aspect-4/2 text-muted-foreground overflow-hidden border border-border'>
+        <div className='flex-1 relative rounded-xl aspect-4/2 text-muted-foreground overflow-hidden border border-border'>
           <img
             src={image}
             alt='Product Preview'
@@ -31,15 +31,16 @@ const Section2 = () => {
       ) : (
         <label
           htmlFor='productImage'
-          className='flex flex-col gap-3 justify-center items-center bg-muted border-2 border-muted-foreground border-dashed rounded-xl aspect-4/2 text-muted-foreground cursor-pointer'
+          className='flex-1 flex flex-col gap-3 justify-center items-center bg-muted border-2 border-muted-foreground border-dashed rounded-xl aspect-4/2 text-muted-foreground cursor-pointer'
         >
           <Upload />
           <p>Tap to Upload photo</p>
         </label>
       )}
 
-      <FormInput
+      <input
         type='file'
+        id='productImage'
         name='productImage'
         accept='image/*'
         className='hidden'

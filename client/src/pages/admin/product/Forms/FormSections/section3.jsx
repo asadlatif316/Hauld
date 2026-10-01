@@ -4,19 +4,10 @@ import { useState } from 'react';
 const Section3 = () => {
   const [category, setCategory] = useState('tote');
   return (
-    <FormSectionWrapper>
-      <div className='flex justify-between items-center'>
-        <h2 className='text-xl font-medium'>Category</h2>
-        {category && (
-          <Button
-            label='clear'
-            className='font-normal text-sm py-1 px-2 bg-transparent underline underline-offset-4 text-muted-foreground border-none hover:bg-transparent'
-            onClick={() => setCategory('')}
-          />
-        )}
-      </div>
+    <FormSectionWrapper heading='Category' description='Pick one, drive the catalog filters'>
+      
 
-      <div className='grid grid-cols-3 gap-4 text-sm'>
+      <div className='flex-1 grid grid-cols-3 gap-4 text-sm'>
         {categories.map((item) => (
           <label className='cursor-pointer '>
             <input
@@ -26,8 +17,8 @@ const Section3 = () => {
               checked={category === item.value}
               onChange={() => setCategory(item.value)}
             />
-            <div className='p-3 bg-muted rounded-lg peer-checked:bg-foreground peer-checked:text-background peer-focus-visible:ring-2 peer-focus-visible:ring-ring/50'>
-              {<item.icon className='size-4' />}
+            <div className='p-3 lg:aspect-3/2 flex flex-col justify-between bg-muted rounded-lg peer-checked:bg-foreground peer-checked:text-background peer-focus-visible:ring-2 peer-focus-visible:ring-ring/50'>
+              {<item.icon className='size-4 lg:size-5' />}
               <p className='mt-4'>{item.label}</p>
             </div>
           </label>
