@@ -19,8 +19,10 @@ const ProductForm = () => {
           <CategorySection />
           <PriceStockSection />
           <Visibility />
-          <PreviewSection />
-          <ReadyToPublishSection />
+          <div className='lg:hidden flex flex-col gap-4'>
+            <PreviewSection />
+            <ReadyToPublishSection />
+          </div>
         </form>
       </div>
       <div className='bg-primary hidden lg:flex w-2/5'></div>

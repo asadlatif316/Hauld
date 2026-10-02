@@ -6,13 +6,25 @@ const Section5 = () => {
       heading='Visibility'
       description='Control where this product appears'
     >
-      <div className='flex flex-col gap-2'>
-        <div className='flex items-center justify-between text-sm'>
-          <span className='text-muted-foreground'>Active</span>
+      <div className='flex-1 flex flex-col gap-2'>
+        <div className='flex items-center justify-between text-sm lg:border-b border-border pb-1'>
+          <div>
+            {' '}
+            <span className=''>Active</span>
+            <p className='hidden lg:block text-muted-foreground text-sm'>
+              Visible to shoppers in the storefront.
+            </p>
+          </div>
           <Switch />
         </div>
-        <div className='flex items-center justify-between text-sm'>
-          <span className='text-muted-foreground'>Featured</span>
+        <div className='flex items-center justify-between text-sm lg:border-b border-border pb-1'>
+          <div>
+            {' '}
+            <span className=''>Featured</span>
+            <p className='hidden lg:block text-muted-foreground text-sm'>
+              Pinned to the storefront homepage and starred in the catalog.
+            </p>
+          </div>
           <Switch />
         </div>
       </div>
