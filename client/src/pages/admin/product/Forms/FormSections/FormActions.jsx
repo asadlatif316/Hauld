@@ -9,7 +9,7 @@ const FormActions = () => {
     navigate(-1);
   };
   return (
-    <div className='grid grid-cols-2 gap-3 bg-muted p-4 rounded-b-2xl border border-border'>
+    <div className='lg:hidden grid grid-cols-2 gap-3 bg-primary-foreground p-4 rounded-b-2xl border border-border'>
       <Button
         className='text-sm bg-muted-foreground hover:bg-muted-foreground/70'
         onClick={handleCancel}
