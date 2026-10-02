@@ -1,20 +1,21 @@
 import { FormSectionWrapper, FormInput, Button } from '@/components';
+import { useUIStore } from '@/store/useUIStore';
 import { Upload, X } from 'lucide-react';
 import { useState } from 'react';
 
 const Section2 = () => {
-  const [image, setImage] = useState();
+  const image = useUIStore((s) => s.image);
+  const update = useUIStore((s) => s.update);
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(uploadedFile);
     reader.onload = () => {
-      setImage(reader.result);
+      update('image', reader.result);
     };
   };
   return (
     <FormSectionWrapper heading='Image' description='Add Photo for the product'>
-      
       {image ? (
         <div className='flex-1 relative rounded-xl aspect-4/2 text-muted-foreground overflow-hidden border border-border'>
           <img
@@ -25,7 +26,7 @@ const Section2 = () => {
           <Button
             icon={<X className='size-5' />}
             className='absolute text-muted top-2 right-2 rounded-full p-1 backdrop-blur-2xl bg-primary/50 border-none'
-            onClick={() => setImage(null)}
+            onClick={() => update('image', null)}
           />
         </div>
       ) : (

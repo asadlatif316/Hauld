@@ -1,6 +1,11 @@
 import { FormSectionWrapper } from '@/components';
 import { Switch } from '@/lib';
+import { useUIStore } from '@/store/useUIStore';
 const Section5 = () => {
+  const isActive = useUIStore((s) => s.isActive);
+  const isFeatured = useUIStore((s) => s.isFeatured);
+  const update = useUIStore((s) => s.update);
+
   return (
     <FormSectionWrapper
       heading='Visibility'
@@ -15,7 +20,10 @@ const Section5 = () => {
               Visible to shoppers in the storefront.
             </p>
           </div>
-          <Switch />
+          <Switch
+            checked={isActive}
+            onCheckedChange={(value) => update('isActive', value)}
+          />
         </div>
         <div className='flex items-center justify-between text-sm lg:border-b border-border pb-1'>
           <div>
@@ -25,7 +33,10 @@ const Section5 = () => {
               Pinned to the storefront homepage and starred in the catalog.
             </p>
           </div>
-          <Switch />
+          <Switch
+            checked={isFeatured}
+            onCheckedChange={(value) => update('isFeatured', value)}
+          />
         </div>
       </div>
     </FormSectionWrapper>

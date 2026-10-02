@@ -1,21 +1,25 @@
 import { categories } from '@/config';
-import { Button, FormSectionWrapper } from '@/components';
-import { useState } from 'react';
+import { FormSectionWrapper } from '@/components';
+import { useUIStore } from '@/store/useUIStore';
 const Section3 = () => {
-  const [category, setCategory] = useState('tote');
+  const category = useUIStore((s) => s.category);
+  const update = useUIStore((s) => s.update);
   return (
-    <FormSectionWrapper heading='Category' description='Pick one, drive the catalog filters'>
-      
-
+    <FormSectionWrapper
+      heading='Category'
+      description='Pick one, drive the catalog filters'
+    >
       <div className='flex-1 grid grid-cols-3 gap-4 text-sm'>
         {categories.map((item) => (
-          <label className='cursor-pointer '>
+          <label key={item.label} className='cursor-pointer '>
             <input
               type='radio'
               className='peer hidden'
               value={item.value}
               checked={category === item.value}
-              onChange={() => setCategory(item.value)}
+              onChange={(e) => {
+                update('category', e.target.value);
+              }}
             />
             <div className='p-3 lg:aspect-3/2 flex flex-col justify-between bg-muted rounded-lg peer-checked:bg-foreground peer-checked:text-background peer-focus-visible:ring-2 peer-focus-visible:ring-ring/50'>
               {<item.icon className='size-4 lg:size-5' />}

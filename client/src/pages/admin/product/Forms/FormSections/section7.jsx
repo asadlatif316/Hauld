@@ -11,7 +11,7 @@ const Section7 = () => {
   ];
 
   const done = checks.filter((c) => c.ok).length;
-  const missing = checks.filter((c) => c.ok).map((c) => c.label);
+  const missing = checks.filter((c) => !c.ok).map((c) => c.label);
   return (
     <FormSectionWrapper heading='Ready to publish'>
       <div className='flex flex-col gap-3'>

@@ -3,28 +3,35 @@ import { useUIStore } from '@/store/useUIStore';
 import { cn } from 'cn';
 import { MdOutlineImageNotSupported } from 'react-icons/md';
 import getStockStatus from '@/utils/products.utils';
+import { Star } from 'lucide-react';
 const Section6 = () => {
-  const { image, name, isFeatured, isActive, stock, price, category } =
-    useUIStore();
+  const {
+    image,
+    name,
+    description,
+    isFeatured,
+    isActive,
+    stock,
+    price,
+    category,
+  } = useUIStore();
   const stockStatus = getStockStatus(stock);
   return (
     <FormSectionWrapper heading='Preview'>
       <div className='overflow-hidden rounded-lg border border-border bg-card'>
         <div className='relative'>
-          {image?.url ? (
-            <img
-              src={image.url}
-              alt={name}
-              className='size-full object-cover'
-            />
+          {image ? (
+            <img src={image} alt={name} className='aspect-4/3 object-cover' />
           ) : (
             <div className='aspect-4/3 bg-muted text-muted-foreground flex justify-center items-center'>
               <MdOutlineImageNotSupported className='size-20' />
             </div>
           )}
-          <span className='absolute top-2 left-2 px-2 text-xs py-0.5 bg-card rounded-md border border-border'>
-            {isActive ? 'active' : 'inactive'}
-          </span>
+          {isActive && (
+            <span className='absolute top-2 left-2 px-2 text-xs py-0.5 bg-card rounded-md border border-border'>
+              {isActive ? 'active' : 'inactive'}
+            </span>
+          )}
           {isFeatured && (
             <span className='absolute top-2 right-2 size-6 grid place-items-center bg-card rounded-full'>
               <Star
@@ -37,6 +44,9 @@ const Section6 = () => {
         <div className='p-4'>
           <p className='font-semibold text-sm truncate'>{name}</p>
           <p className='capitalize text-xs text-muted-foreground'>{category}</p>
+          <p className='text-sm mt-1 text-muted-foreground first-letter:uppercase line-clamp-2'>
+            {description || 'Product description'}
+          </p>
           <div className='mt-3 flex justify-between items-center'>
             <p className='text-sm font-medium'>${price}</p>
             <p
