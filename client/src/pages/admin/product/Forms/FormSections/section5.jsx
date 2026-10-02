@@ -23,6 +23,7 @@ const Section5 = () => {
           <Switch
             checked={isActive}
             onCheckedChange={(value) => update('isActive', value)}
+            name='isActive'
           />
         </div>
         <div className='flex items-center justify-between text-sm lg:border-b border-border pb-1'>
@@ -36,6 +37,7 @@ const Section5 = () => {
           <Switch
             checked={isFeatured}
             onCheckedChange={(value) => update('isFeatured', value)}
+            name='isFeatured'
           />
         </div>
       </div>

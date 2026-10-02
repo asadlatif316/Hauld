@@ -15,6 +15,7 @@ const Section3 = () => {
             <input
               type='radio'
               className='peer hidden'
+              name='category'
               value={item.value}
               checked={category === item.value}
               onChange={(e) => {

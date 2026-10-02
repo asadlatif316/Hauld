@@ -19,6 +19,7 @@ const Section4 = () => {
               className='w-full pl-6'
               value={price}
               type='number'
+              name='price'
               onChange={(e) => update('price', e.target.value)}
             />
           </div>
@@ -31,6 +32,8 @@ const Section4 = () => {
             <FormInput
               className='w-full rounded-none border-x-0 text-center'
               value={stock}
+              type='number'
+              name='stock'
               onChange={(e) =>
                 update('stock', Math.max(0, Number(e.target.value)))
               }

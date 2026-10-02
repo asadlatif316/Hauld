@@ -14,6 +14,7 @@ const Section1 = () => {
         <FormInput
           label='Product name'
           value={name}
+          name='name'
           onChange={(e) => update('name', e.target.value)}
           placeholder='e.g. Leather tote bag product name'
           className='w-full'
@@ -22,6 +23,7 @@ const Section1 = () => {
           placeholder='Describe the material, size, and what makes it special…'
           rows={3}
           value={description}
+          name='description'
           onChange={(e) => update('description', e.target.value)}
           className='text-sm w-ful border border-input bg-input/20 px-3 py-2 resize-none rounded-lg  outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring/30 md:rows-5'
         />

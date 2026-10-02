@@ -19,7 +19,7 @@ const FormHeader = () => {
           label='Cancel'
           onClick={handleCancel}
         />
-        <Button label='Publish' />
+        <Button type='submit' form='product-form' label='Publish' />
       </div>
     </div>
   );
