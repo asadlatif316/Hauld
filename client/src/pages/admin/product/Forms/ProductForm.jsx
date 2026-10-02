@@ -4,12 +4,10 @@ import {
   CategorySection,
   FormAction,
   ImageSection,
-  PreviewSection,
   PriceStockSection,
-  ReadyToPublishSection,
   Visibility,
 } from './FormSections';
-import { ProductPreview } from '@/components';
+import { ProductPreview, ReadyToPublish } from '@/components';
 const ProductForm = () => {
   return (
     <div className='p-6 min-h-screen flex flex-col lg:flex-row gap-4'>
@@ -23,13 +21,14 @@ const ProductForm = () => {
           <Visibility />
           <div className='lg:hidden flex flex-col gap-4'>
             <ProductPreview />
-            <ReadyToPublishSection />
+            <ReadyToPublish />
           </div>
           <FormAction />
         </form>
       </div>
-      <div className='hidden lg:flex flex-col w-2/5'>
+      <div className='hidden lg:flex flex-col gap-4 w-2/5'>
         <ProductPreview />
+        <ReadyToPublish />
       </div>
     </div>
   );
