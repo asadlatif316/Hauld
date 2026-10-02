@@ -9,3 +9,4 @@ export { default as FormSelect } from './FormSelect/index';
 export { default as EmptyState } from './EmptyState/emptyState';
 export { default as FormSectionWrapper } from './SectionWrappers/FormSectionsWrapper';
 export { default as Slider } from './Slider/slider';
+export { default as ProductPreview } from './PreviewProduct/preview';
