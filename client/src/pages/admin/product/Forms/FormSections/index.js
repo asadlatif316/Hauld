@@ -4,3 +4,4 @@ export { default as CategorySection } from './section3';
 export { default as PriceStockSection } from './section4';
 export { default as Visibility } from './section5';
 export { default as PreviewSection } from './section6';
+export { default as ReadyToPublishSection } from './section7';

@@ -3,7 +3,6 @@ import { useUIStore } from '@/store/useUIStore';
 import { cn } from 'cn';
 import { MdOutlineImageNotSupported } from 'react-icons/md';
 import getStockStatus from '@/utils/products.utils';
-import { SquarePen, Trash } from 'lucide-react';
 const Section6 = () => {
   const { image, name, isFeatured, isActive, stock, price, category } =
     useUIStore();
