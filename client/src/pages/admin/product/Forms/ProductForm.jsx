@@ -1,4 +1,6 @@
+import { useProductStore } from '@/store';
 import FormHeader from './FormHeader';
+import { useNavigate } from 'react-router-dom';
 import {
   Basics,
   CategorySection,
@@ -8,12 +10,24 @@ import {
   Visibility,
 } from './FormSections';
 import { ProductPreview, ReadyToPublish } from '@/components';
+import { useUIStore } from '@/store/useUIStore';
 const ProductForm = () => {
+  const navigate = useNavigate();
+  const addProduct = useProductStore((s) => s.addProduct);
+  const reset = useUIStore((s) => s.reset);
+  const toBool = (value) => value === 'on' || value === 'true';
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    formData.delete('lowStockThreshold')
+    formData.delete('lowStockThreshold');
+    formData.set('isActive', toBool(formData.get('isActive')));
+    formData.set('isFeatured', toBool(formData.get('isFeatured')));
     console.log(Object.fromEntries(formData));
+    const product = await addProduct(Object.fromEntries(formData));
+    if (product) {
+      reset();
+      navigate('/dashboard/products');
+    }
   };
   return (
     <div className='p-6 min-h-screen flex flex-col gap-4'>
