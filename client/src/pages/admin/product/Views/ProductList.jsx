@@ -6,7 +6,7 @@ import getStockStatus from '@/utils/products.utils';
 import { cn } from '@/lib/utils';
 
 const ProductList = () => {
-  const { products } = useProductStore();
+  const { products, deleteProduct } = useProductStore();
   return (
     <table className='w-full table-fixed'>
       <ProductTableHead />
@@ -79,6 +79,7 @@ const ProductList = () => {
                     className='px-2'
                   />
                   <Button
+                    onClick={() => deleteProduct(_id)}
                     icon={<Trash className='size-4' />}
                     className='px-2'
                   />

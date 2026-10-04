@@ -7,6 +7,7 @@ const useProductStore = create((set, get) => ({
   isProductLoading: false,
   pagination: { currentPage: 1, numberOfPages: 1, totalProducts: 0 },
   isSubmitting: false,
+  isDeleting: false,
 
   fetchProducts: async () => {
     set({ isProductLoading: true });
@@ -34,6 +35,21 @@ const useProductStore = create((set, get) => ({
       toast.error(error.response?.data?.message || 'Could not publish');
     } finally {
       set({ isSubmitting: false });
+    }
+  },
+
+  deleteProduct: async (id) => {
+    set({ isDeleting: true });
+    try {
+      await api.delete(`/product/${id}`);
+      set((state) => ({
+        products: state.products.filter((p) => p._id !== id),
+      }));
+      toast.success('Product Deleted');
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Could not delete product');
+    } finally {
+      set({ isDeleting: false });
     }
   },
 }));
