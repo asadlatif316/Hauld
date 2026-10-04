@@ -1,5 +1,5 @@
+import 'dotenv/config';
 import express from 'express';
-import dotenv from 'dotenv';
 import statusCode from 'http-status-codes';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -7,8 +7,6 @@ import connectDB from './lib/db.js';
 import helmet from 'helmet';
 import { ErrorHandlerMiddleware } from './middlewares/index.js';
 import { authRouter, productRouter } from './routes/index.js';
-
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
