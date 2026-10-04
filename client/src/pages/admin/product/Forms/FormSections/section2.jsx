@@ -10,7 +10,7 @@ const Section2 = () => {
     const uploadedFile = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(uploadedFile);
-    reader.onload = () => {
+    reader.onload = async () => {
       update('image', reader.result);
     };
   };
@@ -31,7 +31,7 @@ const Section2 = () => {
         </div>
       ) : (
         <label
-          htmlFor='productImage'
+          htmlFor='image'
           className='flex-1 flex flex-col gap-3 justify-center items-center bg-muted border-2 border-muted-foreground border-dashed rounded-xl aspect-4/2 text-muted-foreground cursor-pointer'
         >
           <Upload />
@@ -41,8 +41,8 @@ const Section2 = () => {
 
       <input
         type='file'
-        id='productImage'
-        name='productImage'
+        id='image'
+        name='image'
         accept='image/*'
         className='hidden'
         onChange={handleFileUpload}

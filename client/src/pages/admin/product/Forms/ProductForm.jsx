@@ -19,10 +19,10 @@ const ProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    formData.set('image', useUIStore.getState().image);
     formData.delete('lowStockThreshold');
     formData.set('isActive', toBool(formData.get('isActive')));
     formData.set('isFeatured', toBool(formData.get('isFeatured')));
-    console.log(Object.fromEntries(formData));
     const product = await addProduct(Object.fromEntries(formData));
     if (product) {
       reset();

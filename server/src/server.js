@@ -4,27 +4,24 @@ import statusCode from 'http-status-codes';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectDB from './lib/db.js';
-import helmet from 'helmet'
+import helmet from 'helmet';
 import { ErrorHandlerMiddleware } from './middlewares/index.js';
-import {authRouter,productRouter} from './routes/index.js';
+import { authRouter, productRouter } from './routes/index.js';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
-
-app.use(helmet())
+app.use(helmet());
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
   }),
 );
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
-
-
 
 app.get('/', (req, res) => {
   res
@@ -32,11 +29,10 @@ app.get('/', (req, res) => {
     .json({ success: true, message: `Server is running on port: ${port}` });
 });
 
-app.use('/api/auth',authRouter)
-app.use('/api/product',productRouter)
+app.use('/api/auth', authRouter);
+app.use('/api/product', productRouter);
 
-app.use(ErrorHandlerMiddleware)
-
+app.use(ErrorHandlerMiddleware);
 
 connectDB().then(() => {
   app.listen(port, () => console.log(`Server is running on port: ${port}`));
