@@ -75,6 +75,9 @@ const ProductGrid = () => {
                 </div>
                 <div className='flex gap-1'>
                   <Button
+                    onClick={() => {
+                      navigate(`/dashboard/products/${_id}/edit`);
+                    }}
                     icon={<SquarePen className='size-4' />}
                     className='px-2'
                   />

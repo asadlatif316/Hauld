@@ -4,9 +4,11 @@ import { Button } from '@/components';
 import { SquarePen, Trash, Star } from 'lucide-react';
 import getStockStatus from '@/utils/products.utils';
 import { cn } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
 
 const ProductList = () => {
   const { products, deleteProduct } = useProductStore();
+  const navigate = useNavigate();
   return (
     <table className='w-full table-fixed'>
       <ProductTableHead />
@@ -75,6 +77,9 @@ const ProductList = () => {
               <td className='p-4'>
                 <div className='flex gap-1 justify-end'>
                   <Button
+                    onClick={() => {
+                      navigate(`/dashboard/products/${_id}/edit`);
+                    }}
                     icon={<SquarePen className='size-4' />}
                     className='px-2'
                   />

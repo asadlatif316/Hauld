@@ -1,4 +1,3 @@
-import { Login, ProductCreatePage } from '../pages';
 import { DashboardLayout } from '@/Layout';
 import { ProtectedRoute } from '@/components';
 import {
@@ -7,6 +6,9 @@ import {
   ProductList,
   Settings,
   OrderList,
+  EditProductPage,
+  Login,
+  ProductCreatePage,
 } from '../pages';
 
 const routes = [
@@ -25,6 +27,7 @@ const routes = [
       { index: true, element: <Dashboard /> },
       { path: 'products', element: <ProductList /> },
       { path: 'products/new', element: <ProductCreatePage /> },
+      { path: 'products/:id/edit', element: <EditProductPage /> },
       { path: 'orders', element: <OrderList /> },
       { path: 'settings', element: <Settings /> },
       { path: 'messages', element: <Messages /> },
