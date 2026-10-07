@@ -31,7 +31,7 @@ const ProductForm = () => {
   };
   return (
     <div className='p-6 min-h-screen flex flex-col gap-4'>
-      <FormHeader />
+      <FormHeader text='New Product'/>
       <div className='flex gap-4'>
         <div className='w-full flex flex-col gap-4'>
           <form

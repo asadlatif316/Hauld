@@ -1,7 +1,7 @@
 import { Button } from '@/components';
 import { useUIStore } from '@/store/useUIStore';
 import { useNavigate } from 'react-router-dom';
-const FormHeader = () => {
+const FormHeader = ({ text }) => {
   const navigate = useNavigate();
   const reset = useUIStore((s) => s.reset);
   const handleCancel = () => {
@@ -11,7 +11,7 @@ const FormHeader = () => {
   return (
     <div className='flex gap-2 items-center justify-between'>
       <div className='font-medium'>
-        <p className='font-medium'>New Product</p>
+        <p className='font-medium'>{text}</p>
       </div>
       <div className='flex items-center gap-2'>
         <Button

@@ -1,9 +1,11 @@
+import FormHeader from './Forms/FormHeader';
+
 const EditProductPage = () => {
   return (
     <div>
-    Edit Product Page
+      <FormHeader text='Edit Product'/>
     </div>
-  )
-}
+  );
+};
 
-export default EditProductPage
+export default EditProductPage;
