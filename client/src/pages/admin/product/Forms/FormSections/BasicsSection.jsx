@@ -30,7 +30,9 @@ const BasicSection = () => {
           readOnly={!isEditing}
         />
         <div className='flex flex-col gap-2'>
-          <label htmlFor="description" className='font-medium'>Description</label>
+          <label htmlFor='description' className='font-medium'>
+            Description
+          </label>
           <textarea
             placeholder='Describe the material, size, and what makes it special…'
             rows={3}
@@ -43,7 +45,11 @@ const BasicSection = () => {
         </div>
         {isEditing && (
           <div className='flex gap-1 ml-auto'>
-            <Button label='cancel' onClick={() => setIsEditing(false)} />
+            <Button
+              className='bg-muted-foreground hover:bg-muted-foreground/80'
+              label='cancel'
+              onClick={() => setIsEditing(false)}
+            />
             <Button label='save' />
           </div>
         )}
