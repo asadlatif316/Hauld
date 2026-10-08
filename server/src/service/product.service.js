@@ -121,4 +121,10 @@ const delProduct = async (id) => {
   return product;
 };
 
-export { createProduct, fetchProducts, updateProduct, delProduct };
+const getProduct = async (id) => {
+  const product = await ProductModel.findById(id);
+  if (!product) throw new NotFoundError('Product not Found');
+  return product;
+};
+
+export { createProduct, fetchProducts, updateProduct, delProduct, getProduct };

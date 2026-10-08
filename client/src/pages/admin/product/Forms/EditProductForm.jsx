@@ -3,7 +3,7 @@ import BasicSection from './FormSections/BasicsSection';
 const EditProductForm = () => {
   return (
     <div>
-      <BasicSection />
+      <BasicSection enableEdit={true}/>
     </div>
   );
 };

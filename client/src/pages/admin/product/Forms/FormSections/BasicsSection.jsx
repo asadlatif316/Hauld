@@ -3,7 +3,7 @@ import { useUIStore } from '@/store/useUIStore';
 import FormTitle from '../FormTitle';
 import { useState } from 'react';
 
-const BasicSection = () => {
+const BasicSection = ({ enableEdit = false }) => {
   const [isEditing, setIsEditing] = useState(false);
   const name = useUIStore((s) => s.name);
   const description = useUIStore((s) => s.description);
@@ -15,7 +15,7 @@ const BasicSection = () => {
           heading='Basics'
           description='Enter the Product name and description.'
         />
-        {!isEditing && (
+        {enableEdit && !isEditing && (
           <Button label='edit' onClick={() => setIsEditing(true)} />
         )}
       </div>
@@ -43,7 +43,7 @@ const BasicSection = () => {
             readOnly={!isEditing}
           />
         </div>
-        {isEditing && (
+        {enableEdit && isEditing && (
           <div className='flex gap-1 ml-auto'>
             <Button
               className='bg-muted-foreground hover:bg-muted-foreground/80'

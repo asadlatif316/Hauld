@@ -3,6 +3,7 @@ import {
   createProduct,
   delProduct,
   fetchProducts,
+  getProduct,
   updateProduct,
 } from '../service/index.js';
 
@@ -61,4 +62,20 @@ const deleteProduct = async (req, res, next) => {
   }
 };
 
-export { getProducts, addNewProduct, editProduct, deleteProduct };
+const getSingleProduct = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const product = await getProduct(id);
+    res.status(StatusCodes.OK).json({ success: true, product });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export {
+  getProducts,
+  addNewProduct,
+  editProduct,
+  deleteProduct,
+  getSingleProduct,
+};
