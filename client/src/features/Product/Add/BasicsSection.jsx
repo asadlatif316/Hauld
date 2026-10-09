@@ -1,13 +1,14 @@
 import { FormInput, FormSectionWrapper, Button } from '@/components';
-import { useUIStore } from '@/store/useUIStore';
-import FormTitle from '../FormTitle';
+import { FormTitle } from '@/components';
 import { useState } from 'react';
+import { useProductStore } from '@/store';
 
 const BasicSection = ({ enableEdit = false }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const name = useUIStore((s) => s.name);
-  const description = useUIStore((s) => s.description);
-  const update = useUIStore((s) => s.update);
+  const singleProduct = useProductStore((s) => s.singleProduct);
+  const name = useProductStore((s) => s.name);
+  const description = useProductStore((s) => s.description);
+  const update = useProductStore((s) => s.update);
   return (
     <FormSectionWrapper>
       <div className='flex items-center justify-between'>
@@ -22,7 +23,7 @@ const BasicSection = ({ enableEdit = false }) => {
       <div className='flex-1 flex flex-col gap-4'>
         <FormInput
           label='Product name'
-          value={name}
+          value={enableEdit ? singleProduct.name : name}
           name='name'
           onChange={(e) => update('name', e.target.value)}
           placeholder='e.g. Leather tote bag product name'
@@ -36,7 +37,7 @@ const BasicSection = ({ enableEdit = false }) => {
           <textarea
             placeholder='Describe the material, size, and what makes it special…'
             rows={3}
-            value={description}
+            value={enableEdit ? singleProduct.description : description}
             name='description'
             onChange={(e) => update('description', e.target.value)}
             className='text-sm w-ful border border-input bg-input/20 px-3 py-2 resize-none rounded-lg  outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring/30 md:rows-5'

@@ -1,11 +1,10 @@
 import { FormSectionWrapper, FormInput, Button } from '@/components';
-import { useUIStore } from '@/store/useUIStore';
+import { useProductStore } from '@/store';
 import { Upload, X } from 'lucide-react';
-import { useState } from 'react';
 
 const Section2 = () => {
-  const image = useUIStore((s) => s.image);
-  const update = useUIStore((s) => s.update);
+  const image = useProductStore((s) => s.image);
+  const update = useProductStore((s) => s.update);
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
     const reader = new FileReader();

@@ -1,11 +1,11 @@
 import EditProductForm from './Forms/EditProductForm';
-import FormHeader from './Forms/FormHeader';
+import FormHeader from '../../../components/FormHeader/FormHeader';
 
 const EditProductPage = () => {
   return (
     <div>
-          <FormHeader text='Edit Product' />
-          <EditProductForm/>
+      <FormHeader text='Edit Product' />
+      <EditProductForm />
     </div>
   );
 };

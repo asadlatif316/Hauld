@@ -1,13 +1,38 @@
 import { create } from 'zustand';
 import { api } from '@/utils';
 import toast from 'react-hot-toast';
-import { useUIStore } from './useUIStore';
+
+const initialState = {
+  name: '',
+  description: '',
+  image: null,
+  category: 'tote',
+  price: '',
+  stock: 6,
+  threshold: 10,
+  isActive: true,
+  isFeatured: false,
+};
+
 const useProductStore = create((set, get) => ({
   products: [],
+  singleProduct: null,
+  editDraft: null,
   isProductLoading: false,
   pagination: { currentPage: 1, numberOfPages: 1, totalProducts: 0 },
   isSubmitting: false,
   isDeleting: false,
+  ...initialState,
+
+  update: (field, value) => {
+    set({ [field]: value });
+  },
+  reset: () => set(initialState),
+
+  startEdit: () => set({ editDraft: { ...get().singleProduct } }),
+  updateDraft: (field, value) =>
+    set((s) => ({ editDraft: { ...s.editDraft, [field]: value } })),
+  cancelEdit: () => set({ editDraft: null }),
 
   fetchProducts: async () => {
     set({ isProductLoading: true });
@@ -50,6 +75,18 @@ const useProductStore = create((set, get) => ({
       toast.error(error.response?.data?.message || 'Could not delete product');
     } finally {
       set({ isDeleting: false });
+    }
+  },
+
+  getSingleProduct: async (id) => {
+    set({ isProductLoading: true });
+    try {
+      const product = await api.get(`/product/${id}`, id);
+      set({ singleProduct: product.data.product });
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Product not exist');
+    } finally {
+      set({ isProductLoading: false });
     }
   },
 }));

@@ -1,5 +1,5 @@
 import { useProductStore } from '@/store';
-import FormHeader from './FormHeader';
+import FormHeader from '../../../../components/FormHeader/FormHeader';
 import { useNavigate } from 'react-router-dom';
 import {
   Basics,
@@ -8,7 +8,7 @@ import {
   ImageSection,
   PriceStockSection,
   Visibility,
-} from './FormSections';
+} from '@/features/Product/Add';
 import { ProductPreview, ReadyToPublish } from '@/components';
 import { useUIStore } from '@/store/useUIStore';
 const ProductForm = () => {
@@ -31,7 +31,7 @@ const ProductForm = () => {
   };
   return (
     <div className='p-6 min-h-screen flex flex-col gap-4'>
-      <FormHeader text='New Product'/>
+      <FormHeader text='New Product' />
       <div className='flex gap-4'>
         <div className='w-full flex flex-col gap-4'>
           <form

@@ -11,3 +11,5 @@ export { default as FormSectionWrapper } from './SectionWrappers/FormSectionsWra
 export { default as Slider } from './Slider/slider';
 export { default as ProductPreview } from './PreviewProduct/preview';
 export { default as ReadyToPublish } from './ReadyToPublish/readyToPublish';
+export { default as FormHeader } from './FormHeader/FormHeader';
+export { default as FormTitle } from './FormTitle/FormTitle';

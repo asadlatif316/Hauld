@@ -1,11 +1,9 @@
 import { FormSectionWrapper, FormInput, Button, Slider } from '@/components';
-import { useUIStore } from '@/store/useUIStore';
-import { useState } from 'react';
-
+import { useProductStore } from '@/store';
 const Section4 = () => {
-  const stock = useUIStore((s) => s.stock);
-  const price = useUIStore((s) => s.price);
-  const update = useUIStore((s) => s.update);
+  const stock = useProductStore((s) => s.stock);
+  const price = useProductStore((s) => s.price);
+  const update = useProductStore((s) => s.update);
   return (
     <FormSectionWrapper
       heading='Price & Stock'

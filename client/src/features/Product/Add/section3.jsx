@@ -1,9 +1,8 @@
 import { categories } from '@/config';
 import { FormSectionWrapper } from '@/components';
-import { useUIStore } from '@/store/useUIStore';
 const Section3 = () => {
-  const category = useUIStore((s) => s.category);
-  const update = useUIStore((s) => s.update);
+  const category = useProductStore((s) => s.category);
+  const update = useProductStore((s) => s.update);
   return (
     <FormSectionWrapper
       heading='Category'

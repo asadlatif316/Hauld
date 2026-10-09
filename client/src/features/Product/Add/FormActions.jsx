@@ -1,8 +1,8 @@
 import { Button } from '@/components';
-import { useUIStore } from '@/store/useUIStore';
+import { useProductStore } from '@/store';
 import { useNavigate } from 'react-router-dom';
 const FormActions = () => {
-  const reset = useUIStore((s) => s.reset);
+  const reset = useProductStore((s) => s.reset);
   const navigate = useNavigate();
   const handleCancel = () => {
     reset();

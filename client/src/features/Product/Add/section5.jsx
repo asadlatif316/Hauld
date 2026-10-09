@@ -1,10 +1,10 @@
 import { FormSectionWrapper } from '@/components';
 import { Switch } from '@/lib';
-import { useUIStore } from '@/store/useUIStore';
+import { useProductStore } from '@/store';
 const Section5 = () => {
-  const isActive = useUIStore((s) => s.isActive);
-  const isFeatured = useUIStore((s) => s.isFeatured);
-  const update = useUIStore((s) => s.update);
+  const isActive = useProductStore((s) => s.isActive);
+  const isFeatured = useProductStore((s) => s.isFeatured);
+  const update = useProductStore((s) => s.update);
 
   return (
     <FormSectionWrapper
