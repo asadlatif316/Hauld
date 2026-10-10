@@ -1,4 +1,4 @@
-import getStockStatus from '@/utils/products.utils';
+import { getStockStatus } from '@/utils';
 import { MdOutlineImageNotSupported } from 'react-icons/md';
 import { Star } from 'lucide-react';
 import { cn } from '@/lib/utils';

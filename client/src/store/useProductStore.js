@@ -23,20 +23,30 @@ const useProductStore = create((set, get) => ({
   isSubmitting: false,
   isDeleting: false,
   isEditing: false,
+  mode: 'create',
   ...initialState,
 
   setIsEditing: (value) => set({ isEditing: value }),
-
+  setMode: (value) => set({ mode: value }),
   update: (field, value) => {
     set({ [field]: value });
   },
+
+  updateDraft: (field, value) =>
+    set((s) => ({ editDraft: { ...s.editDraft, [field]: value } })),
+
+  updateField: () => {
+    get().mode === 'edit'
+      ? get().updateDraft(field, value)
+      : get().update(field, value);
+  },
+
   reset: () => set(initialState),
 
   startEdit: () => {
-    set({ editDraft: { ...get().singleProduct } })
+    set({ editDraft: { ...get().singleProduct } });
   },
-  updateDraft: (field, value) =>
-    set((s) => ({ editDraft: { ...s.editDraft, [field]: value } })),
+
   cancelEdit: () => {
     set({ editDraft: null });
   },
@@ -47,13 +57,11 @@ const useProductStore = create((set, get) => ({
   },
 
   handleCancelEdit: () => {
-    console.log('working');
-    
     get().cancelEdit();
     set({ isEditing: false });
   },
 
-  saveChange:()=>{},
+  saveChange: () => {},
 
   fetchProducts: async () => {
     set({ isProductLoading: true });

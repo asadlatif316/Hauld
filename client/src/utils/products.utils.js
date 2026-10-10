@@ -6,4 +6,13 @@ const getStockStatus = (stock) => {
   return 'ok';
 };
 
-export default getStockStatus
+const selectField = (key) => (s) => {
+  return s.mode === 'edit'
+    ? ((s.isEditing && s.editDraft ? s.editDraft : s.singleProduct)?.[key] ??
+        '')
+    : s[key];
+};
+
+const selectReadOnly = (s) => s.mode === 'edit' && !s.isEditing;
+
+export { getStockStatus, selectField, selectReadOnly };

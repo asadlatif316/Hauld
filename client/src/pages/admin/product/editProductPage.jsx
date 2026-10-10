@@ -7,9 +7,17 @@ const EditProductPage = () => {
   const { id } = useParams();
   const getSingleProduct = useProductStore((s) => s.getSingleProduct);
   const singleProduct = useProductStore((s) => s.singleProduct);
+  const setMode = useProductStore((s) => s.setMode);
+  const setIsEditing = useProductStore((s) => s.setIsEditing);
   const isProductLoading = useProductStore((s) => s.isProductLoading);
+  const handleCancelEdit = useProductStore((s) => s.handleCancelEdit);
   useEffect(() => {
+    setMode('edit')
     getSingleProduct(id);
+    return () => {
+      setIsEditing(false)
+      handleCancelEdit()
+    }
   }, [id, getSingleProduct]);
   if (isProductLoading || !singleProduct) return <p>loading</p>;
   return (

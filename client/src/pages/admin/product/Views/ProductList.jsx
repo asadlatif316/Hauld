@@ -2,7 +2,7 @@ import { useProductStore } from '@/store';
 import { ProductTableHead } from '..';
 import { Button } from '@/components';
 import { SquarePen, Trash, Star } from 'lucide-react';
-import getStockStatus from '@/utils/products.utils';
+import { getStockStatus } from '@/utils';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,6 +1,6 @@
 import { useProductStore } from '@/store';
 import { Star, Trash, SquarePen } from 'lucide-react';
-import getStockStatus from '@/utils/products.utils';
+import { getStockStatus } from '@/utils';
 import { Button } from '@/components';
 import { MdOutlineImageNotSupported } from 'react-icons/md';
 import { cn } from 'cn';
