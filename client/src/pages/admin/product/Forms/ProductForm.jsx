@@ -2,7 +2,7 @@ import { useProductStore } from '@/store';
 import FormHeader from '../../../../components/FormHeader/FormHeader';
 import { useNavigate } from 'react-router-dom';
 import {
-  Basics,
+  BasicSection,
   CategorySection,
   FormAction,
   ImageSection,
@@ -39,7 +39,7 @@ const ProductForm = () => {
             onSubmit={handleSubmit}
             className='flex flex-col gap-4'
           >
-            <Basics />
+            <BasicSection />
             <ImageSection />
             <CategorySection />
             <PriceStockSection />

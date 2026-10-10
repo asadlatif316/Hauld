@@ -22,17 +22,38 @@ const useProductStore = create((set, get) => ({
   pagination: { currentPage: 1, numberOfPages: 1, totalProducts: 0 },
   isSubmitting: false,
   isDeleting: false,
+  isEditing: false,
   ...initialState,
+
+  setIsEditing: (value) => set({ isEditing: value }),
 
   update: (field, value) => {
     set({ [field]: value });
   },
   reset: () => set(initialState),
 
-  startEdit: () => set({ editDraft: { ...get().singleProduct } }),
+  startEdit: () => {
+    set({ editDraft: { ...get().singleProduct } })
+  },
   updateDraft: (field, value) =>
     set((s) => ({ editDraft: { ...s.editDraft, [field]: value } })),
-  cancelEdit: () => set({ editDraft: null }),
+  cancelEdit: () => {
+    set({ editDraft: null });
+  },
+
+  handleEdit: () => {
+    get().startEdit();
+    set({ isEditing: true });
+  },
+
+  handleCancelEdit: () => {
+    console.log('working');
+    
+    get().cancelEdit();
+    set({ isEditing: false });
+  },
+
+  saveChange:()=>{},
 
   fetchProducts: async () => {
     set({ isProductLoading: true });
