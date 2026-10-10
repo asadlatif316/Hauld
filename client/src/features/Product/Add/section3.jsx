@@ -1,13 +1,15 @@
 import { categories } from '@/config';
-import { FormSectionWrapper } from '@/components';
+import { FormSectionWrapper, FormTitle } from '@/components';
+import { useProductStore } from '@/store';
 const Section3 = () => {
   const category = useProductStore((s) => s.category);
   const update = useProductStore((s) => s.update);
   return (
-    <FormSectionWrapper
-      heading='Category'
-      description='Pick one, drive the catalog filters'
-    >
+    <FormSectionWrapper>
+      <FormTitle
+        heading='Category'
+        description='Pick one, drive the catalog filters'
+      />
       <div className='flex-1 grid grid-cols-3 gap-4 text-sm'>
         {categories.map((item) => (
           <label key={item.label} className='cursor-pointer '>

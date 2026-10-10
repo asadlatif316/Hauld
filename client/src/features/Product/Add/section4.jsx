@@ -1,14 +1,21 @@
-import { FormSectionWrapper, FormInput, Button, Slider } from '@/components';
+import {
+  FormSectionWrapper,
+  FormInput,
+  Button,
+  Slider,
+  FormTitle,
+} from '@/components';
 import { useProductStore } from '@/store';
 const Section4 = () => {
   const stock = useProductStore((s) => s.stock);
   const price = useProductStore((s) => s.price);
   const update = useProductStore((s) => s.update);
   return (
-    <FormSectionWrapper
-      heading='Price & Stock'
-      description='Decide the price and quantity of your product'
-    >
+    <FormSectionWrapper>
+      <FormTitle
+        heading='Price & Stock'
+        description='Decide the price and quantity of your product'
+      />
       <div className='flex-1 flex flex-col gap-4 text-sm'>
         <div className='flex gap-4'>
           <div className='relative flex items-center'>

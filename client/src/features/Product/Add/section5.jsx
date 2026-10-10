@@ -1,4 +1,4 @@
-import { FormSectionWrapper } from '@/components';
+import { FormSectionWrapper, FormTitle } from '@/components';
 import { Switch } from '@/lib';
 import { useProductStore } from '@/store';
 const Section5 = () => {
@@ -7,10 +7,11 @@ const Section5 = () => {
   const update = useProductStore((s) => s.update);
 
   return (
-    <FormSectionWrapper
-      heading='Visibility'
-      description='Control where this product appears'
-    >
+    <FormSectionWrapper>
+      <FormTitle
+        heading='Visibility'
+        description='Control where this product appears'
+      />
       <div className='flex-1 flex flex-col gap-2'>
         <div className='flex items-center justify-between text-sm lg:border-b border-border pb-1'>
           <div>

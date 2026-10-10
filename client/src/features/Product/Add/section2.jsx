@@ -1,4 +1,4 @@
-import { FormSectionWrapper, FormInput, Button } from '@/components';
+import { FormSectionWrapper, FormInput, Button, FormTitle } from '@/components';
 import { useProductStore } from '@/store';
 import { Upload, X } from 'lucide-react';
 
@@ -14,7 +14,8 @@ const Section2 = () => {
     };
   };
   return (
-    <FormSectionWrapper heading='Image' description='Add Photo for the product'>
+    <FormSectionWrapper>
+      <FormTitle heading='Image' description='Add Photo for the product' />
       {image ? (
         <div className='flex-1 relative rounded-xl aspect-4/2 text-muted-foreground overflow-hidden border border-border'>
           <img

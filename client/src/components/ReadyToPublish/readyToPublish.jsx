@@ -1,10 +1,9 @@
-import { useUIStore } from '@/store/useUIStore';
-import { Circle, CircleCheck } from 'lucide-react';
-import { FaRegCircle, FaCheckCircle } from 'react-icons/fa';
-import { FaCircleCheck, FaCircle } from 'react-icons/fa6';
+import { useProductStore } from '@/store';
+import { FaRegCircle } from 'react-icons/fa';
+import { FaCircleCheck } from 'react-icons/fa6';
 
 const ReadyToPublish = () => {
-  const { name, price, image, category, stock } = useUIStore();
+  const { name, price, image, category, stock } = useProductStore();
 
   const checks = [
     { ok: !!name, label: 'name' },
