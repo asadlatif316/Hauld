@@ -10,19 +10,21 @@ import {
   Visibility,
 } from '@/features/Product/Add';
 import { ProductPreview, ReadyToPublish } from '@/components';
-import { useUIStore } from '@/store/useUIStore';
+
 const ProductForm = () => {
   const navigate = useNavigate();
   const addProduct = useProductStore((s) => s.addProduct);
-  const reset = useUIStore((s) => s.reset);
+  const reset = useProductStore((s) => s.reset);
   const toBool = (value) => value === 'on' || value === 'true';
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    formData.set('image', useUIStore.getState().image);
+    formData.set('image', useProductStore.getState().image);
     formData.delete('lowStockThreshold');
     formData.set('isActive', toBool(formData.get('isActive')));
     formData.set('isFeatured', toBool(formData.get('isFeatured')));
+    console.log(Object.fromEntries(formData));
+    
     const product = await addProduct(Object.fromEntries(formData));
     if (product) {
       reset();

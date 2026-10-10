@@ -35,7 +35,7 @@ const useProductStore = create((set, get) => ({
   updateDraft: (field, value) =>
     set((s) => ({ editDraft: { ...s.editDraft, [field]: value } })),
 
-  updateField: () => {
+  updateField: (field, value) => {
     get().mode === 'edit'
       ? get().updateDraft(field, value)
       : get().update(field, value);

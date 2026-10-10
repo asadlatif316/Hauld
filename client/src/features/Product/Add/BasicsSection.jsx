@@ -9,7 +9,6 @@ const BasicSection = () => {
   
   const updateField = useProductStore((s) => s.updateField);
   const readOnly = useProductStore(selectReadOnly);
-  console.log(name,description,readOnly);
 
   return (
     <FormSectionWrapper>

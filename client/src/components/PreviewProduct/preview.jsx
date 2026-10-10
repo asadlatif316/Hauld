@@ -2,7 +2,7 @@ import { getStockStatus } from '@/utils';
 import { MdOutlineImageNotSupported } from 'react-icons/md';
 import { Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useUIStore } from '@/store/useUIStore';
+import { useProductStore } from '@/store';
 const Preview = () => {
   const {
     image,
@@ -13,7 +13,7 @@ const Preview = () => {
     stock,
     isFeatured,
     category,
-  } = useUIStore();
+  } = useProductStore();
   const stockStatus = getStockStatus({ stock });
   return (
     <div className='px-4 py-6 bg-card rounded-lg flex flex-col gap-3 border border-border'>
