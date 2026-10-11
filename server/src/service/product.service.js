@@ -64,6 +64,7 @@ const fetchProducts = async (query) => {
 
 const updateProduct = async (id, data) => {
   const { image: base64 } = data;
+
   const allowed = [
     'name',
     'description',
@@ -81,7 +82,12 @@ const updateProduct = async (id, data) => {
   const existing = await ProductModel.findById(id);
   if (!existing) throw new NotFoundError('Product not found');
 
-  if (!base64) {
+  const isNewImage =
+    typeof base64 === 'string' && base64.startsWith('data:image');
+  const isRemoved = base64 === null;
+
+  // 1. image unchanged (old object) or not sent: update the other fields only
+  if (!isNewImage && !isRemoved) {
     const updatedProduct = await ProductModel.findByIdAndUpdate(id, updates, {
       returnDocument: 'after',
       runValidators: true,
@@ -90,18 +96,27 @@ const updateProduct = async (id, data) => {
     return updatedProduct;
   }
 
+  // 2. photo removed
+  if (isRemoved) {
+    const updatedProduct = await ProductModel.findByIdAndUpdate(
+      id,
+      { ...updates, image: null },
+      { returnDocument: 'after', runValidators: true },
+    );
+    if (existing.image?.publicId) {
+      await deleteImage(existing.image.publicId);
+    }
+    return updatedProduct;
+  }
+
+  // 3. new photo: your existing code, unchanged
   const image = await uploadImage(base64);
   try {
     const updatedProduct = await ProductModel.findByIdAndUpdate(
       id,
       { ...updates, image },
-      {
-        returnDocument: 'after',
-        runValidators: true,
-      },
+      { returnDocument: 'after', runValidators: true },
     );
-    console.log(updatedProduct);
-
     if (existing.image?.publicId) {
       await deleteImage(existing.image.publicId);
     }

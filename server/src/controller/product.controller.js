@@ -12,8 +12,6 @@ const getProducts = async (req, res, next) => {
   try {
     const { products, totalProducts, numberOfPages, pageNumber } =
       await fetchProducts(query);
-    console.log(products);
-
     res.status(StatusCodes.OK).json({
       totalProducts,
       numberOfPages,
@@ -36,7 +34,7 @@ const addNewProduct = async (req, res, next) => {
     next(error);
   }
 };
-const editProduct = async (req, res) => {
+const editProduct = async (req, res,next) => {
   const { id } = req.params;
   try {
     const updatedProduct = await updateProduct(id, req.body);

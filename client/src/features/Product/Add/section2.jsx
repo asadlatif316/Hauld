@@ -6,6 +6,8 @@ import { useRef } from 'react';
 const Section2 = () => {
   const fileRef = useRef(null);
   const image = useProductStore(selectField('image'));
+  console.log(image);
+  
   const mode = useProductStore((s) => s.mode);
   const readOnly = useProductStore(selectReadOnly);
 

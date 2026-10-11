@@ -118,6 +118,26 @@ const useProductStore = create((set, get) => ({
       set({ isProductLoading: false });
     }
   },
+
+  editProduct: async () => {
+    const { singleProduct, editDraft, isSubmitting } = get();
+    if (isSubmitting || !singleProduct || !editDraft) return { ok: false };
+    set({ isSubmitting: true });
+    try {
+      const res = await api.post(`/product/${editDraft._id}`, editDraft);
+      console.log(res);
+      
+      set({
+        singleProduct: res.data,
+        editDraft: null,
+        isEditing: false,
+      });
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Update failed');
+    } finally {
+      set({ isSubmitting: false });
+    }
+  },
 }));
 
 export default useProductStore;

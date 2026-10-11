@@ -5,19 +5,24 @@ import { useProductStore } from '@/store';
 import { useNavigate } from 'react-router-dom';
 
 const FormHeader = ({ text, mode = 'create' }) => {
-  const navigate  = useNavigate()
+  const navigate = useNavigate();
 
   const isEditing = useProductStore((s) => s.isEditing);
-  const handleEdit = useProductStore((s) => s.handleEdit  );
-  const reset = useProductStore((s) => s.reset  );
+  const handleEdit = useProductStore((s) => s.handleEdit);
+  const reset = useProductStore((s) => s.reset);
   const handleCancelEdit = useProductStore((s) => s.handleCancelEdit);
+  const editProduct = useProductStore((s) => s.editProduct);
   const editing = mode === 'create' || isEditing;
 
   const cancelCreate = () => {
-    reset()
-    navigate(-1)
-  }
+    reset();
+    navigate(-1);
+  };
 
+  const onPublish = async () => {
+    await editProduct();
+    navigate(-1);
+  };
 
   return (
     <div className='flex gap-2 items-center justify-between w-full'>
@@ -39,7 +44,7 @@ const FormHeader = ({ text, mode = 'create' }) => {
             className='bg-muted-foreground'
             onClick={handleCancelEdit}
           />
-          <Button label={'publish'} />
+          <Button label={'publish'} onClick={onPublish} />
         </div>
       ) : (
         <Button label='edit' onClick={handleEdit} />
