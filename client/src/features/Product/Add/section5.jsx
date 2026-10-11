@@ -1,10 +1,12 @@
 import { FormSectionWrapper, FormTitle } from '@/components';
 import { Switch } from '@/lib';
 import { useProductStore } from '@/store';
+import { selectField, selectReadOnly } from '@/utils';
 const Section5 = () => {
-  const isActive = useProductStore((s) => s.isActive);
-  const isFeatured = useProductStore((s) => s.isFeatured);
-  const update = useProductStore((s) => s.update);
+  const isActive = useProductStore(selectField('isActive'));
+  const isFeatured = useProductStore(selectField('isFeatured'));
+  const updateField = useProductStore((s) => s.updateField);
+  const readOnly = useProductStore(selectReadOnly)
 
   return (
     <FormSectionWrapper>
@@ -23,7 +25,7 @@ const Section5 = () => {
           </div>
           <Switch
             checked={isActive}
-            onCheckedChange={(value) => update('isActive', value)}
+            onCheckedChange={(value) => updateField('isActive', value)}
             name='isActive'
           />
         </div>
@@ -37,7 +39,7 @@ const Section5 = () => {
           </div>
           <Switch
             checked={isFeatured}
-            onCheckedChange={(value) => update('isFeatured', value)}
+            onCheckedChange={(value) => updateField('isFeatured', value)}
             name='isFeatured'
           />
         </div>

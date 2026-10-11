@@ -3,6 +3,7 @@ import {
   CategorySection,
   ImageSection,
   PriceStockSection,
+  Visibility,
 } from '@/features/Product/Add';
 
 const EditProductForm = () => {
@@ -12,6 +13,7 @@ const EditProductForm = () => {
       <ImageSection />
       <CategorySection />
       <PriceStockSection />
+      <Visibility />
     </form>
   );
 };
