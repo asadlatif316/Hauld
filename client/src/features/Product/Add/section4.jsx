@@ -6,10 +6,13 @@ import {
   FormTitle,
 } from '@/components';
 import { useProductStore } from '@/store';
+import { selectField, selectReadOnly } from '@/utils';
 const Section4 = () => {
-  const stock = useProductStore((s) => s.stock);
-  const price = useProductStore((s) => s.price);
-  const update = useProductStore((s) => s.update);
+  const stock = useProductStore(selectField('stock'));
+  const price = useProductStore(selectField('price'));
+  const updateField = useProductStore((s) => s.updateField);
+  const readOnly = useProductStore(selectReadOnly);
+
   return (
     <FormSectionWrapper>
       <FormTitle
@@ -25,14 +28,16 @@ const Section4 = () => {
               value={price}
               type='number'
               name='price'
-              onChange={(e) => update('price', e.target.value)}
+              onChange={(e) => updateField('price', e.target.value)}
+              readOnly={readOnly}
             />
           </div>
           <div className='flex items-center'>
             <Button
               label='-'
-              className='rounded-l-lg rounded-r-none border-r-0'
-              onClick={() => update('stock', Math.max(0, stock - 1))}
+              className='rounded-l-lg py-2.5 rounded-r-none border-r-0'
+              onClick={() => updateField('stock', Math.max(0, stock - 1))}
+              disabled={readOnly}
             />
             <FormInput
               className='w-full rounded-none border-x-0 text-center'
@@ -40,13 +45,15 @@ const Section4 = () => {
               type='number'
               name='stock'
               onChange={(e) =>
-                update('stock', Math.max(0, Number(e.target.value)))
+                updateField('stock', Math.max(0, Number(e.target.value)))
               }
+              readOnly={readOnly}
             />
             <Button
               label='+'
-              className='rounded-r-lg rounded-l-none border-l-0'
-              onClick={() => update('stock', stock + 1)}
+              className='rounded-r-lg py-2.5 rounded-l-none border-l-0'
+              onClick={() => updateField('stock', stock + 1)}
+              disabled={readOnly}
             />
           </div>
         </div>

@@ -1,9 +1,11 @@
 import { categories } from '@/config';
 import { FormSectionWrapper, FormTitle } from '@/components';
 import { useProductStore } from '@/store';
+import { selectField, selectReadOnly } from '@/utils';
 const Section3 = () => {
-  const category = useProductStore((s) => s.category);
-  const update = useProductStore((s) => s.update);
+  const category = useProductStore(selectField('category'));
+  const updateField = useProductStore((s) => s.updateField);
+  const readOnly = useProductStore(selectReadOnly);
   return (
     <FormSectionWrapper>
       <FormTitle
@@ -19,9 +21,8 @@ const Section3 = () => {
               name='category'
               value={item.value}
               checked={category === item.value}
-              onChange={(e) => {
-                update('category', e.target.value);
-              }}
+              onChange={(e) => updateField('category', e.target.value)}
+              readOnly={readOnly}
             />
             <div className='p-3 lg:aspect-3/2 flex flex-col justify-between bg-muted rounded-lg peer-checked:bg-foreground peer-checked:text-background peer-focus-visible:ring-2 peer-focus-visible:ring-ring/50'>
               {<item.icon className='size-4 lg:size-5' />}

@@ -1,11 +1,18 @@
-import { BasicSection, ImageSection } from '@/features/Product/Add';
+import {
+  BasicSection,
+  CategorySection,
+  ImageSection,
+  PriceStockSection,
+} from '@/features/Product/Add';
 
 const EditProductForm = () => {
   return (
-    <div>
+    <form className='flex flex-col gap-4 pb-3'>
       <BasicSection enableEdit={true} />
-      <ImageSection/>
-    </div>
+      <ImageSection />
+      <CategorySection />
+      <PriceStockSection />
+    </form>
   );
 };
 

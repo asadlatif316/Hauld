@@ -21,7 +21,7 @@ const EditProductPage = () => {
   }, [id, getSingleProduct]);
   if (isProductLoading || !singleProduct) return <p>loading</p>;
   return (
-    <div>
+    <div className='flex min-h-screen gap-4 p-6 flex-col '>
       <FormHeader text='Edit Product' mode='edit' />
       <EditProductForm />
     </div>
