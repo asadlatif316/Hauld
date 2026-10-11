@@ -20,7 +20,7 @@ const FormHeader = ({ text, mode = 'create' }) => {
 
 
   return (
-    <div className='flex gap-2 items-center justify-between'>
+    <div className='flex gap-2 items-center justify-between w-full'>
       <h3 className='font-medium'>{text}</h3>
 
       {mode === 'create' ? (

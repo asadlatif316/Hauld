@@ -1,19 +1,18 @@
-import { getStockStatus } from '@/utils';
+import { getStockStatus, selectField } from '@/utils';
 import { MdOutlineImageNotSupported } from 'react-icons/md';
 import { Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useProductStore } from '@/store';
 const Preview = () => {
-  const {
-    image,
-    isActive,
-    name,
-    description,
-    price,
-    stock,
-    isFeatured,
-    category,
-  } = useProductStore();
+  const image = useProductStore(selectField('image'));
+  const name = useProductStore(selectField('name'));
+  const category = useProductStore(selectField('category'));
+  const price = useProductStore(selectField('price'));
+  const stock = useProductStore(selectField('stock'));
+  const description = useProductStore(selectField('description'));
+  const isFeatured = useProductStore(selectField('isFeatured'));
+  const isActive = useProductStore(selectField('isActive'));
+  const mode = useProductStore((s) => s.mode);
   const stockStatus = getStockStatus({ stock });
   return (
     <div className='px-4 py-6 bg-card rounded-lg flex flex-col gap-3 border border-border'>
@@ -21,7 +20,11 @@ const Preview = () => {
       <div className='overflow-hidden rounded-lg border border-border bg-card'>
         <div className='relative'>
           {image ? (
-            <img src={image} alt={name} className='aspect-4/3 object-cover' />
+            <img
+              src={mode === 'edit' ? image?.url : image}
+              alt='Product Preview'
+              className='h-full w-full object-cover'
+            />
           ) : (
             <div className='aspect-4/3 bg-muted text-muted-foreground flex justify-center items-center'>
               <MdOutlineImageNotSupported className='size-20' />

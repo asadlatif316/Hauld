@@ -1,10 +1,13 @@
 import { useProductStore } from '@/store';
 import { FaRegCircle } from 'react-icons/fa';
 import { FaCircleCheck } from 'react-icons/fa6';
-
+import { selectField } from '@/utils';
 const ReadyToPublish = () => {
-  const { name, price, image, category, stock } = useProductStore();
-
+  const image = useProductStore(selectField('image'));
+  const name = useProductStore(selectField('name'));
+  const category = useProductStore(selectField('category'));
+  const price = useProductStore(selectField('price'));
+  const stock = useProductStore(selectField('stock'));
   const checks = [
     { ok: !!name, label: 'name' },
     { ok: !!image, label: 'product image' },

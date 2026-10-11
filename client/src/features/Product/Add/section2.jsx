@@ -8,7 +8,6 @@ const Section2 = () => {
   const image = useProductStore(selectField('image'));
   const mode = useProductStore((s) => s.mode);
   const readOnly = useProductStore(selectReadOnly);
-  console.log(readOnly);
 
   const updateField = useProductStore((s) => s.updateField);
   const handleFileUpload = (e) => {
