@@ -8,6 +8,7 @@ import {
 } from '@/config';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useProductStore } from '@/store';
 
 const ProductFilters = ({ showFilters }) => {
   const [sortBy, setSortBy] = useState('-createdAt');
@@ -15,6 +16,8 @@ const ProductFilters = ({ showFilters }) => {
   const [category, setCategory] = useState('all');
   const [status, setStatus] = useState('all');
   const [stock, setStock] = useState('all');
+  const filters = useProductStore((s)=> s.filters)
+  const setFilter = useProductStore((s)=> s.setFilter)
   return (
     <div
       className={cn(
@@ -29,8 +32,8 @@ const ProductFilters = ({ showFilters }) => {
       <div className='xl:hidden'>
         <FormSelect
           label='Show'
-          value={featured}
-          onChange={setFeatured}
+          value={filters.isFeatured}
+          onChange={(value) => setFilter('isFeatured', value)}
           options={FEATURED_OPTIONS}
           className='rounded-full'
         />
@@ -38,30 +41,30 @@ const ProductFilters = ({ showFilters }) => {
       <div className='xl:hidden'>
         <FormSelect
           label='Sort by'
-          value={sortBy}
-          onChange={setSortBy}
+          value={filters.sort}
+          onChange={(value) => setFilter('sort', value)}
           options={SORT_OPTIONS}
           className='rounded-full'
         />
       </div>
       <FormSelect
-        value={category}
+        value={filters.category}
         options={CATEGORY_OPTIONS}
-        onChange={setCategory}
+        onChange={(value) => setFilter('category', value)}
         label='Category'
         className='rounded-full'
       />
       <FormSelect
-        value={stock}
+        value={filters.stock}
         options={STOCK_OPTIONS}
-        onChange={setStock}
+        onChange={(value) => setFilter(value)}
         label='Stock'
         className='rounded-full'
       />
       <FormSelect
-        value={status}
+        value={filters.isActive}
         options={STATUS_OPTIONS}
-        onChange={setStatus}
+        onChange={(value) => setFilter('isActive', value)}
         label='Status'
         className='rounded-full'
       />

@@ -14,6 +14,17 @@ const initialState = {
   isFeatured: false,
 };
 
+export const defaultFilters = {
+  search: '',
+  category: '',
+  isActive: '',
+  isFeatured: '',
+  inStock: '',
+  sort: 'newest',
+  page: 1,
+  limit: 12,
+};
+
 const useProductStore = create((set, get) => ({
   products: [],
   singleProduct: null,
@@ -25,7 +36,18 @@ const useProductStore = create((set, get) => ({
   isEditing: false,
   mode: 'create',
   ...initialState,
-
+  ...defaultFilters,
+  filters: defaultFilters,
+  setFilter: (field, value) => {
+    set((state) => ({
+      filters: {
+        ...state.filters,
+        [field]: value,
+        page: field === 'page' ? value : 1,
+      },
+    }));
+  },
+  resetFilters: () => set({ filters: defaultFilters }),
   setIsEditing: (value) => set({ isEditing: value }),
   setMode: (value) => set({ mode: value }),
   update: (field, value) => {
@@ -66,7 +88,11 @@ const useProductStore = create((set, get) => ({
   fetchProducts: async () => {
     set({ isProductLoading: true });
     try {
-      const res = await api.get('/product');
+      const { filters } = get();
+      const params = Object.fromEntries(
+        Object.entries(filters).filter(([, v]) => v !== ''),
+      );
+      const res = await api.get('/product', { params });
       const { products, currentPage, numberOfPages, totalProducts } = res.data;
       set({
         products,
@@ -126,7 +152,7 @@ const useProductStore = create((set, get) => ({
     try {
       const res = await api.post(`/product/${editDraft._id}`, editDraft);
       console.log(res);
-      
+
       set({
         singleProduct: res.data,
         editDraft: null,

@@ -6,12 +6,16 @@ import { IoMdAdd } from 'react-icons/io';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductFilters from './productFilters';
+import { useProductStore } from '@/store';
 
 const Toolbar = () => {
   const [sortBy, setSortBy] = useState('-createdAt');
   const [featured, setFeatured] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
   const navigate = useNavigate()
+  
+  const filters = useProductStore((s) => s.filters);
+  const setFilter = useProductStore((s) => s.setFilter);
 
   return (
     <div>
@@ -21,16 +25,16 @@ const Toolbar = () => {
           <FormInput placeholder='search product' type='text' />
           <div className='hidden xl:flex gap-2'>
             <FormSelect
-              value={featured}
+              value={filters.isFeatured}
               options={FEATURED_OPTIONS}
-              onChange={setFeatured}
+              onChange={(value) => setFilter('isFeatured', value)}
               label='Show'
               className='w-32 rounded-full'
             />
             <FormSelect
-              value={sortBy}
+              value={filters.sort}
               options={SORT_OPTIONS}
-              onChange={setSortBy}
+              onChange={(value) => setFilter('sort', value)}
               label='Sort by'
               className='w-32 rounded-full'
             />
@@ -48,7 +52,7 @@ const Toolbar = () => {
               label={<span className='hidden lg:inline'>Add new product</span>}
               iconDirection='left'
               icon={<IoMdAdd size={20} />}
-              onClick={()=> navigate('/dashboard/products/new')}
+              onClick={() => navigate('/dashboard/products/new')}
             />
           </div>
         </div>
