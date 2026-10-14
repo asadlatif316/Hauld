@@ -1,4 +1,4 @@
-import ProductCards from './productCard';
+import ProductCards from './productCardsList';
 import ProductList from './ProductList';
 import ProductGrid from './ProductGrid';
 import { useProductStore } from '@/store';

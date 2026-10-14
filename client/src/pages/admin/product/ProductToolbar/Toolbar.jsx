@@ -9,8 +9,6 @@ import ProductFilters from './productFilters';
 import { useProductStore } from '@/store';
 
 const Toolbar = () => {
-  const [sortBy, setSortBy] = useState('-createdAt');
-  const [featured, setFeatured] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
   const navigate = useNavigate()
   

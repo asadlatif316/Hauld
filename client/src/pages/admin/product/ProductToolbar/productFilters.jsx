@@ -6,19 +6,11 @@ import {
   STOCK_OPTIONS,
   CATEGORY_OPTIONS,
 } from '@/config';
-import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useProductStore } from '@/store';
 
 const ProductFilters = ({ showFilters }) => {
-  const [sortBy, setSortBy] = useState('-createdAt');
-  const [featured, setFeatured] = useState('all');
-  const [category, setCategory] = useState('all');
-  const [status, setStatus] = useState('all');
-  const [stock, setStock] = useState('all');
   const filters = useProductStore((s) => s.filters);
-  console.log(filters);
-
   const setFilter = useProductStore((s) => s.setFilter);
   return (
     <div
