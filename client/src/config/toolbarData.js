@@ -20,18 +20,19 @@ const FEATURED_OPTIONS = [
 ];
 
 const STOCK_OPTIONS = [
-  { value: 'all', label: 'All Stock' },
-  { value: 'in', label: 'In Stock' },
-  { value: 'low', label: 'Low Stock' },
-  { value: 'out', label: 'Out of Stock' },
+  { value: '', label: 'All' },
+  { value: 'in', label: 'In stock' },
+  { value: 'low', label: 'Low stock' },
+  { value: 'out', label: 'Out of stock' },
 ];
 
 const SORT_OPTIONS = [
-  { value: '-createdAt', label: 'Newest' },
-  { value: 'createdAt', label: 'Oldest' },
-  { value: 'price', label: 'Price: Low to High' },
-  { value: '-price', label: 'Price: High to Low' },
-  { value: 'name', label: 'Name: A-Z' },
+  { value: 'newest', label: 'Newest' },
+  { value: 'oldest', label: 'Oldest' },
+  { value: 'low-price', label: 'Price: Low to High' },
+  { value: 'high-price', label: 'Price: High to Low' },
+  { value: 'a-z', label: 'Name: A-Z' },
+  { value: 'z-a', label: 'Name: Z-A' },
 ];
 
 export {

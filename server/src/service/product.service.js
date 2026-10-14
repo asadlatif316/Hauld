@@ -34,8 +34,9 @@ const fetchProducts = async (query) => {
   if (isActive !== undefined) filter.isActive = isActive === 'true';
   if (isFeatured !== undefined) filter.isFeatured = isFeatured === 'true';
 
-  if (inStock === 'true') filter.stock = { $gt: 0 };
-  if (inStock === 'false') filter.stock = 0;
+if (inStock === 'in')  filter.stock = { $gt: 0 };
+if (inStock === 'out') filter.stock = { $lte: 0 };
+if (inStock === 'low') filter.stock = { $gt: 0, $lte: 10 };
 
   const sortOptions = {
     newest: '-createdAt',

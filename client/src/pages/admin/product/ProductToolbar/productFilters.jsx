@@ -16,8 +16,10 @@ const ProductFilters = ({ showFilters }) => {
   const [category, setCategory] = useState('all');
   const [status, setStatus] = useState('all');
   const [stock, setStock] = useState('all');
-  const filters = useProductStore((s)=> s.filters)
-  const setFilter = useProductStore((s)=> s.setFilter)
+  const filters = useProductStore((s) => s.filters);
+  console.log(filters);
+
+  const setFilter = useProductStore((s) => s.setFilter);
   return (
     <div
       className={cn(
@@ -55,9 +57,9 @@ const ProductFilters = ({ showFilters }) => {
         className='rounded-full'
       />
       <FormSelect
-        value={filters.stock}
+        value={filters.inStock}
         options={STOCK_OPTIONS}
-        onChange={(value) => setFilter(value)}
+        onChange={(value) => setFilter('inStock', value)}
         label='Stock'
         className='rounded-full'
       />
