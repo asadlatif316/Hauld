@@ -4,9 +4,12 @@ import { getStockStatus } from '@/utils';
 import { Button } from '@/components';
 import { MdOutlineImageNotSupported } from 'react-icons/md';
 import { cn } from 'cn';
+import { useNavigate } from 'react-router-dom';
 
 const ProductGrid = () => {
-  const { products, deleteProduct } = useProductStore();
+  const products = useProductStore((s) => s.products);
+  const navigate = useNavigate();
+  const deleteProduct = useProductStore((s) => s.deleteProduct);
   return (
     <div className='grid grid-cols-2 lg:grid-cols-3 gap-4'>
       {products.map((product) => {
@@ -26,7 +29,7 @@ const ProductGrid = () => {
             key={_id}
             className='overflow-hidden rounded-lg border border-border bg-card'
           >
-            <div className='relative'>
+            <div className='relative aspect-4/3'>
               {image?.url ? (
                 <img
                   src={image.url}
