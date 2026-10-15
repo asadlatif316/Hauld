@@ -22,7 +22,7 @@ export const defaultFilters = {
   inStock: '',
   sort: 'newest',
   page: 1,
-  limit: 12,
+  limit: 10,
 };
 
 const useProductStore = create((set, get) => ({
@@ -94,10 +94,12 @@ const useProductStore = create((set, get) => ({
       );
       const res = await api.get('/product', { params });
       const { products, currentPage, numberOfPages, totalProducts } = res.data;
+      
       set({
         products,
         pagination: { currentPage, numberOfPages, totalProducts },
       });
+      console.log(get().pagination);
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || 'Failed to load products');

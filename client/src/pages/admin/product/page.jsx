@@ -5,19 +5,23 @@ import { useProductStore } from '@/store';
 import { useEffect } from 'react';
 
 const ProductPage = () => {
-  const { search, category, isActive, isFeatured, inStock, sort, page, limit } =
-    useParams();
   const filters = useProductStore((s) => s.filters);
-
-  const { fetchProducts } = useProductStore();
+  const resetFilters = useProductStore((s) => s.resetFilters);
+  const fetchProducts = useProductStore((s) => s.fetchProducts);
+  const pagination = useProductStore((s) => s.pagination);
+  
   useEffect(() => {
     fetchProducts();
-  }, [fetchProducts,filters]);
+    return () => {
+      resetFilters();
+    };
+  }, [fetchProducts, filters]);
 
   return (
     <div>
       <ProductToolbar />
       <div className='p-6'>
+        <h3 className='text-xl mb-4 text-muted-foreground capitalize'>{pagination.totalProducts} products found</h3>
         <ProductTable />
       </div>
     </div>

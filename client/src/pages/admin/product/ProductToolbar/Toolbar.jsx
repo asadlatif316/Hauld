@@ -11,7 +11,6 @@ import { useProductStore } from '@/store';
 const Toolbar = () => {
   const [showFilters, setShowFilters] = useState(false);
   const navigate = useNavigate()
-  
   const filters = useProductStore((s) => s.filters);
   const setFilter = useProductStore((s) => s.setFilter);
 
