@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import ProductToolbar from './ProductToolbar/productToolbar';
 import ProductTable from './Views/productTable';
 import { useProductStore } from '@/store';

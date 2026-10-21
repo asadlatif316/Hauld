@@ -83,7 +83,15 @@ const useProductStore = create((set, get) => ({
     set({ isEditing: false });
   },
 
-  saveChange: () => {},
+debounce: (fn, delay = 500) => {
+  let timeout;
+  const debounced = (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
+  debounced.cancel = () => clearTimeout(timeout);
+  return debounced;
+},
 
   fetchProducts: async () => {
     set({ isProductLoading: true });

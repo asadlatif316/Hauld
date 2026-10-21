@@ -7,7 +7,7 @@ const ProductCards = () => {
   return (
     <div className='flex flex-col gap-4'>
       {products.map((product) => (
-        <ProductCard product={product} />
+        <ProductCard key={product._id} product={product} />
       ))}
     </div>
   );
