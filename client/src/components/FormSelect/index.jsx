@@ -7,6 +7,7 @@ const FormSelect = ({ value, className, onChange, placeholder, options, label })
   const ref = useRef(null);
 
   const selected = options.find((o) => o.value === value);
+  
 
   return (
     <div className='relative w-full' ref={ref}>

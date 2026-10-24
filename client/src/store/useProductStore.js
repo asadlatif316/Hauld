@@ -46,8 +46,10 @@ const useProductStore = create((set, get) => ({
         page: field === 'page' ? value : 1,
       },
     }));
+    console.log(get().filters);
   },
   resetFilters: () => set({ filters: defaultFilters }),
+
   setIsEditing: (value) => set({ isEditing: value }),
   setMode: (value) => set({ mode: value }),
   update: (field, value) => {
@@ -83,15 +85,15 @@ const useProductStore = create((set, get) => ({
     set({ isEditing: false });
   },
 
-debounce: (fn, delay = 500) => {
-  let timeout;
-  const debounced = (...args) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => fn(...args), delay);
-  };
-  debounced.cancel = () => clearTimeout(timeout);
-  return debounced;
-},
+  debounce: (fn, delay = 500) => {
+    let timeout;
+    const debounced = (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => fn(...args), delay);
+    };
+    debounced.cancel = () => clearTimeout(timeout);
+    return debounced;
+  },
 
   fetchProducts: async () => {
     set({ isProductLoading: true });
@@ -100,9 +102,11 @@ debounce: (fn, delay = 500) => {
       const params = Object.fromEntries(
         Object.entries(filters).filter(([, v]) => v !== ''),
       );
+      console.log(params);
+
       const res = await api.get('/product', { params });
       const { products, currentPage, numberOfPages, totalProducts } = res.data;
-      
+
       set({
         products,
         pagination: { currentPage, numberOfPages, totalProducts },

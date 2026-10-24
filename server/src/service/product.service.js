@@ -23,8 +23,10 @@ const fetchProducts = async (query) => {
   const filter = {};
 
   if (search) {
-    filter.$or = [{ name: { $regex: search, $options: 'i' } }];
-    filter.$or = [{ description: { $regex: search, $options: 'i' } }];
+    filter.$or = [
+      { name: { $regex: search, $options: 'i' } },
+      { description: { $regex: search, $options: 'i' } },
+    ];
   }
 
   if (category && category !== 'all') {
@@ -34,9 +36,9 @@ const fetchProducts = async (query) => {
   if (isActive !== undefined) filter.isActive = isActive === 'true';
   if (isFeatured !== undefined) filter.isFeatured = isFeatured === 'true';
 
-if (inStock === 'in')  filter.stock = { $gt: 0 };
-if (inStock === 'out') filter.stock = { $lte: 0 };
-if (inStock === 'low') filter.stock = { $gt: 0, $lte: 10 };
+  if (inStock === 'in') filter.stock = { $gt: 0 };
+  if (inStock === 'out') filter.stock = { $lte: 0 };
+  if (inStock === 'low') filter.stock = { $gt: 0, $lte: 10 };
 
   const sortOptions = {
     newest: '-createdAt',

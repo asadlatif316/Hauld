@@ -8,13 +8,14 @@ const ProductPage = () => {
   const resetFilters = useProductStore((s) => s.resetFilters);
   const fetchProducts = useProductStore((s) => s.fetchProducts);
   const pagination = useProductStore((s) => s.pagination);
-  
-  useEffect(() => {
-    fetchProducts();
-    return () => {
-      resetFilters();
-    };
-  }, [fetchProducts, filters]);
+useEffect(() => {
+  fetchProducts();
+}, [fetchProducts, filters]);
+
+// effect 2: reset only when leaving the page
+useEffect(() => {
+  return () => resetFilters();
+}, []);
 
   return (
     <div>

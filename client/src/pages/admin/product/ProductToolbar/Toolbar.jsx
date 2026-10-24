@@ -14,14 +14,14 @@ const Toolbar = () => {
   const filters = useProductStore((s) => s.filters);
   const debounce = useProductStore((s) => s.debounce);
   const setFilter = useProductStore((s) => s.setFilter);
+  
 
   const handleSearch = useMemo(() =>
     debounce((value) => {
       console.log('debounced value:', value);
       setFilter('search', value.trim());
-                    console.log(useProductStore.getState().filters.search);
-
-    }, 500),
+      console.log(useProductStore.getState().filters.search);
+    }, 500),[setFilter]
   );
   useEffect(() => () => handleSearch.cancel(), [handleSearch]);
 
@@ -35,7 +35,7 @@ const Toolbar = () => {
             type='text'
             onChange={(e) => {
               console.log('typed:', e.target.value);
-              
+
               handleSearch(e.target.value);
             }}
           />
@@ -43,14 +43,25 @@ const Toolbar = () => {
             <FormSelect
               value={filters.isFeatured}
               options={FEATURED_OPTIONS}
-              onChange={(value) => setFilter('isFeatured', value)}
+              onChange={(value) =>
+              {
+                setFilter('isFeatured', value);
+                console.log(value);
+                
+              }
+              }
               label='Show'
               className='w-32 rounded-full'
             />
             <FormSelect
               value={filters.sort}
               options={SORT_OPTIONS}
-              onChange={(value) => setFilter('sort', value)}
+              onChange={(value) => {
+                setFilter('sort', value);
+                console.log(filters);
+
+                
+              }}
               label='Sort by'
               className='w-32 rounded-full'
             />
