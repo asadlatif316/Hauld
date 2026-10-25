@@ -1,3 +1,4 @@
+import { Pagination } from '@/components';
 import ProductToolbar from './ProductToolbar/productToolbar';
 import ProductTable from './Views/productTable';
 import { useProductStore } from '@/store';
@@ -23,6 +24,7 @@ useEffect(() => {
       <div className='p-6'>
         <h3 className='text-xl mb-4 text-muted-foreground capitalize'>{pagination.totalProducts} products found</h3>
         <ProductTable />
+        <Pagination />
       </div>
     </div>
   );
