@@ -21,7 +21,7 @@ useEffect(() => {
   return (
     <div>
       <ProductToolbar />
-      <div className='p-6'>
+      <div className='p-6 grid space-y-4'>
         <h3 className='text-xl mb-4 text-muted-foreground capitalize'>{pagination.totalProducts} products found</h3>
         <ProductTable />
         <Pagination />
