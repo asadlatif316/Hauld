@@ -22,7 +22,7 @@ useEffect(() => {
     <div>
       <ProductToolbar />
       <div className='p-6 grid space-y-4'>
-        <h3 className='text-xl mb-4 text-muted-foreground capitalize'>{pagination.totalProducts} products found</h3>
+        <h3 className='text-xl mb-4 text-muted-foreground capitalize'>{pagination.totalProducts} product{ pagination.totalProducts > 1 && 's'} found</h3>
         <ProductTable />
         <Pagination />
       </div>
