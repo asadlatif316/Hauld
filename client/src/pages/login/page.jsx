@@ -53,6 +53,7 @@ const Login = () => {
         <form
           className='flex flex-col items-center space-y-2'
           onSubmit={handleSubmit}
+          autoComplete='on'
         >
           <FormInput
             label='Email'
