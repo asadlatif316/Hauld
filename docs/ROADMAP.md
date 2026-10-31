@@ -47,6 +47,8 @@ Scope: Basic package + charts + second CRUD module.
 * [ ] `useDebounce` on search
 * [ ] Field-level validation errors
 
+Starting Phase 4
+
 ## Phase 4 — Seed Data
 
 Do this before charts.
