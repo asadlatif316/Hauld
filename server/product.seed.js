@@ -240,16 +240,9 @@ const raw = [
   ],
 ];
 
-const slugify = (s) =>
-  s
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-
 const products = raw.map(
   ([name, category, price, stock, status, description]) => ({
-    name,
-    slug: slugify(name), // stable key so re-running the seed never duplicates
+    name, // used as the stable key, so re-running the seed never duplicates
     description,
     category,
     price,
@@ -259,4 +252,4 @@ const products = raw.map(
   }),
 );
 
-module.exports = products;
+export default products

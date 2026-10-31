@@ -1,19 +1,17 @@
 // Run from your backend folder:  node seed.js
 // Adjust the 3 paths/names marked CHANGE to match your project.
+import 'dotenv/config';
+import mongoose from 'mongoose';
+import { ProductModel as Product } from './src/models/index.js'; // CHANGE: path to your Product model
+import products from './product.seed.js'; // the file I gave you
 
-require('dotenv').config();
-const mongoose = require('mongoose');
-
-const Product = require('./models/Product'); // CHANGE: path to your Product model
-const products = require('./products.seed'); // the file I gave you
-
-const MONGO_URI = process.env.MONGO_URI; // CHANGE: your env variable name
+const MONGO_URI = process.env.MONGO_URI_DEV; // CHANGE: your env variable name
 
 async function seedProducts() {
   const result = await Product.bulkWrite(
     products.map((p) => ({
       updateOne: {
-        filter: { slug: p.slug },
+        filter: { name: p.name },
         update: { $set: p },
         upsert: true,
       },
