@@ -1,6 +1,5 @@
 import { body, validationResult } from 'express-validator';
-import { BadRequestError } from '../utils/errors.js';
-
+import { BadRequestError, PRODUCT_CATEGORY } from '../utils/index.js';
 const withValidationErrors = (validationValues) => {
   return [
     validationValues,
@@ -14,3 +13,22 @@ const withValidationErrors = (validationValues) => {
     },
   ];
 };
+
+export const validateProductInput = withValidationErrors([
+  body('name').notEmpty().withMessage('name is required'),
+  body('description').notEmpty().withMessage('description is required'),
+  body('price')
+    .notEmpty()
+    .withMessage('price is required')
+    .isFloat({ gt: 0 })
+    .withMessage('price must be greater than 0'),
+  body('stock')
+    .notEmpty()
+    .withMessage('stock is required')
+    .isInt({ min: 0 })
+    .withMessage('stock must be greater than 0'),
+  body('category')
+    .isIn(Object.values(PRODUCT_CATEGORY))
+    .withMessage(`invalid category`),
+  ,
+]);

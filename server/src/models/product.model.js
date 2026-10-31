@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import {PRODUCT_CATEGORY} from '../utils/index.js';
 const ProductSchema = mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
@@ -7,7 +7,8 @@ const ProductSchema = mongoose.Schema(
     price: { type: Number, required: true },
     category: {
       type: String,
-      enum: ['backpack', 'tote', 'duffel', 'crossBody', 'wallet', 'laptop-bag'],
+      enum: Object.values(PRODUCT_CATEGORY),
+      default: PRODUCT_CATEGORY.BACKPACK,
       required: true,
     },
     image: {
