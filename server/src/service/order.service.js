@@ -61,7 +61,7 @@ const newOrder = async (orderData) => {
 };
 
 const fetchOrders = async (query) => {
-  const { search, status } = query;
+  const { search, status, sort } = query;
   const filter = {};
   if (search) {
     filter.$or = [
@@ -73,9 +73,16 @@ const fetchOrders = async (query) => {
     filter.status = status;
   }
 
-  
+  const sortOptions = {
+    newest: '-placedAt -_id',
+    oldest: 'placedAt _id',
+    total_high: '-total -_id',
+    total_low: 'total _id',
+    name: 'customer.name _id',
+  };
 
-  const orders = await OrderModel.find(filter);
+  const sortKey = sortOptions[sort] || sortOptions.newest;
+  const orders = await OrderModel.find(filter).sort(sortKey);
   return orders;
 };
 
