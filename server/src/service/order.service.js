@@ -1,0 +1,43 @@
+import { ProductModel } from '../models/index.js';
+import { NotFoundError, BadRequestError } from '../utils/index.js';
+
+const newOrder = async (orderData) => {
+  const { items } = orderData;
+  if (!Array.isArray(items) || items.length === 0) {
+    throw new BadRequestError('Order must contain at least one item');
+  }
+  const productIds = items.map((item) => item.productId);
+  const products = await ProductModel.find({ _id: { $in: productIds } });
+  const productsById = new Map();
+
+  products.map((product) => {
+    productsById.set(product._id.toString(), product);
+  });
+  const uniqueIds = new Set(productIds.map(String));
+  if (productsById.size !== uniqueIds.size) {
+    throw new NotFoundError('One or more products not found');
+  }
+  const orderItems = items.map((item) => {
+    if (!Number.isInteger(item.qty || item.qty < 1)) {
+      throw new BadRequestError(
+        'Quantity must be a whole number of at least 1',
+      );
+    }
+    const product = productsById.get(String(item.productId));
+    if (!product) {
+      throw new NotFoundError('Product not found');
+    }
+    if (product.stock < item.qty) {
+      throw new BadRequestError(`Not enough stock for ${product.name}`);
+      }
+      return {
+        productId: product._id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        qty: item.qty,
+      };
+  });
+};
+
+export { newOrder };
