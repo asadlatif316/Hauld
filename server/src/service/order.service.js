@@ -61,7 +61,7 @@ const newOrder = async (orderData) => {
 };
 
 const fetchOrders = async (query) => {
-  const { search } = query;
+  const { search, status } = query;
   const filter = {};
   if (search) {
     filter.$or = [
@@ -69,6 +69,12 @@ const fetchOrders = async (query) => {
       { orderNumber: { $regex: search, $options: 'i' } },
     ];
   }
+  if (status && status !== 'all') {
+    filter.status = status;
+  }
+
+  
+
   const orders = await OrderModel.find(filter);
   return orders;
 };
