@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { ORDER_STATUS } from '../utils/index.js';
+import { Counter, ORDER_STATUS } from '../utils/index.js';
 
 const customerSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
@@ -61,6 +61,16 @@ orderSchema.pre('validate', async function (next) {
     });
     this.subtotal = this.items.reduce((sum, it) => sum + it.subtotal, 0);
     this.total = this.subtotal + (this.shipping || 0);
+
+    if (!this.orderNumber) {
+      const year = new Date(this.placedAt || Date.now()).getFullYear();
+      const counter = await Counter.findOneAndUpdate(
+        { _id: `order-${year}` },
+        { $inc: { seq: 1 } },
+        { new: true, upsert: true },
+      );
+      this.orderNumber = `ORD-${year}-${String(counter.seq).padStart(4, '0')}`;
+    }
   } catch (error) {
     next(error);
   }
