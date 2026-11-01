@@ -1,8 +1,10 @@
 import { StatusCodes } from "http-status-codes";
-import { newOrder } from "../service/index.js";
+import { newOrder,fetchOrders } from "../service/index.js";
+import Product from "../models/product.model.js";
 
 const getOrders = async (req, res) => {
-  res.json('get Orders');
+    const orders = await fetchOrders()
+  res.json({success:true, orders});
 };
 
 const createOrder = async (req, res) => {

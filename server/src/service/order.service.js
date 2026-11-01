@@ -38,8 +38,6 @@ const newOrder = async (orderData) => {
       qty: item.qty,
     };
   });
-    console.log(orderItems);
-    
   const order = await OrderModel.create({
     customer,
     items: orderItems,
@@ -62,4 +60,10 @@ const newOrder = async (orderData) => {
   return order;
 };
 
-export { newOrder };
+const fetchOrders = async () => {
+  const orders = await OrderModel.find()
+  return orders
+    
+}
+
+export { newOrder, fetchOrders };
