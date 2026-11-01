@@ -61,7 +61,7 @@ const newOrder = async (orderData) => {
 };
 
 const fetchOrders = async (query) => {
-  const { search, status, sort, from, to } = query;
+  const { search, status, sort, from, to, page, limit } = query;
   const filter = {};
   if (search) {
     filter.$or = [
@@ -103,9 +103,11 @@ const fetchOrders = async (query) => {
       throw new BadRequestError('"from" must be before "to"');
     }
   }
-
+  const pageNumber = Number(page) || 1;
+  const pagelimit = limit || 10;
+  const skip = (pageNumber - 1) * pagelimit;
   const sortKey = sortOptions[sort] || sortOptions.newest;
-  const orders = await OrderModel.find(filter).sort(sortKey);
+  const orders = await OrderModel.find(filter).sort(sortKey).skip(skip);
   return orders;
 };
 
