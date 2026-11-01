@@ -1,3 +1,4 @@
+import { StatusCodes } from "http-status-codes";
 import { newOrder } from "../service/index.js";
 
 const getOrders = async (req, res) => {
@@ -7,7 +8,7 @@ const getOrders = async (req, res) => {
 const createOrder = async (req, res) => {
     const orderData = req.body
     const order = await newOrder(orderData)
-  res.json('create Orders');
+  res.status(StatusCodes.CREATED).json(order);
 };
 
 const updateOrder = async (req, res) => {
