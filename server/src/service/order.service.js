@@ -60,10 +60,17 @@ const newOrder = async (orderData) => {
   return order;
 };
 
-const fetchOrders = async () => {
-  const orders = await OrderModel.find()
-  return orders
-    
-}
+const fetchOrders = async (query) => {
+  const { search } = query;
+  const filter = {};
+  if (search) {
+    filter.$or = [
+      { 'customer.name': { $regex: search, $options: 'i' } },
+      { orderNumber: { $regex: search, $options: 'i' } },
+    ];
+  }
+  const orders = await OrderModel.find(filter);
+  return orders;
+};
 
 export { newOrder, fetchOrders };
