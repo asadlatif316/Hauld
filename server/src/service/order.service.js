@@ -1,8 +1,8 @@
-import { ProductModel } from '../models/index.js';
+import { ProductModel, OrderModel } from '../models/index.js';
 import { NotFoundError, BadRequestError } from '../utils/index.js';
 
 const newOrder = async (orderData) => {
-  const { items } = orderData;
+  const { items, customer, shipping, notes } = orderData;
   if (!Array.isArray(items) || items.length === 0) {
     throw new BadRequestError('Order must contain at least one item');
   }
@@ -29,14 +29,20 @@ const newOrder = async (orderData) => {
     }
     if (product.stock < item.qty) {
       throw new BadRequestError(`Not enough stock for ${product.name}`);
-      }
-      return {
-        productId: product._id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        qty: item.qty,
-      };
+    }
+    return {
+      productId: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      qty: item.qty,
+    };
+  });
+  const order = await OrderModel.create({
+    customer,
+    item: orderItems,
+    shipping,
+    notes,
   });
 };
 
