@@ -61,7 +61,7 @@ const newOrder = async (orderData) => {
 };
 
 const fetchOrders = async (query) => {
-  const { search, status, sort } = query;
+  const { search, status, sort, from, to } = query;
   const filter = {};
   if (search) {
     filter.$or = [
@@ -80,6 +80,29 @@ const fetchOrders = async (query) => {
     total_low: 'total _id',
     name: 'customer.name _id',
   };
+
+  if (from || to) {
+    filter.placedAt;
+    if (from) {
+      const fromDate = new Date(from);
+      if (isNaN(from)) {
+        throw new BadRequestError('Invalid "from" date');
+      }
+      filter.placedAt.$gte = fromDate;
+    }
+
+    if (to) {
+      const toDate = new Date(to);
+      if (isNaN(to)) {
+        throw new BadRequestError('Invalid "to" date');
+      }
+      toDate.setUTCHours(23, 59, 59, 999);
+      filter.placedAt.$lte = toDate;
+    }
+    if (from && to && filter.placedAt.$gte > filter.placedAt.$lte) {
+      throw new BadRequestError('"from" must be before "to"');
+    }
+  }
 
   const sortKey = sortOptions[sort] || sortOptions.newest;
   const orders = await OrderModel.find(filter).sort(sortKey);
