@@ -54,3 +54,14 @@ const orderSchema = new mongoose.Schema(
 orderSchema.index({ 'customer.email': 1 });
 orderSchema.index({ 'customer.name': 1 });
 
+orderSchema.pre('validate', async function (next) {
+  try {
+    this.items.forEach((it) => {
+      it.lineTotal = it.price * it.qty;
+    });
+    this.subtotal = this.items.reduce((sum, it) => sum + it.subtotal, 0);
+    this.total = this.subtotal + (this.shipping || 0);
+  } catch (error) {
+    next(error);
+  }
+});
