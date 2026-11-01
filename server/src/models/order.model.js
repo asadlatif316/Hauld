@@ -75,3 +75,5 @@ orderSchema.pre('validate', async function (next) {
     next(error);
   }
 });
+
+export const Order = mongoose.model('Order', orderSchema);
