@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import { newOrder, fetchOrders } from '../service/index.js';
+import { newOrder, fetchOrders, delOrder } from '../service/index.js';
 
 const getOrders = async (req, res) => {
   const query = req.query;
@@ -19,7 +19,11 @@ const updateOrder = async (req, res) => {
 };
 
 const deleteOrder = async (req, res) => {
-  res.json('delete Orders');
+  const { id } = req.params;
+  const product = await delOrder(id);
+  res
+    .status(StatusCodes.OK)
+    .json({ success: true, msg: 'order deleted', product });
 };
 
 export { getOrders, createOrder, updateOrder, deleteOrder };

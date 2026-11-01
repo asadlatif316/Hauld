@@ -108,9 +108,15 @@ const fetchOrders = async (query) => {
   const skip = (pageNumber - 1) * pagelimit;
   const sortKey = sortOptions[sort] || sortOptions.newest;
   const orders = await OrderModel.find(filter).sort(sortKey).skip(skip);
-   const totalOrders = await OrderModel.countDocuments(filter);
-   const numberOfPages = Math.ceil(totalOrders / pagelimit);
-   return { orders, totalOrders, pageNumber, numberOfPages };
+  const totalOrders = await OrderModel.countDocuments(filter);
+  const numberOfPages = Math.ceil(totalOrders / pagelimit);
+  return { orders, totalOrders, pageNumber, numberOfPages };
 };
 
-export { newOrder, fetchOrders };
+const delOrder = async (id) => {
+  const product = await OrderModel.findOneAndDelete(id);
+  if (!product) throw new NotFoundError('product not found');
+  return product;
+};
+
+export { newOrder, fetchOrders, delOrder };
