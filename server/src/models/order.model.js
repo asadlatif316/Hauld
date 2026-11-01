@@ -59,7 +59,7 @@ orderSchema.pre('validate', async function (next) {
     this.items.forEach((it) => {
       it.lineTotal = it.price * it.qty;
     });
-    this.subtotal = this.items.reduce((sum, it) => sum + it.subtotal, 0);
+    this.subtotal = this.items.reduce((sum, it) => sum + it.lineTotal, 0);
     this.total = this.subtotal + (this.shipping || 0);
 
     if (!this.orderNumber) {
@@ -67,7 +67,7 @@ orderSchema.pre('validate', async function (next) {
       const counter = await Counter.findOneAndUpdate(
         { _id: `order-${year}` },
         { $inc: { seq: 1 } },
-        { new: true, upsert: true },
+        { returnDocument: 'after', upsert: true },
       );
       this.orderNumber = `ORD-${year}-${String(counter.seq).padStart(4, '0')}`;
     }
@@ -77,4 +77,4 @@ orderSchema.pre('validate', async function (next) {
 });
 
 const Order = mongoose.model('Order', orderSchema);
-export default Order
+export default Order;
