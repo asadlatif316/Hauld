@@ -7,4 +7,10 @@ export const PRODUCT_CATEGORY = {
   LAPTOPBAG: 'laptop-bag',
 };
 
-
+export const ORDER_STATUS = Object.freeze({
+  PENDING: 'pending',
+  PROCESSING: 'processing',
+  SHIPPED: 'shipped',
+  DELIVERED: 'delivered',
+  CANCELLED: 'cancelled',
+});
