@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './lib/db.js';
 import helmet from 'helmet';
 import { ErrorHandlerMiddleware } from './middlewares/index.js';
-import { authRouter, productRouter } from './routes/index.js';
+import { authRouter, productRouter, orderRouter } from './routes/index.js';
 
 const app = express();
 const port = process.env.PORT;
@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/product', productRouter);
+app.use('/api/order', orderRouter);
 
 app.use(ErrorHandlerMiddleware);
 
