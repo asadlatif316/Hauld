@@ -108,7 +108,9 @@ const fetchOrders = async (query) => {
   const skip = (pageNumber - 1) * pagelimit;
   const sortKey = sortOptions[sort] || sortOptions.newest;
   const orders = await OrderModel.find(filter).sort(sortKey).skip(skip);
-  return orders;
+   const totalOrders = await OrderModel.countDocuments(filter);
+   const numberOfPages = Math.ceil(totalOrders / pagelimit);
+   return { orders, totalOrders, pageNumber, numberOfPages };
 };
 
 export { newOrder, fetchOrders };

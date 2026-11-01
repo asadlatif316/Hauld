@@ -3,8 +3,9 @@ import { newOrder, fetchOrders } from '../service/index.js';
 
 const getOrders = async (req, res) => {
   const query = req.query;
-  const orders = await fetchOrders(query);
-  res.json({ success: true, orders });
+  const { orders, totalOrders, numberOfPages, pageNumber } =
+    await fetchOrders(query);
+  res.json({ success: true, totalOrders, numberOfPages, pageNumber, orders });
 };
 
 const createOrder = async (req, res) => {
