@@ -1,5 +1,6 @@
 import { ProductModel, OrderModel } from '../models/index.js';
 import { NotFoundError, BadRequestError } from '../utils/index.js';
+import { ORDER_STATUS, ORDER_STATUSES } from '../utils/index.js';
 
 const newOrder = async (orderData) => {
   const { items, customer, shipping, notes } = orderData;
@@ -122,9 +123,12 @@ const delOrder = async (id) => {
 const changesOrder = async (orderData, id) => {
   const { notes, status, customer } = orderData;
   const order = await OrderModel.findById(id);
-  if (!product) throw new NotFoundError('not found error');
+  if (!order) throw new NotFoundError('not found error');
   if (['cancelled', 'delivered'].includes(order.status))
     throw new BadRequestError('Order is already cancelled or delivered');
+  if (notes !== undefined) {
+    order.notes = notes;
+  }
   if (customer) {
     if (!['pending', 'processing'].includes(order.status))
       throw new BadRequestError('Customer details can no longer be changed');
@@ -142,6 +146,37 @@ const changesOrder = async (orderData, id) => {
       });
     }
   }
+  const allowedMoves = {
+    [ORDER_STATUS.PENDING]: [ORDER_STATUS.PROCESSING, ORDER_STATUS.CANCELLED],
+    [ORDER_STATUS.PROCESSING]: [ORDER_STATUS.SHIPPED, ORDER_STATUS.CANCELLED],
+    [ORDER_STATUS.SHIPPED]: [ORDER_STATUS.DELIVERED],
+  };
+  let restoreStock = false;
+
+  if (status !== undefined && status !== order.status) {
+    if (!ORDER_STATUSES.includes(status)) {
+      throw new BadRequestError('Invalid status');
+    }
+    if (!allowedMoves[order.status]?.includes(status)) {
+      throw new BadRequestError(
+        `Cannot change status from ${order.status} to ${status}`,
+      );
+    }
+    restoreStock = status === ORDER_STATUS.CANCELLED;
+    order.status = status;
+  }
+  order.save();
+  if (restoreStock) {
+    await ProductModel.bulkWrite(
+      order.items.map((item) => ({
+        updateOne: {
+          filter: { _id: item.productId },
+          update: { $inc: { stock: item.qty } },
+        },
+      })),
+    );
+  }
+  return order;
 };
 
 export { newOrder, fetchOrders, delOrder, changesOrder };

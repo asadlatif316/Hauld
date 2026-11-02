@@ -14,3 +14,6 @@ export const ORDER_STATUS = Object.freeze({
   DELIVERED: 'delivered',
   CANCELLED: 'cancelled',
 });
+
+export const ORDER_STATUSES = Object.values(ORDER_STATUS);
+
