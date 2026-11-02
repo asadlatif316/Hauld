@@ -23,7 +23,7 @@ const updateOrder = async (req, res) => {
   const orderDate = req.body;
   const { id } = req.params;
   const order = await changesOrder(orderDate, id);
-  res.json('update Orders');
+  res.json({ success: true, msg: 'update Orders', order });
 };
 
 const deleteOrder = async (req, res) => {
