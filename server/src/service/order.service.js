@@ -119,4 +119,11 @@ const delOrder = async (id) => {
   return product;
 };
 
-export { newOrder, fetchOrders, delOrder };
+const changesOrder = async (orderData, id) => {
+  const { notes, status, customer } = orderData
+  console.log(id);
+  console.log(notes, status, customer);
+  
+};
+
+export { newOrder, fetchOrders, delOrder, changesOrder };

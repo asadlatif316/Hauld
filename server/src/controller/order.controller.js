@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import { newOrder, fetchOrders, delOrder } from '../service/index.js';
+import { newOrder, fetchOrders, delOrder, changesOrder } from '../service/index.js';
 
 const getOrders = async (req, res) => {
   const query = req.query;
@@ -15,6 +15,9 @@ const createOrder = async (req, res) => {
 };
 
 const updateOrder = async (req, res) => {
+  const orderDate = req.body
+  const id = req.params
+  const order = await changesOrder(orderDate,id)
   res.json('update Orders');
 };
 
