@@ -120,10 +120,28 @@ const delOrder = async (id) => {
 };
 
 const changesOrder = async (orderData, id) => {
-  const { notes, status, customer } = orderData
-  console.log(id);
-  console.log(notes, status, customer);
-  
+  const { notes, status, customer } = orderData;
+  const order = await OrderModel.findById(id);
+  if (!product) throw new NotFoundError('not found error');
+  if (['cancelled', 'delivered'].includes(order.status))
+    throw new BadRequestError('Order is already cancelled or delivered');
+  if (customer) {
+    if (!['pending', 'processing'].includes(order.status))
+      throw new BadRequestError('Customer details can no longer be changed');
+    ['name', 'email', 'phone'].forEach((key) => {
+      if (customer[key] !== undefined) {
+        order.customer[key] = customer[key];
+      }
+    });
+
+    if (customer.address) {
+      ['line1', 'city', 'country'].forEach((key) => {
+        if (customer.address[key] !== undefined) {
+          order.customer.address[key] = customer.address[key];
+        }
+      });
+    }
+  }
 };
 
 export { newOrder, fetchOrders, delOrder, changesOrder };
