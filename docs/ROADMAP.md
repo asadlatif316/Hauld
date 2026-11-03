@@ -68,6 +68,8 @@ Do this before charts.
 * [ ] `POST /orders` — totals computed server-side
 * [ ] `PATCH /orders/:id/status`
 * [ ] `DELETE /orders/:id`
+complete backend
+starting frontend
 * [ ] Orders table + status badges
 * [ ] Inline status dropdown
 * [ ] Order detail page
