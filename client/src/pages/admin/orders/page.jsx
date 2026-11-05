@@ -1,7 +1,7 @@
 const OrderList = () => {
   return (
     <div>
-      OrdersList
+      
     </div>
   )
 }
