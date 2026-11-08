@@ -46,7 +46,6 @@ const useProductStore = create((set, get) => ({
         page: field === 'page' ? value : 1,
       },
     }));
-    console.log(get().filters);
   },
   resetFilters: () => set({ filters: defaultFilters }),
 
@@ -102,8 +101,6 @@ const useProductStore = create((set, get) => ({
       const params = Object.fromEntries(
         Object.entries(filters).filter(([, v]) => v !== ''),
       );
-      console.log(params);
-
       const res = await api.get('/product', { params });
       const { products, currentPage, numberOfPages, totalProducts } = res.data;
 
@@ -111,7 +108,6 @@ const useProductStore = create((set, get) => ({
         products,
         pagination: { currentPage, numberOfPages, totalProducts },
       });
-      console.log(get().pagination);
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || 'Failed to load products');
