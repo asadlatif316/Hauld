@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { api } from "@/utils";
 
 const useOrderStore = create((set) => ({
-    isLoading: false,
+    isLoading: true,
     orders:[]
 }))
 

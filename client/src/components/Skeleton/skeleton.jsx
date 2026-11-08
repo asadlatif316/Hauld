@@ -20,7 +20,7 @@ const CardSkeleton = () => {
 };
 const ListSkeleton = ({ columns }) => {
   return (
-    <Table>
+    <Table className='hidden md:table'>
       <TableHeader columns={columns} />
       <tbody className='animate-pulse'>
         {[...Array(6)].map((_, rowIndex) => (
@@ -46,7 +46,7 @@ const ListSkeleton = ({ columns }) => {
 
 const GridSkeleton = () => {
   return (
-    <div className='grid grid-cols-2 gap-4 lg:grid-cols-3'>
+    <div className='grid-cols-2 gap-4 lg:grid-cols-3'>
       {[...Array(6)].map((_, index) => (
         <div
           key={index}
@@ -70,4 +70,8 @@ const GridSkeleton = () => {
   );
 };
 
-export { CardSkeleton, GridSkeleton, ListSkeleton };
+const OrderCardSkeleton = () => {
+  return <div className='md:hidden'>Card Skeleton</div>;
+};
+
+export { CardSkeleton, GridSkeleton, ListSkeleton, OrderCardSkeleton };

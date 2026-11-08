@@ -1,6 +1,11 @@
 import { useOrderStore } from '@/store';
 import OrderTable from './orderTable';
-import { ListSkeleton, EmptyState, Button } from '@/components';
+import {
+  ListSkeleton,
+  EmptyState,
+  Button,
+  OrderCardSkeleton,
+} from '@/components';
 import { orderColumns } from '../constants/column';
 import { LuPackageX } from 'react-icons/lu';
 
@@ -9,7 +14,12 @@ const OrdersView = () => {
   const orders = useOrderStore((s) => s.orders);
   const initialLoading = isLoading && orders.length === 0;
   if (initialLoading) {
-    return <ListSkeleton columns={orderColumns}/>;
+    return (
+      <div>
+        <ListSkeleton columns={orderColumns} />
+        <OrderCardSkeleton />
+      </div>
+    );
   }
   if (orders.length === 0) {
     return (
