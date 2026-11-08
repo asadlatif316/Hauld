@@ -4,7 +4,6 @@ const OrderTable = () => {
   return (
     <Table>
       <TableHeader columns={orderColumns}/>
-      Order Table
     </Table>
   )
 }

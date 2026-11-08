@@ -1,5 +1,11 @@
 import { OrdersView } from '@/features';
-const OrderList = () => {
+import { useOrderStore } from '@/store';
+import { useEffect } from 'react';
+const OrderPage = () => {
+  const fetchOrders = useOrderStore((s) => s.fetchOrders);
+  useEffect(() => {
+    fetchOrders()
+  }, [fetchOrders]);
   return (
     <div>
       <OrdersView />
@@ -7,4 +13,4 @@ const OrderList = () => {
   );
 };
 
-export default OrderList;
+export default OrderPage;
