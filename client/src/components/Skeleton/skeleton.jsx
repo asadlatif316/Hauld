@@ -1,4 +1,6 @@
 import { ProductTableHead } from '@/pages/admin/product';
+import { TableHeader, Table } from '../Table';
+import { orderColumns } from '../Order/column';
 
 const CardSkeleton = () => {
   return (
@@ -16,48 +18,29 @@ const CardSkeleton = () => {
     </div>
   );
 };
-
-const ListSkeleton = () => {
+const ListSkeleton = ({ columns }) => {
   return (
-    <table className='w-full table-fixed'>
-      <ProductTableHead />
+    <Table>
+      <TableHeader columns={columns} />
       <tbody className='animate-pulse'>
-        {[...Array(6)].map((_, index) => (
-          <tr key={index} className='border-b border-border'>
-            <td className='p-3'>
-              <div className='flex items-center gap-3'>
-                <div className='size-9 bg-muted rounded-lg'></div>
-                <div className='space-y-2'>
-                  <div className='w-36 h-3 rounded bg-muted'></div>
-                  <div className='h-3 w-20 rounded bg-muted'></div>
-                </div>
-              </div>
-            </td>
-            <td className='hidden lg:table-cell p-3'>
-              <div className='w-16 h-3 rounded bg-muted'></div>
-            </td>
-            <td className='p-3'>
-              <div className='w-16 h-3 rounded bg-muted'></div>
-            </td>
-            <td className='p-3'>
-              <div className='w-16 h-3 rounded bg-muted'></div>
-            </td>
-            <td className='p-3'>
-              <div className='w-16 h-3 rounded bg-muted'></div>
-            </td>
-            <td className='hidden lg:table-cell p-3'>
-              <div className='w-16 h-3 rounded bg-muted'></div>
-            </td>
-            <td className='p-3'>
-              <div className='flex justify-end gap-2'>
-                <div className='size-7 bg-muted rounded'></div>
-                <div className='size-7 bg-muted rounded'></div>
-              </div>
-            </td>
+        {[...Array(6)].map((_, rowIndex) => (
+          <tr key={rowIndex} className='border-b border-border'>
+            {columns.map((col) => (
+              <td key={col.key} className={col.className}>
+                {col.key === 'actions' ? (
+                  <div className='flex justify-end gap-2'>
+                    <div className='size-7 bg-muted rounded'></div>
+                    <div className='size-7 bg-muted rounded'></div>
+                  </div>
+                ) : (
+                  <div className='w-16 h-3 rounded bg-muted'></div>
+                )}
+              </td>
+            ))}
           </tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   );
 };
 
