@@ -1,5 +1,5 @@
-const TableBody = () => {
-  return <div>TableBody</div>;
+const TableBody = ({ children, ...props }) => {
+  return <tbody {...props}>{children}</tbody>;
 };
 
 export default TableBody;
