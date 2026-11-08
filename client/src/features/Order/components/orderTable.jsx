@@ -1,8 +1,11 @@
+import { Table, TableHeader } from "@/components"
+import { orderColumns } from "../constants/column"
 const OrderTable = () => {
   return (
-    <div>
+    <Table>
+      <TableHeader columns={orderColumns}/>
       Order Table
-    </div>
+    </Table>
   )
 }
 
