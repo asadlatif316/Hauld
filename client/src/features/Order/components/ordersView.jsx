@@ -8,6 +8,7 @@ import {
 } from '@/components';
 import { orderColumns } from '../constants/column';
 import { LuPackageX } from 'react-icons/lu';
+import OrderCards from './orderCards';
 
 const OrdersView = () => {
   const isLoading = useOrderStore((s) => s.isLoading);
@@ -32,7 +33,16 @@ const OrdersView = () => {
     );
   }
 
-  return <OrderTable />;
+  return (
+    <div className='w-full'>
+      <div className='hidden md:block'>
+       <OrderTable/>
+      </div>
+      <div className='md:hidden'>
+        <OrderCards />
+      </div>
+    </div>
+  );
 };
 
 export default OrdersView;
