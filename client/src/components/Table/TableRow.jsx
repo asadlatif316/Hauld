@@ -1,8 +1,8 @@
-import { cn } from 'cn';
+import { cn } from '@/lib/utils';
 
-const TableRow = ({ children, classname }) => {
+const TableRow = ({ children, className, ...props }) => {
   return (
-    <tr className={cn('border-b border-border text-sm', classname)}>
+    <tr className={cn('border-b border-border text-sm', className)} {...props}>
       {children}
     </tr>
   );
