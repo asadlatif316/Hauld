@@ -1,6 +1,8 @@
-import { Button } from "@/components";
+import { Button } from '@/components';
+import { useOrderStore } from '@/store';
 
 const OrderCards = () => {
+  const orders = useOrderStore((s) => s.orders);
   return (
     <div className='p-6'>
       <div className='p-4 flex flex-col gap-4 border border-border rounded-xl'>
@@ -24,17 +26,17 @@ const OrderCards = () => {
             <div className='size-16 bg-muted rounded-xl'></div>
             <p>order name and list</p>
           </div>
-              </div>
-              <div className="flex items-center justify-between">
-                  <div>
-                      <p>total + items</p>
-                      <h3>price</h3>
-                  </div>
-                  <div className="flex gap-2">
-                      <Button label='View'/>
-                      <Button label='Status'/>
-                  </div>
-              </div>
+        </div>
+        <div className='flex items-center justify-between'>
+          <div>
+            <p>total + items</p>
+            <h3>price</h3>
+          </div>
+          <div className='flex gap-2'>
+            <Button label='View' />
+            <Button label='Status' />
+          </div>
+        </div>
       </div>
     </div>
   );
