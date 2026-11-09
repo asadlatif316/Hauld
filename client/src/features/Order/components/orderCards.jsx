@@ -6,7 +6,7 @@ import formatCurrency from '@/utils/formatCurrency.util';
 const OrderCards = () => {
   const orders = useOrderStore((s) => s.orders);
   return (
-    <div className='p-6'>
+    <div className='p-6 flex flex-col gap-4'>
       {orders.map((order) => {
         const customer = order.customer;
         const items = order.items;
