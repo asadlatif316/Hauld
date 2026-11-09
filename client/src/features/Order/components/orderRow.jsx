@@ -2,7 +2,7 @@ import { Button, TableCell, TableRow } from '@/components';
 import formatCurrency from '@/utils/formatCurrency.util';
 import OrderStatusBadge from './orderStatusBadge';
 import { Trash } from 'lucide-react';
-import { formatDateTime } from '@/utils';
+import { formatDate } from '@/utils';
 const OrderRow = ({ order }) => {
   console.log(order);
 
@@ -28,7 +28,7 @@ const OrderRow = ({ order }) => {
         </div>
       </TableCell>
       <TableCell className='hidden lg:table-cell'>
-        {formatDateTime(order.placedAt)}
+        {formatDate(order.placedAt)}
       </TableCell>
       <TableCell className='hidden xl:table-cell'>
         {order.items.length}
