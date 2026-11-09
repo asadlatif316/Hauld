@@ -3,8 +3,10 @@ import { useOrderStore } from '@/store';
 import { formatDateTime } from '@/utils';
 import OrderStatusBadge from './orderStatusBadge';
 import formatCurrency from '@/utils/formatCurrency.util';
+import { useNavigate } from 'react-router-dom';
 const OrderCards = () => {
   const orders = useOrderStore((s) => s.orders);
+  const navigate = useNavigate();
   return (
     <div className='p-6 flex flex-col gap-4'>
       {orders.map((order) => {
@@ -85,7 +87,10 @@ const OrderCards = () => {
                 </h3>
               </div>
               <div className='flex gap-2'>
-                <Button label='View' />
+                <Button
+                  onClick={() => navigate(`/dashboard/orders/${order._id}`)}
+                  label='View'
+                />
                 <Button label='Status' />
               </div>
             </div>

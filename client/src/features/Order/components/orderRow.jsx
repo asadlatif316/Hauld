@@ -3,13 +3,15 @@ import formatCurrency from '@/utils/formatCurrency.util';
 import OrderStatusBadge from './orderStatusBadge';
 import { Trash } from 'lucide-react';
 import { formatDate } from '@/utils';
+import { useNavigate } from 'react-router-dom';
 const OrderRow = ({ order }) => {
-  console.log(order);
-
+  const navigate = useNavigate();
   const customer = order.customer;
   return (
     <TableRow>
-      <TableCell className='font-medium truncate'>{order.orderNumber}</TableCell>
+      <TableCell className='font-medium truncate'>
+        {order.orderNumber}
+      </TableCell>
       <TableCell>
         <div className='flex items-center gap-4'>
           <div className='size-10 shrink-0 bg-muted rounded-full text-primary font- flex items-center justify-center uppercase'>
@@ -40,7 +42,10 @@ const OrderRow = ({ order }) => {
         <OrderStatusBadge status={order.status} />
       </TableCell>
       <TableCell className='flex w-full justify-end gap-1'>
-        <Button className='flex-end' label='View' />
+        <Button
+          onClick={() => navigate(`/dashboard/orders/${order._id}`)}
+          label='View'
+        />
         <Button className='flex-end bg-destructive' icon={<Trash />} />
       </TableCell>
     </TableRow>
