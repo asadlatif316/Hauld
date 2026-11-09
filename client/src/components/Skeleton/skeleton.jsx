@@ -1,7 +1,6 @@
-import { ProductTableHead } from '@/pages/admin/product';
 import { TableHeader, Table } from '../Table';
-import { orderColumns } from '../Order/column';
-
+import { orderColumns } from '@/features/Order/constants/column';
+orderColumns
 const CardSkeleton = () => {
   return (
     <div className='w-full space-y-4  animate-pulse'>
