@@ -1,12 +1,13 @@
 import { Button } from '@/components';
 import { useOrderStore } from '@/store';
 import { formatDateTime } from '@/utils';
+import OrderStatusBadge from './orderStatusBadge';
 const OrderCards = () => {
   const orders = useOrderStore((s) => s.orders);
   return (
     <div className='p-6'>
       {orders.map((order) => {
-        console.log(order.createdAt);
+        console.log(order);
         
         return (
           <div className='p-4 flex flex-col gap-4 border border-border rounded-xl bg-card'>
@@ -19,7 +20,7 @@ const OrderCards = () => {
                   {formatDateTime(order.createdAt)}
                 </p>
               </div>
-              <p>Status</p>
+              <p><OrderStatusBadge status={order.status}/></p>
             </div>
             <div className='pb-4 space-y-4 border-b border-border'>
               <div className='flex items-center gap-4'>
