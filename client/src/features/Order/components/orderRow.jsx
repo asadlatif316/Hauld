@@ -9,13 +9,13 @@ const OrderRow = ({ order }) => {
   const customer = order.customer;
   return (
     <TableRow>
-      <TableCell className='font-medium'>{order.orderNumber}</TableCell>
+      <TableCell className='font-medium truncate'>{order.orderNumber}</TableCell>
       <TableCell>
         <div className='flex items-center gap-4'>
-          <div className='size-10 bg-muted rounded-full text-primary font- flex items-center justify-center uppercase'>
+          <div className='size-10 shrink-0 bg-muted rounded-full text-primary font- flex items-center justify-center uppercase'>
             {customer.name.charAt(0)}
           </div>
-          <div>
+          <div className='min-w-0'>
             <div className='min-w-0'>
               <h3 className='text-primary font-semibold truncate capitalize'>
                 {customer.name}
