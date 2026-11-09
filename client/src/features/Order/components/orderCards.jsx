@@ -13,11 +13,9 @@ const OrderCards = () => {
         const shown = items.slice(0, 2);
         const extra = items.length - shown.length;
         const [first, ...rest] = order.items;
-
         const summary = `${first.name}${first.quantity > 1 ? ` x${first.quantity}` : ''}${
           rest.length > 0 ? `, +${rest.length} more` : ''
         }`;
-        console.log(shown);
 
         return (
           <div
