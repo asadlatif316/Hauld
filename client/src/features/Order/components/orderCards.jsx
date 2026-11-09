@@ -10,10 +10,20 @@ const OrderCards = () => {
       {orders.map((order) => {
         const customer = order.customer;
         const items = order.items;
-        console.log(order);
+        const shown = items.slice(0, 2);
+        const extra = items.length - shown.length;
+        const [first, ...rest] = order.items;
+
+        const summary = `${first.name}${first.quantity > 1 ? ` x${first.quantity}` : ''}${
+          rest.length > 0 ? `, +${rest.length} more` : ''
+        }`;
+        console.log(shown);
 
         return (
-          <div className='p-4 flex flex-col gap-4 border border-border rounded-xl bg-card'>
+          <div
+            key={order._id}
+            className='p-4 flex flex-col gap-4 border border-border rounded-xl bg-card'
+          >
             <div className='flex justify-between items-start border-b border-border pb-4'>
               <div>
                 <h3 className='font-semibold text-lg text-primary truncate'>
@@ -42,9 +52,29 @@ const OrderCards = () => {
                 </div>
               </div>
               <div className='flex items-center gap-2'>
-                <div className='size-16 bg-muted rounded-xl'></div>
-                <div className='size-16 bg-muted rounded-xl'></div>
-                <p>order name and list</p>
+                {shown.map((item, i) => (
+                  <div
+                    key={i}
+                    className='size-12 shrink-0 rounded-xl bg-muted overflow-hidden'
+                  >
+                    {item.image && (
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className='size-full object-cover'
+                      />
+                    )}
+                  </div>
+                ))}
+                {extra > 0 && (
+                  <div className='size-12 shrink-0 rounded-xl bg-muted flex items-center justify-center text-xs font-medium text-primary'>
+                    +{extra}
+                  </div>
+                )}
+
+                <p className='text-sm text-muted-foreground truncate'>
+                  {summary}
+                </p>
               </div>
             </div>
             <div className='flex items-center justify-between'>
