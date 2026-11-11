@@ -5,12 +5,17 @@ import {
   createOrder,
   updateOrder,
   deleteOrder,
+  fetchSingleProduct,
 } from '../controller/index.js';
 const router = express.Router();
 
 router.use(authMiddleware);
 
 router.route('/').get(getOrders).post(createOrder);
-router.route('/:id').patch(updateOrder).delete(deleteOrder);
+router
+  .route('/:id')
+  .get(fetchSingleProduct)
+  .patch(updateOrder)
+  .delete(deleteOrder);
 
 export default router;
