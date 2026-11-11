@@ -1,5 +1,5 @@
 const OrderDetailHeader = () => {
-  return <div>Order DetailHeader</div>;
+  return <div></div>;
 };
 
 export default OrderDetailHeader;

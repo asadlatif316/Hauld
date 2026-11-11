@@ -179,4 +179,10 @@ const changesOrder = async (orderData, id) => {
   return order;
 };
 
+const getOrder = async (id) => {
+  const order = await OrderModel.findById(id);
+  if (!order) throw new NotFoundError('product not found');
+  return product;
+};
+
 export { newOrder, fetchOrders, delOrder, changesOrder };
