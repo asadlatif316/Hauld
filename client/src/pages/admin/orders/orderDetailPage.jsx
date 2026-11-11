@@ -6,8 +6,16 @@ import {
   OrderNotesCard,
   OrderProgress,
 } from '@/features';
+import { useOrderStore } from '@/store';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const OrderDetailPage = () => {
+  const {id} = useParams()
+  const fetchSingleOrder = useOrderStore((s) => s.fetchSingleOrder);
+  useEffect(() => {
+    fetchSingleOrder(id)
+  },[fetchSingleOrder])
   return (
     <div className='flex flex-col gap-4'>
       <OrderDetailHeader />
