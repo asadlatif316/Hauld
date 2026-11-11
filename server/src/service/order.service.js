@@ -185,4 +185,4 @@ const getOrder = async (id) => {
   return product;
 };
 
-export { newOrder, fetchOrders, delOrder, changesOrder };
+export { newOrder, fetchOrders, delOrder, changesOrder, getOrder };

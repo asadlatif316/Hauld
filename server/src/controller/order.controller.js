@@ -4,6 +4,7 @@ import {
   fetchOrders,
   delOrder,
   changesOrder,
+  getOrder,
 } from '../service/index.js';
 
 const getOrders = async (req, res) => {
@@ -34,4 +35,10 @@ const deleteOrder = async (req, res) => {
     .json({ success: true, msg: 'order deleted', product });
 };
 
-export { getOrders, createOrder, updateOrder, deleteOrder };
+const fetchSingleProduct = async (req, res) => {
+  const { id } = req.params;
+  const order = await getOrder(id);
+  res.status(StatusCodes.OK).json({ success: true, order });
+};
+
+export { getOrders, createOrder, updateOrder, deleteOrder, fetchSingleProduct };
