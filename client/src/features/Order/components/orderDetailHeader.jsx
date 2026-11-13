@@ -4,15 +4,16 @@ import { Button } from '@/components';
 
 const OrderDetailHeader = ({ status, orderNumber, date }) => {
   return (
-    <div>
-      <div>
-        <div>
-          <h1>{orderNumber}</h1>
+    <div className='md:flex items-center justify-between'>
+      <div className=''>
+        <div className='flex justify-between'>
+          <h1 className='text-2xl text-primary font-bold truncate'>{orderNumber}</h1>
           <OrderStatusBadge status={status} />
         </div>
-        <p>Placed {formatDateTime(date)}</p>
+        <p className='text-sm text-muted-foreground'>Placed {formatDateTime(date)}</p>
       </div>
-      <div>
+      <div className='hidden md:flex'>
+        <Button label={'Print'} />
         <Button label={'Status'} />
       </div>
     </div>

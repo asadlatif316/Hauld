@@ -21,7 +21,7 @@ const OrderDetailPage = () => {
   }, [fetchSingleOrder]);
   if (loading || !order) return <div>loading test</div>;
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 p-6'>
       <OrderDetailHeader
         status={order.status}
         orderNumber={order.orderNumber}
