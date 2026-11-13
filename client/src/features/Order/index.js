@@ -1,7 +1,7 @@
 export { default as OrdersView } from './components/ordersView'
-export { default as OrderDetailHeader } from './components/OrderDetailHeader'
 export { default as OrderItemsCard } from './components/orderItemsCard'
 export { default as OrderNotesCard } from './components/orderNotesCard'
 export { default as OrderProgress } from './components/orderProgress'
 export { default as OrderDangerZone } from './components/orderDangerZone'
 export { default as OrderCustomerCard } from './components/orderCustomerCard'
+export { default as OrderDetailHeader } from './components/orderDetailHeader'
