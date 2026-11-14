@@ -32,7 +32,7 @@ const OrderDetailPage = () => {
       </div>
       <div className='flex flex-col md:flex-row'>
         <div className='w-9/12'>
-          <OrderItemsCard />
+          <OrderItemsCard items={order.items} />
           <OrderNotesCard />
         </div>
         <div className='md:flex-1'>
