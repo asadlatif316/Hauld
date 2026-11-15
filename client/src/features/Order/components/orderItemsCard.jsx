@@ -12,7 +12,7 @@ const OrderItemsCard = ({ items, total, subtotal, shipping }) => {
         </div>
         <div className='flex flex-col gap-2 py-4'>
           {items.map((item) => (
-            <div key={item.productId} className='flex gap-2'>
+            <div key={item.productId} className='flex gap-2 border-b border-border pb-2'>
               {item.image ? (
                 <div className='size-12 bg-muted flex items-center justify-center rounded-md'>
                   <MdOutlineHideImage />
@@ -44,9 +44,12 @@ const OrderItemsCard = ({ items, total, subtotal, shipping }) => {
               <dt className='text-muted-foreground'>Shipping</dt>
               <dd>{formatCurrency(shipping)}</dd>
             </div>
+            <div className='flex justify-between border-t border-border pt-3 font-semibold text-primary'>
+              <dt>Total</dt>
+              <dd>{formatCurrency(total)}</dd>
+            </div>
           </dl>
         </div>
-        <div>total</div>
       </div>
     </Card>
   );
