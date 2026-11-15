@@ -20,6 +20,8 @@ const OrderDetailPage = () => {
     fetchSingleOrder(id);
   }, [fetchSingleOrder]);
   if (loading || !order) return <div>loading test</div>;
+  console.log(order);
+
   return (
     <div className='flex flex-col gap-4 p-6'>
       <OrderDetailHeader
@@ -32,7 +34,12 @@ const OrderDetailPage = () => {
       </div>
       <div className='flex flex-col md:flex-row'>
         <div className='md:w-9/12'>
-          <OrderItemsCard items={order.items} />
+          <OrderItemsCard
+            items={order.items}
+            shipping={order.shipping}
+            subtotal={order.subtotal}
+            total={order.total}
+          />
           <OrderNotesCard />
         </div>
         <div className='md:flex-1'>
