@@ -31,7 +31,7 @@ const OrderDetailPage = () => {
         <OrderProgress />
       </div>
       <div className='flex flex-col md:flex-row'>
-        <div className='w-9/12'>
+        <div className='md:w-9/12'>
           <OrderItemsCard items={order.items} />
           <OrderNotesCard />
         </div>
