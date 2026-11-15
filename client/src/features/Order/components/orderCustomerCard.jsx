@@ -1,10 +1,11 @@
 import { Button } from '@/components';
 import { getInitials } from '@/utils/getInitials.util';
+import { FormSectionWrapper as Card } from '@/components';
 const OrderCustomerCard = ({ customer }) => {
   const { name, email, phone, address } = customer;
 
   return (
-    <div className='border border-border rounded-2xl p-5 bg-card'>
+    <Card className='border-primary border-2'>
       {/* Header */}
       <div className='flex items-center justify-between mb-5'>
         <h4 className='font-semibold text-primary'>Customer</h4>
@@ -42,7 +43,7 @@ const OrderCustomerCard = ({ customer }) => {
           </p>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
