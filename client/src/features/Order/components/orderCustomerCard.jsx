@@ -1,5 +1,5 @@
 import { Button } from '@/components';
-
+import { getInitials } from '@/utils/getInitials.util';
 const OrderCustomerCard = ({ customer }) => {
   const { name, email, phone, address } = customer;
 
@@ -14,7 +14,7 @@ const OrderCustomerCard = ({ customer }) => {
       {/* Avatar + name */}
       <div className='flex items-center gap-3 mb-5'>
         <div className='size-14 shrink-0 rounded-full bg-muted flex justify-center items-center font-semibold text-primary uppercase'>
-          {customer.name.charAt(0)}
+          {getInitials(name)}
         </div>
         <h2 className='font-medium text-primary truncate'>{name}</h2>
       </div>
