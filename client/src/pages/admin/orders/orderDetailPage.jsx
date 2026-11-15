@@ -43,7 +43,7 @@ const OrderDetailPage = () => {
           <OrderNotesCard />
         </div>
         <div className='md:flex-1'>
-          <OrderCustomerCard />
+          <OrderCustomerCard customer={order.customer} />
           <OrderProgress />
           <OrderDangerZone />
         </div>
