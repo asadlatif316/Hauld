@@ -29,22 +29,32 @@ const OrderDetailPage = () => {
         orderNumber={order.orderNumber}
         date={order.createdAt}
       />
+
       <div className='md:hidden'>
-        <OrderProgress />
+        <OrderProgress status={order.status} />
       </div>
-      <div className='flex flex-col md:flex-row'>
-        <div className='md:w-9/12'>
+
+      <div className='flex flex-col gap-4 md:flex-row md:items-start'>
+        <div className='flex flex-col gap-4 min-w-0 md:w-9/12'>
           <OrderItemsCard
             items={order.items}
             shipping={order.shipping}
             subtotal={order.subtotal}
             total={order.total}
           />
-          <OrderNotesCard />
+          <div className='hidden md:block'>
+            <OrderNotesCard />
+          </div>
         </div>
-        <div className='md:flex-1'>
+
+        <div className='flex flex-col gap-4 min-w-0 md:flex-1'>
           <OrderCustomerCard customer={order.customer} />
-          <OrderProgress />
+          <div className='hidden md:block'>
+            <OrderProgress />
+          </div>
+          <div className='md:hidden'>
+            <OrderNotesCard notes={order.notes} />
+          </div>
           <OrderDangerZone />
         </div>
       </div>
