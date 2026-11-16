@@ -5,7 +5,7 @@ import formatCurrency from '@/utils/formatCurrency.util';
 const OrderItemsCard = ({ items, total, subtotal, shipping }) => {
   return (
     <Card className='py-4'>
-      <div>
+      <div className='w-full'>
         <div className='flex justify-between border-b pb-3'>
           <h4 className='font-semibold text-primary'>Items</h4>
           <p className='text-sm text-muted-foreground'>{items.length} items</p>

@@ -8,7 +8,7 @@ const OrderCards = () => {
   const orders = useOrderStore((s) => s.orders);
   const navigate = useNavigate();
   return (
-    <div className='p-6 flex flex-col gap-4'>
+    <div className='flex-1 p-6 flex flex-col gap-4'>
       {orders.map((order) => {
         const customer = order.customer;
         const items = order.items;
