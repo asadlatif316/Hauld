@@ -6,7 +6,7 @@ const OrderNotesCard = ({ orderId, notes }) => {
     <Card>
       <div className='flex items-center justify-between mb-4'>
         <h4 className='font-semibold text-primary'>Internal Notes</h4>
-        {changed && <Button label='Save' />}
+        { <Button label='Save' />}
       </div>
       <textarea
         rows={4}
