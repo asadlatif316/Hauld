@@ -31,7 +31,7 @@ const OrderDetailPage = () => {
       />
 
       <div className='md:hidden'>
-        <OrderProgress status={order.status} />
+        <OrderProgress status={order.status} date={order.createdAt} />
       </div>
 
       <div className='flex flex-col gap-4 md:flex-row md:items-start'>
@@ -50,7 +50,7 @@ const OrderDetailPage = () => {
         <div className='flex flex-col gap-4 min-w-0 md:flex-1'>
           <OrderCustomerCard customer={order.customer} />
           <div className='hidden md:block'>
-            <OrderProgress />
+            <OrderProgress status={order.status} date={order.createdAt} />
           </div>
           <div className='md:hidden'>
             <OrderNotesCard notes={order.notes} />

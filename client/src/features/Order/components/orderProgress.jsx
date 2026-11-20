@@ -1,16 +1,45 @@
 import { FormSectionWrapper as Card } from '@/components';
 import { orderProgressSteps } from '../constants/orderProgressSteps';
 const OrderProgress = ({ status }) => {
+  const currentIndex = orderProgressSteps.findIndex((s) => s.key === status);
   return (
     <Card>
-      <h4>Progress</h4>
       <div>
-        {orderProgressSteps.map((step) => (
-          <div key={step.key}>
-            <div></div>
-            <p>{step.label}</p>
-          </div>
-        ))}
+        <h4 className='font-semibold text-primary'>Progress</h4>
+        <ol className='flex justify-around md:flex-col'>
+          {orderProgressSteps.map((step, index) => {
+            const isDone = index < currentIndex;
+            const isCurrent = index === currentIndex;
+            const isLast = index === orderProgressSteps.length - 1;
+            return (
+              <li
+                key={step.key}
+                className='flex-1 md:flex-none flex flex-col items-center gap-2 md:flex-row md:items-stretch md:gap-3'
+              >
+                <div className='flex flex-col items-center'>
+                  <span
+                    className={`size-4 shrink-0 rounded-full border-2 ${
+                      isCurrent
+                        ? 'bg-primary border-primary ring-4 ring-primary/30'
+                        : isDone
+                          ? 'bg-primary border-primary'
+                          : 'bg-transparent border-muted-foreground/40'
+                    }`}
+                  />
+                  {!isLast && (
+                    <span
+                      className={`hidden md:block w-px flex-1 min-h-6 ${
+                        isDone ? 'bg-primary' : 'bg-border'
+                      }`}
+                    />
+                  )}
+                </div>
+
+                <p>{step.label}</p>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </Card>
   );
