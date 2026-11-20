@@ -48,7 +48,7 @@ const OrderDetailPage = () => {
         </div>
 
         <div className='flex flex-col gap-4 min-w-0 md:flex-1'>
-          <OrderCustomerCard customer={order.customer} />
+          <OrderCustomerCard customer={order.customer} id={order._id} />
           <div className='hidden md:block'>
             <OrderProgress status={order.status} date={order.createdAt} />
           </div>

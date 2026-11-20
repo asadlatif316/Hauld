@@ -4,11 +4,13 @@ import { FormSectionWrapper as Card } from '@/components';
 import { useState } from 'react';
 import { useOrderStore } from '@/store';
 import { FormInput } from '@/components';
-const OrderCustomerCard = ({ customer }) => {
+const OrderCustomerCard = ({ customer, id }) => {
   const { name, email, phone, address } = customer;
   const [edit, setEdit] = useState(false);
   const draft = useOrderStore((s) => s.draft);
   const updateCustomer = useOrderStore((s) => s.updateCustomer);
+  const updateAddress = useOrderStore((s) => s.updateAddress);
+  const saveDraft = useOrderStore((s) => s.saveDraft);
   return (
     <Card className='border-primary border-2'>
       {/* Header */}
@@ -17,7 +19,13 @@ const OrderCustomerCard = ({ customer }) => {
         <div className='flex items-center justify-between mb-5'>
           <h4 className='font-semibold text-primary'>Customer</h4>
           {edit ? (
-            <Button label='Save' onClick={() => setEdit(false)} />
+            <Button
+              label='Save'
+              onClick={async () => {
+                saveDraft(id);
+                setEdit(false);
+              }}
+            />
           ) : (
             <Button label='Edit' onClick={() => setEdit(true)} />
           )}
