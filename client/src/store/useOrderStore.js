@@ -10,7 +10,7 @@ const initialOrder = {
     address: { line1: '', city: '', country: 'Pakistan' },
   },
 };
-const useOrderStore = create((set) => ({
+const useOrderStore = create((set, get) => ({
   isLoading: false,
   orders: [],
   singleOrder: null,
@@ -60,6 +60,49 @@ const useOrderStore = create((set) => ({
       },
     })),
 
+  saveDraft: async (id) => {
+    const { draft, singleOrder } = get();
+    const newOrder = {};
+    const customerFields = ['name', 'email', 'phone'];
+    const addressFields = ['line1', 'city', 'country'];
+    if ((singleOrder.notes ?? '') !== draft.notes) {
+      newOrder.notes = draft.notes;
+    }
+    const customerChanges = Object.fromEntries(
+      customerFields
+        .filter((f) => draft.customer[f] !== singleOrder.customer[f])
+        .map((f) => [f, draft.customer[f]]),
+    );
+    const addressChanges = Object.fromEntries(
+      addressFields
+        .filter(
+          (f) => draft.customer.address[f] !== singleOrder.customer.address[f],
+        )
+        .map((f) => [f, draft.customer[f]]),
+    );
+    if (Object.keys(addressChanges).length > 0) {
+      customerChanges.address = addressChanges;
+    }
+
+    if (Object.keys(customerChanges).length > 0) {
+      newOrder.customer = customerChanges;
+    }
+
+    if (Object.keys(newOrder).length === 0) return;
+    set({ isLoading: true });
+    try {
+      const order = await api.patch(`/order/${id}`, newOrder);
+      set({ singleOrder: order.data.order });
+      get().resetDraft();
+      toast.success('Order updated!!!');
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || 'Failed to update order');
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+
   fetchOrders: async () => {
     set({ isLoading: true });
     try {
@@ -77,6 +120,7 @@ const useOrderStore = create((set) => ({
     try {
       const order = await api.get(`/order/${id}`);
       set({ singleOrder: order.data.order });
+      get().resetDraft();
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || 'Failed to load orders');
