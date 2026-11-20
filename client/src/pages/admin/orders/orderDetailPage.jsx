@@ -55,7 +55,7 @@ const OrderDetailPage = () => {
           <div className='md:hidden'>
             <OrderNotesCard notes={order.notes} id={order._id} />
           </div>
-          <OrderDangerZone />
+          <OrderDangerZone status={order.status} id={order._id} />
         </div>
       </div>
     </div>

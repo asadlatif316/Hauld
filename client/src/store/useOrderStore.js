@@ -126,6 +126,23 @@ const useOrderStore = create((set, get) => ({
       toast.error(error.response?.data?.message || 'Failed to load orders');
     }
   },
+
+  deleteOrder: async (id) => {
+    set({ isLoading: true });
+    try {
+      await api.delete(`/order/${id}`);
+      set({ singleOrder: null, draft: initialOrder });
+      set((state) => ({
+        orders: state.orders.filter((o) => o._id !== id),
+      }));
+      toast.success('Order Deleted');
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || 'Failed to delete order');
+    } finally {
+      set({ isLoading: false });
+    }
+  },
 }));
 
 export default useOrderStore;
