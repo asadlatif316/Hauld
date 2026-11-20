@@ -4,8 +4,10 @@ import OrderStatusBadge from './orderStatusBadge';
 import { Trash } from 'lucide-react';
 import { formatDate } from '@/utils';
 import { useNavigate } from 'react-router-dom';
+import { useOrderStore } from '@/store';
 const OrderRow = ({ order }) => {
   const navigate = useNavigate();
+    const deleteOrder = useOrderStore((s) => s.deleteOrder);
   const customer = order.customer;
   return (
     <TableRow>
@@ -46,7 +48,14 @@ const OrderRow = ({ order }) => {
           onClick={() => navigate(`/dashboard/orders/${order._id}`)}
           label='View'
         />
-        <Button className='flex-end bg-destructive' icon={<Trash />} />
+        <Button
+          className='flex-end bg-destructive hover:bg-destructive/70'
+          icon={<Trash />}
+          onClick={async () => {
+            const ok = await deleteOrder(order._id);
+            if (ok) navigate('/dashboard/orders');
+          }}
+        />
       </TableCell>
     </TableRow>
   );

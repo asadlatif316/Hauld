@@ -1,9 +1,13 @@
 import { Button, FormSectionWrapper as Card } from '@/components';
+import { useOrderStore } from '@/store';
+import { useNavigate } from 'react-router-dom';
 
 const CANCELLABLE = ['pending', 'processing'];
 
-const OrderDangerZone = ({ status }) => {
+const OrderDangerZone = ({ status, id }) => {
   const canCancel = CANCELLABLE.includes(status);
+  const deleteOrder = useOrderStore((s) => s.deleteOrder);
+  const navigate = useNavigate();
 
   return (
     <Card>
@@ -30,7 +34,13 @@ const OrderDangerZone = ({ status }) => {
                 Permanently removes this order. This can't be undone.
               </p>
             </div>
-            <Button label='Delete' />
+            <Button
+              label='Delete'
+              onClick={async () => {
+                const ok = await deleteOrder(id);
+                if (ok) navigate('/dashboard/orders');
+              }}
+            />
           </div>
         </div>
       </div>
