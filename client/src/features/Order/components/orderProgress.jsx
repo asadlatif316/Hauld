@@ -1,6 +1,7 @@
 import { FormSectionWrapper as Card } from '@/components';
 import { orderProgressSteps } from '../constants/orderProgressSteps';
-const OrderProgress = ({ status }) => {
+import { formatDateTime } from '@/utils';
+const OrderProgress = ({ status, date }) => {
   const currentIndex = orderProgressSteps.findIndex((s) => s.key === status);
   return (
     <Card>
@@ -35,7 +36,26 @@ const OrderProgress = ({ status }) => {
                   )}
                 </div>
 
-                <p>{step.label}</p>
+                <div
+                  className={`text-center md:text-left ${isLast ? '' : 'md:pb-6'}`}
+                >
+                  <p
+                    className={`text-sm ${
+                      isCurrent
+                        ? 'font-semibold text-primary'
+                        : isDone
+                          ? 'text-primary'
+                          : 'text-muted-foreground'
+                    }`}
+                  >
+                    {step.label}
+                  </p>
+                  {isCurrent && status === 'pending' && date && (
+                    <p className='hidden md:block text-xs text-muted-foreground'>
+                      Current - placed {formatDateTime(date)}
+                    </p>
+                  )}
+                </div>
               </li>
             );
           })}
