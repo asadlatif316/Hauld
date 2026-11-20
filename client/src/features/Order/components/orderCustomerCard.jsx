@@ -19,13 +19,16 @@ const OrderCustomerCard = ({ customer, id }) => {
         <div className='flex items-center justify-between mb-5'>
           <h4 className='font-semibold text-primary'>Customer</h4>
           {edit ? (
-            <Button
-              label='Save'
-              onClick={async () => {
-                saveDraft(id);
-                setEdit(false);
-              }}
-            />
+            <div className='flex gap-2'>
+              <Button label='Cancel' onClick={() => setEdit(false)} />
+              <Button
+                label='Save'
+                onClick={async () => {
+                  await saveDraft(id);
+                  setEdit(false);
+                }}
+              />
+            </div>
           ) : (
             <Button label='Edit' onClick={() => setEdit(true)} />
           )}
