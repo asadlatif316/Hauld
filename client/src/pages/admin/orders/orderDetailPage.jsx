@@ -43,7 +43,7 @@ const OrderDetailPage = () => {
             total={order.total}
           />
           <div className='hidden md:block'>
-            <OrderNotesCard />
+            <OrderNotesCard notes={order.notes} id={order._id} />
           </div>
         </div>
 
@@ -53,7 +53,7 @@ const OrderDetailPage = () => {
             <OrderProgress status={order.status} date={order.createdAt} />
           </div>
           <div className='md:hidden'>
-            <OrderNotesCard notes={order.notes} />
+            <OrderNotesCard notes={order.notes} id={order._id} />
           </div>
           <OrderDangerZone />
         </div>
