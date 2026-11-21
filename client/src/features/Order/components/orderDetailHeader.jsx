@@ -3,6 +3,8 @@ import OrderStatusBadge from './orderStatusBadge';
 import { Button } from '@/components';
 import { ChevronDown } from 'lucide-react';
 ChevronDown;
+import OrderStatusDropdown from './orderStatusDropDown';
+import ChangeStatusButton from './changeStatusButton';
 
 const OrderDetailHeader = ({ status, orderNumber, date }) => {
   const options = getNextStatus(status);
@@ -22,11 +24,8 @@ const OrderDetailHeader = ({ status, orderNumber, date }) => {
         </p>
       </div>
       <div className='hidden md:flex gap-1'>
-        <Button label={'Print'} />
-        <Button
-          label={'Change Status'}
-          icon={<ChevronDown className='size-4' />}
-        />
+        <Button className='bg-muted text-primary hover:bg-muted/70' label={'Print'} />
+        <ChangeStatusButton status={status} />
       </div>
     </div>
   );

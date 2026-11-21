@@ -21,3 +21,18 @@ export const statusStyles = {
   },
 };
 
+export const statusStyle = {
+  pending: 'text-amber-400 bg-amber-500/10 border-amber-500/30',
+  processing: 'text-sky-400 bg-sky-500/10 border-sky-500/30',
+  shipped: 'text-violet-400 bg-violet-500/10 border-violet-500/30',
+  delivered: 'text-lime-400 bg-lime-500/10 border-lime-500/30',
+  cancelled: 'text-red-400 bg-red-500/10 border-red-500/30',
+};
+
+export const optionColors = {
+  processing: 'text-sky-400',
+  shipped: 'text-violet-400',
+  delivered: 'text-lime-400',
+  cancelled: 'text-red-400',
+};
+
