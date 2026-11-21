@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { api } from '@/utils';
 import toast from 'react-hot-toast';
 const initialOrder = {
+  status: '',
   notes: '',
   customer: {
     name: '',
@@ -21,6 +22,7 @@ const useOrderStore = create((set, get) => ({
 
     set({
       draft: {
+        status: order.status ?? '',
         notes: order.notes ?? '',
         customer: {
           name: order.customer.name,
@@ -39,6 +41,11 @@ const useOrderStore = create((set, get) => ({
   updateNotes: (value) =>
     set((state) => ({
       draft: { ...state.draft, notes: value },
+    })),
+
+  updateStatus: (value) =>
+    set((state) => ({
+      draft: { ...state.draft, status: value },
     })),
 
   updateCustomer: (field, value) =>
@@ -68,6 +75,11 @@ const useOrderStore = create((set, get) => ({
     if ((singleOrder.notes ?? '') !== draft.notes) {
       newOrder.notes = draft.notes;
     }
+    if (draft.status !== singleOrder.status) {
+      newOrder.status = draft.status;
+    }
+    console.log(draft.status);
+
     const customerChanges = Object.fromEntries(
       customerFields
         .filter((f) => draft.customer[f] !== singleOrder.customer[f])
@@ -91,13 +103,17 @@ const useOrderStore = create((set, get) => ({
     if (Object.keys(newOrder).length === 0) return;
     set({ isLoading: true });
     try {
-      const order = await api.patch(`/order/${id}`, newOrder);
-      set({ singleOrder: order.data.order });
+      const res = await api.patch(`/order/${id}`, newOrder);
+      const updated = res.data.order;
+      set((state) => ({
+        singleOrder: updated,
+        orders: state.orders.map((o) => (o._id === id ? updated : o)),
+      }));
       get().resetDraft();
       toast.success('Order updated!!!');
     } catch (error) {
       console.log(error);
-      toast.error(error.response?.data?.message || 'Failed to update order');
+      toast.error(error?.response?.data?.msg || 'Failed to update order');
     } finally {
       set({ isLoading: false });
     }

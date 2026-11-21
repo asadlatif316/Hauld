@@ -25,6 +25,7 @@ const OrderDetailPage = () => {
   return (
     <div className='flex flex-col gap-4 p-6'>
       <OrderDetailHeader
+        id={order._id}
         status={order.status}
         orderNumber={order.orderNumber}
         date={order.createdAt}
