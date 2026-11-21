@@ -3,13 +3,9 @@ import OrderStatusBadge from './orderStatusBadge';
 import { Button } from '@/components';
 import { ChevronDown } from 'lucide-react';
 ChevronDown;
-import OrderStatusDropdown from './orderStatusDropDown';
 import ChangeStatusButton from './changeStatusButton';
 
 const OrderDetailHeader = ({ status, orderNumber, date }) => {
-  const options = getNextStatus(status);
-  const changeStatus = canChangeStatus(status);
-
   return (
     <div className='md:flex items-start justify-between'>
       <div className=''>
@@ -24,7 +20,10 @@ const OrderDetailHeader = ({ status, orderNumber, date }) => {
         </p>
       </div>
       <div className='hidden md:flex gap-1'>
-        <Button className='bg-muted text-primary hover:bg-muted/70' label={'Print'} />
+        <Button
+          className='bg-muted text-primary hover:bg-muted/70'
+          label={'Print'}
+        />
         <ChangeStatusButton status={status} />
       </div>
     </div>
