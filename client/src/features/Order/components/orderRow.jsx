@@ -1,16 +1,19 @@
-import { Button, TableCell, TableRow } from '@/components';
+import { Button, TableCell, TableRow, ConfirmDialog } from '@/components';
 import formatCurrency from '@/utils/formatCurrency.util';
 import { Trash } from 'lucide-react';
 import { formatDate } from '@/utils';
 import { useNavigate } from 'react-router-dom';
 import { useOrderStore } from '@/store';
 import OrderStatusDropdown from './orderStatusDropDown';
+import { useState } from 'react';
 const OrderRow = ({ order }) => {
+  const [dialog, setDialog] = useState(null);
   const navigate = useNavigate();
   const deleteOrder = useOrderStore((s) => s.deleteOrder);
   const updateStatus = useOrderStore((s) => s.updateStatus);
   const saveStatus = useOrderStore((s) => s.saveStatus);
   const updatingId = useOrderStore((s) => s.updatingId);
+  const deleting = useOrderStore((s) => s.deleting);
   const customer = order.customer;
   return (
     <TableRow>
@@ -49,7 +52,7 @@ const OrderRow = ({ order }) => {
           disabled={updatingId === order._id}
           onSelect={async (next) => {
             updateStatus(next);
-            await saveStatus(order._id,next);
+            await saveStatus(order._id, next);
           }}
         />
       </TableCell>
@@ -61,9 +64,20 @@ const OrderRow = ({ order }) => {
         <Button
           className='flex-end bg-destructive hover:bg-destructive/70'
           icon={<Trash />}
-          onClick={async () => {
+          onClick={() => setDialog('delete')}
+        />
+        <ConfirmDialog
+          open={dialog === 'delete'}
+          title='Delete this order?'
+          message="This permanently removes the order and its record. This can't be undone."
+          confirmLabel='Delete order'
+          cancelLabel='Keep order'
+          loading={deleting}
+          onCancel={() => setDialog(null)}
+          onConfirm={async () => {
             const ok = await deleteOrder(order._id);
-            if (ok) navigate('/dashboard/orders');
+            if (ok) navigate('/orders');
+            else setDialog(null);
           }}
         />
       </TableCell>
