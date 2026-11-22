@@ -10,6 +10,7 @@ import {
   EditProductPage,
   Login,
   ProductCreatePage,
+  NewOrderPage,
 } from '../pages';
 
 const routes = [
@@ -31,6 +32,7 @@ const routes = [
       { path: 'products/:id/edit', element: <EditProductPage /> },
       { path: 'orders', element: <OrderList /> },
       { path: 'orders/:id', element: <OrderDetailsPage /> },
+      { path: 'orders/new', element: <NewOrderPage /> },
       { path: 'settings', element: <Settings /> },
       { path: 'messages', element: <Messages /> },
     ],
