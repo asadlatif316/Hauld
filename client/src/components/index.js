@@ -15,3 +15,4 @@ export { default as ReadyToPublish } from './ReadyToPublish/readyToPublish';
 export { default as FormHeader } from './FormHeader/FormHeader';
 export { default as FormTitle } from './FormTitle/FormTitle';
 export { default as Pagination } from './Pagination/pagination';
+export { default as ConfirmDialog } from './ConfirmDialog/ConfirmDialog';

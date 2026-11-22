@@ -1,10 +1,12 @@
-import { Button, FormSectionWrapper as Card } from '@/components';
+import { Button, FormSectionWrapper as Card, ConfirmDialog } from '@/components';
 import { useOrderStore } from '@/store';
 import { useNavigate } from 'react-router-dom';
-
+import { useState } from 'react';
 const CANCELLABLE = ['pending', 'processing'];
-
 const OrderDangerZone = ({ status, id }) => {
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const updatingId = useOrderStore((s) => s.updatingId);
+  const saveStatus = useOrderStore((s) => s.saveStatus);
   const canCancel = CANCELLABLE.includes(status);
   const deleteOrder = useOrderStore((s) => s.deleteOrder);
   const navigate = useNavigate();
@@ -24,7 +26,24 @@ const OrderDangerZone = ({ status, id }) => {
                   : `Can't be cancelled once ${status}.`}
               </p>
             </div>
-            <Button label='Cancel' disabled={!canCancel} />
+            <Button
+              label='Cancel'
+              disabled={!canCancel}
+              onClick={() => setConfirmOpen(true)}
+            />
+            <ConfirmDialog
+              open={confirmOpen}
+              title='Cancel this order?'
+              message='The order will be marked as cancelled and its items will be returned to stock. This can’t be undone.'
+              confirmLabel='Cancel order'
+              cancelLabel='Keep order'
+              loading={updatingId === id}
+              onCancel={() => setConfirmOpen(false)}
+              onConfirm={async () => {
+                await saveStatus(id, 'cancelled');
+                setConfirmOpen(false);
+              }}
+            />
           </div>
 
           <div className='flex items-center justify-between gap-3 border-t border-border pt-4'>

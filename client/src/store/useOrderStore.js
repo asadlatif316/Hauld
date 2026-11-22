@@ -132,7 +132,7 @@ const useOrderStore = create((set, get) => ({
       const updated = res.data.order;
       toast.success('Order updated!!!');
       set((state) => ({
-        orders: state.orders.map((o) => (o._id === id ? updated : o)),
+        orders: state.orders.map((o) => (o._id === id ? updated : o)),singleOrder: state.singleOrder._id === id ? updated : state.singleOrder
       }));
     } catch (error) {
       console.log(error);
