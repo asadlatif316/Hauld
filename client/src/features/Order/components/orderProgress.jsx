@@ -18,7 +18,7 @@ const OrderProgress = ({ status, date }) => {
   }
   return (
     <Card>
-      <div>
+      <div className='flex flex-col gap-4'>
         <h4 className='font-semibold text-primary'>Progress</h4>
         <ol className='flex justify-around md:flex-col'>
           {orderProgressSteps.map((step, index) => {
