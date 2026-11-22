@@ -3,6 +3,19 @@ import { orderProgressSteps } from '../constants/orderProgressSteps';
 import { formatDateTime } from '@/utils';
 const OrderProgress = ({ status, date }) => {
   const currentIndex = orderProgressSteps.findIndex((s) => s.key === status);
+  if (status === 'cancelled') {
+    return (
+      <Card>
+        <div>
+          {' '}
+          <h4 className='font-semibold text-primary'>Progress</h4>
+          <p className='mt-3 text-sm text-destructive'>
+            This order was cancelled.
+          </p>
+        </div>
+      </Card>
+    );
+  }
   return (
     <Card>
       <div>
