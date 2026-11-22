@@ -46,13 +46,29 @@ const OrderRow = ({ order }) => {
       <TableCell className='font-semibold'>
         {formatCurrency(order.total)}
       </TableCell>
-      <TableCell>
+      <TableCell onClick={(e) => e.stopPropagation()}>
         <OrderStatusDropdown
           status={order.status}
           disabled={updatingId === order._id}
           onSelect={async (next) => {
-            updateStatus(next);
+            if (next === 'cancelled') {
+              setDialog('cancel');
+              return;
+            }
             await saveStatus(order._id, next);
+          }}
+        />
+        <ConfirmDialog
+          open={dialog === 'cancel'}
+          title='Cancel this order?'
+          message="The order will be marked as cancelled and its items will be returned to stock. This can't be undone."
+          confirmLabel='Cancel order'
+          cancelLabel='Keep order'
+          loading={updatingId === order._id}
+          onCancel={() => setDialog(null)}
+          onConfirm={async () => {
+            await saveStatus(order._id, 'cancelled');
+            setDialog(null);
           }}
         />
       </TableCell>
