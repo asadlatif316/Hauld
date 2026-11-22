@@ -3,7 +3,7 @@ import { optionColors } from '../constants/orderStyles';
 import { Button } from '@/components';
 import { canChangeStatus, getNextStatus } from '@/utils';
 
-const ChangeStatusButton = ({ status, onSelect }) => {
+const ChangeStatusButton = ({ status, onSelect, disabled }) => {
   const ref = useRef(null);
   const [open, setOpen] = useState(false);
   const options = getNextStatus(status);
@@ -18,8 +18,9 @@ const ChangeStatusButton = ({ status, onSelect }) => {
     return (
       <div ref={ref} className='relative'>
         <Button
-                label='Change status'
-                className=''
+          disabled={disabled}
+          label={disabled ? 'Updating...' : 'Change status'}
+          className=''
           icon={
             <svg
               viewBox='0 0 20 20'

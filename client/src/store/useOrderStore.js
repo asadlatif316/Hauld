@@ -13,6 +13,7 @@ const initialOrder = {
 };
 const useOrderStore = create((set, get) => ({
   isLoading: false,
+  updatingId: null,
   orders: [],
   singleOrder: null,
   draft: initialOrder,
@@ -69,6 +70,7 @@ const useOrderStore = create((set, get) => ({
 
   saveDraft: async (id) => {
     const { draft, singleOrder } = get();
+    if (!singleOrder) return null;
     const newOrder = {};
     const customerFields = ['name', 'email', 'phone'];
     const addressFields = ['line1', 'city', 'country'];
@@ -101,7 +103,7 @@ const useOrderStore = create((set, get) => ({
     }
 
     if (Object.keys(newOrder).length === 0) return;
-    set({ isLoading: true });
+    set({ isLoading: true, updatingId: id });
     try {
       const res = await api.patch(`/order/${id}`, newOrder);
       const updated = res.data.order;
@@ -115,7 +117,28 @@ const useOrderStore = create((set, get) => ({
       console.log(error);
       toast.error(error?.response?.data?.msg || 'Failed to update order');
     } finally {
-      set({ isLoading: false });
+      set({ isLoading: false, updatingId: null });
+    }
+  },
+
+  saveStatus: async (id, status) => {
+    const payload = {};
+    payload.status = status;
+    console.log(payload);
+
+    set({ updatingId: id });
+    try {
+      const res = await api.patch(`/order/${id}`, payload);
+      const updated = res.data.order;
+      toast.success('Order updated!!!');
+      set((state) => ({
+        orders: state.orders.map((o) => (o._id === id ? updated : o)),
+      }));
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.msg || 'Failed to update order');
+    } finally {
+      set({ updatingId: null });
     }
   },
 

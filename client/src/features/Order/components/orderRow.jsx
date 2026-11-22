@@ -1,13 +1,16 @@
 import { Button, TableCell, TableRow } from '@/components';
 import formatCurrency from '@/utils/formatCurrency.util';
-import OrderStatusBadge from './orderStatusBadge';
 import { Trash } from 'lucide-react';
 import { formatDate } from '@/utils';
 import { useNavigate } from 'react-router-dom';
 import { useOrderStore } from '@/store';
+import OrderStatusDropdown from './orderStatusDropDown';
 const OrderRow = ({ order }) => {
   const navigate = useNavigate();
-    const deleteOrder = useOrderStore((s) => s.deleteOrder);
+  const deleteOrder = useOrderStore((s) => s.deleteOrder);
+  const updateStatus = useOrderStore((s) => s.updateStatus);
+  const saveStatus = useOrderStore((s) => s.saveStatus);
+  const updatingId = useOrderStore((s) => s.updatingId);
   const customer = order.customer;
   return (
     <TableRow>
@@ -41,7 +44,14 @@ const OrderRow = ({ order }) => {
         {formatCurrency(order.total)}
       </TableCell>
       <TableCell>
-        <OrderStatusBadge status={order.status} />
+        <OrderStatusDropdown
+          status={order.status}
+          disabled={updatingId === order._id}
+          onSelect={async (next) => {
+            updateStatus(next);
+            await saveStatus(order._id,next);
+          }}
+        />
       </TableCell>
       <TableCell className='flex w-full justify-end gap-1'>
         <Button
