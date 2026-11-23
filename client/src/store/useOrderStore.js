@@ -17,6 +17,8 @@ const useOrderStore = create((set, get) => ({
   orders: [],
   singleOrder: null,
   draft: initialOrder,
+  pagination: { pageNumber: 1, numberOfPages: 1, totalProducts: 0 },
+
   resetDraft: () => {
     const order = get().singleOrder;
     if (!order) return;
@@ -132,7 +134,9 @@ const useOrderStore = create((set, get) => ({
       const updated = res.data.order;
       toast.success('Order updated!!!');
       set((state) => ({
-        orders: state.orders.map((o) => (o._id === id ? updated : o)),singleOrder: state.singleOrder?._id === id ? updated : state.singleOrder
+        orders: state.orders.map((o) => (o._id === id ? updated : o)),
+        singleOrder:
+          state.singleOrder?._id === id ? updated : state.singleOrder,
       }));
     } catch (error) {
       console.log(error);
@@ -145,8 +149,9 @@ const useOrderStore = create((set, get) => ({
   fetchOrders: async () => {
     set({ isLoading: true });
     try {
-      const orders = await api.get('/order');
-      set({ orders: orders.data.orders });
+      const res = await api.get('/order');
+      const { orders, numberOfPages, pageNumber, totalOrders } = res.data;
+      set({ orders, pagination: { pageNumber, numberOfPages, totalOrders } });
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || 'Failed to load orders');

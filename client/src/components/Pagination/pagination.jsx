@@ -2,15 +2,14 @@ import { useProductStore } from '@/store';
 import { Button } from '..';
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
 
-const Pagination = () => {
-  const { pagination, setFilter } = useProductStore();
-  const { numberOfPages, currentPage } = pagination;
-
-  const pages = Array.from({ length: numberOfPages }, (_, index) => index + 1);
+const Pagination = ({ currentPage, numberOfPages, onPageChange }) => {
+  const { setFilter } = useProductStore();
+  if (numberOfPages <= 1) return null;
 
   const addPageButton = ({ pageNumber, activeClass }) => {
     return (
       <Button
+        key={`page-${pageNumber}`}
         label={pageNumber}
         className={` ${activeClass ? '' : 'bg-primary-foreground text-muted-foreground hover:bg-secondary'} `}
         onClick={() => setFilter('page', pageNumber)}
@@ -26,7 +25,12 @@ const Pagination = () => {
 
     if (currentPage > 3) {
       pageButtons.push(
-        <span className='px-1.5 text-muted-foreground font-semibold'>...</span>,
+        <span
+          key='dots-end'
+          className='px-1.5 text-muted-foreground font-semibold'
+        >
+          ...
+        </span>,
       );
     }
 
@@ -49,7 +53,12 @@ const Pagination = () => {
 
     if (currentPage < numberOfPages - 2) {
       pageButtons.push(
-        <span className='px-1.5 text-muted-foreground font-semibold'>...</span>,
+        <span
+          key='dots-start'
+          className='px-1.5 text-muted-foreground font-semibold'
+        >
+          ...
+        </span>,
       );
     }
 
@@ -83,7 +92,7 @@ const Pagination = () => {
         onClick={() => {
           let next = currentPage + 1;
           if (next > numberOfPages) next = 1;
-          setFilter('page', next);
+          onPageChange(next);
         }}
       />
     </div>
